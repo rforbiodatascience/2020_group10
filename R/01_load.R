@@ -47,11 +47,12 @@ write_tsv(x = patient_df, path = "data/02_dat_load.tsv")
 # Region dataframe
 # ------------------------------------------------------------------------------
 
-# Join Region and Weather sets
+# Join Region and Weather sets without column duplicates
 region_df <- dataset_korean_covid19$Region.csv %>%
-  full_join(dataset_korean_covid19$Weather.csv, by = "province")
+  full_join(dataset_korean_covid19$Weather.csv, by = "province") %>% 
+  select(-contains("."))
 
-# Write dataframe
+# Write dataframe 
 write_tsv(x = region_df, path = "data/03_dat_load.tsv")
 
 ################################################################################
