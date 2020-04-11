@@ -1,42 +1,39 @@
-#install.packages("tidyverse")
-library("tidyverse")
-#install.packages("dplyr")
-library("dplyr")
-options(scipen = 999)
-### Load relevant csv files from _raw folder ###
+# Clear workspace
+# ------------------------------------------------------------------------------
+rm(list = ls())
 
-# If anyone can find out how to import all files (like Leon did) and extract them from 
-# the list so we can do different joins, feel free to do so :) 
-setwd("/cloud/project/_raw")
+# Load libraries
+# ------------------------------------------------------------------------------
+library(tidyverse)
 
-Time <- read_csv(file = "Time.csv")
-TimeAge <- read_csv(file = "TimeAge.csv")
-TimeGender <- read_csv(file = "TimeGender.csv")
-TimeProvince <- read_csv(file = "TimeProvince.csv")
+# Define functions
+# ------------------------------------------------------------------------------
+source(file = "R/99_project_functions.R")
 
-Region <- read_csv(file = "Region.csv")
-SearchTrend <- read_csv(file="SearchTrend.csv")
+# Load all dataset files
+# ------------------------------------------------------------------------------
+dataset_raw_files <- list.files(path = "_raw", full.names = TRUE)
 
-PatientInfo <- read_csv(file = "PatientInfo.csv")
-PatientRoute <- read_csv(file = "PatientRoute.csv")
-Case <-  read_csv(file = "Case.csv")
+dataset_korean_covid19 <- dataset_raw_files %>%
+  setNames(nm = sapply(str_split(., "/"), tail, 1)) %>%
+  map(read_csv)
 
+# Nest TimeAge, TimeProvince and TimeGender and append to Time
+# ------------------------------------------------------------------------------
+time_files_labels = c("TimeAge.csv", "TimeProvince.csv", "TimeGender.csv")
 
-# Join the time data in the different tables
-# First change naming so we do not have double names
-Time <- Time %>% rename_at(vars(-date, -time), ~ paste0(., '_total'))
-TimeProvince <- TimeProvince %>% rename_at(vars(-date, -time, -province), ~ paste0(., '_province'))
+# Nest TimeAge, TimeProvince and TimeGender 
+nested_time_files <- dataset_korean_covid19[time_file_labels] %>%
+  map(group_by, date) %>%
+  map(nest) %>% 
+  reduce(full_join, by='date')
 
-TimeAge <- TimeProvince %>% rename_at(vars(-date, -time, -age), ~ paste0(., '_age'))
-TimeGender <- TimeProvince %>% rename_at(vars(-date, -time, -sex), ~ paste0(., '_gender'))
-time_frame <- TimeProvince %>% 
-  left_join(Time, by=c("date","time")) %>% 
-  left_join(TimeAge, by=c("date","time")) %>% 
-  left_join(TimeGender, by = c("date","time"))
-#join region and search data
+# Rename nested names
+old_names <- colnames(test)[2:length(test)]
 
-patient_frame <- PatientInfo %>% 
-  left_join(PatientRoute, by=c("patient_id","global_num", "province", "city"))
+nested_time_files <- nested_time_files %>% 
+  rename_at(vars(old_names), ~ str_replace(time_dataframes, ".csv", ""))
 
-# I don't know if it makes sense to join with case before that one has been cleaned?
-# join case on infection case w patien_table  
+# Join nested TimeAge, TimeProvince and TimeGender to Time
+test %>% full_join(dataset_korean_covid19$Time.csv, by='date') %>% 
+  arrange(date)
