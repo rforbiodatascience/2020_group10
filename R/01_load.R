@@ -21,7 +21,7 @@ dataset_korean_covid19 <- dataset_raw_files %>%
 # Create Time dataframe
 # ------------------------------------------------------------------------------
 
-#  Join all Time* sets and remove duplicates
+#  Join all Time* sets without column duplicates
 time_df <- dataset_korean_covid19$Time.csv %>%
   full_join(dataset_korean_covid19$TimeAge.csv, by = "date") %>%
   full_join(dataset_korean_covid19$TimeGender.csv, by = "date") %>%
@@ -35,7 +35,7 @@ write_tsv(x = time_df, path = "data/01_dat_load.tsv")
 # Patient dataframe
 # ------------------------------------------------------------------------------
 
-# Join Case, PatientInfo and PatientRoute sets
+# Join Case, PatientInfo and PatientRoute sets without column duplicates
 patient_df <- dataset_korean_covid19$Case.csv %>%
   full_join(dataset_korean_covid19$PatientInfo.csv, by = "infection_case") %>%
   full_join(dataset_korean_covid19$PatientRoute.csv, by = "patient_id") %>%
@@ -53,7 +53,6 @@ region_df <- dataset_korean_covid19$Region.csv %>%
 
 # Write dataframe
 write_tsv(x = region_df, path = "data/03_dat_load.tsv")
-
 
 ################################################################################
 
