@@ -18,22 +18,71 @@ dataset_korean_covid19 <- dataset_raw_files %>%
   setNames(nm = sapply(str_split(., "/"), tail, 1)) %>%
   map(read_csv)
 
-# Nest TimeAge, TimeProvince and TimeGender and append to Time
+# Create Time dataframe
 # ------------------------------------------------------------------------------
-time_files_labels = c("TimeAge.csv", "TimeProvince.csv", "TimeGender.csv")
 
+#  Join all Time* sets and remove duplicates
+time_df <- dataset_korean_covid19$Time.csv %>%
+  full_join(dataset_korean_covid19$TimeAge.csv, by = "date") %>%
+  full_join(dataset_korean_covid19$TimeGender.csv, by = "date") %>%
+  full_join(dataset_korean_covid19$TimeProvince.csv, by = "date") %>%
+  full_join(dataset_korean_covid19$SearchTrend.csv, by = "date") %>%
+  select(-contains("."))
+
+# Write dataframe
+write_tsv(x = time_df, path = "data/01_dat_load.tsv")
+
+# Patient dataframe
+# ------------------------------------------------------------------------------
+
+# Join Case, PatientInfo and PatientRoute sets
+patient_df <- dataset_korean_covid19$Case.csv %>%
+  full_join(dataset_korean_covid19$PatientInfo.csv, by = "infection_case") %>%
+  full_join(dataset_korean_covid19$PatientRoute.csv, by = "patient_id") %>%
+  select(-contains("."))
+
+# Write dataframe
+write_tsv(x = patient_df, path = "data/02_dat_load.tsv")
+
+# Region dataframe
+# ------------------------------------------------------------------------------
+
+# Join Region and Weather sets
+region_df <- dataset_korean_covid19$Region.csv %>%
+  full_join(dataset_korean_covid19$Weather.csv, by = "province")
+
+# Write dataframe
+write_tsv(x = region_df, path = "data/03_dat_load.tsv")
+
+
+################################################################################
+
+# **REMOVE IN FUTURE**
+# ------------------------------------------------------------------------------
+
+# Create Time dataframe (using nested lists)
+# ------------------------------------------------------------------------------
+#time_files_labels = c("TimeAge.csv", "TimeProvince.csv", "TimeGender.csv")
+#
 # Nest TimeAge, TimeProvince and TimeGender 
-nested_time_files <- dataset_korean_covid19[time_file_labels] %>%
-  map(group_by, date) %>%
-  map(nest) %>% 
-  reduce(full_join, by='date')
-
-# Rename nested names
-old_names <- colnames(test)[2:length(test)]
-
-nested_time_files <- nested_time_files %>% 
-  rename_at(vars(old_names), ~ str_replace(time_dataframes, ".csv", ""))
-
+#nested_time_files <- dataset_korean_covid19[time_files_labels] %>%
+#  map(group_by, date) %>%
+#  map(nest) %>% 
+#  reduce(full_join, by='date')
+#
+# Rename name of nested tibbles
+#new_names < c("time_age", "time_province", "time_gender")
+#old_names <- colnames(nested_time_files)[2:length(nested_time_files)]
+#
+#nested_time_files <- nested_time_files %>% 
+#  rename_at(vars(old_names), ~ new_names)
+#
 # Join nested TimeAge, TimeProvince and TimeGender to Time
-test %>% full_join(dataset_korean_covid19$Time.csv, by='date') %>% 
-  arrange(date)
+#time_df <- dataset_korean_covid19$Time.csv %>% 
+#  full_join(nested_time_files, by='date') %>% 
+#  arrange(date)
+#
+#View(time_df)
+#
+# Write dataframe
+#write_tsv(x = time_df, path = "data/01_dat_load.tsv")
