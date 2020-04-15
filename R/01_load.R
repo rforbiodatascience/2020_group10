@@ -21,13 +21,18 @@ dataset_korean_covid19 <- dataset_raw_files %>%
 # Create Time dataframe
 # ------------------------------------------------------------------------------
 
-#  Join all Time* sets without column duplicates
+# Add suffixes to TimeAge and TimeGender to prevent column name collisions
+dataset_korean_covid19$TimeAge.csv <- dataset_korean_covid19$TimeAge.csv %>% 
+  rename_at(vars(-one_of('date')), ~ paste0(., '_age'))
+
+dataset_korean_covid19$TimeGender.csv  <- dataset_korean_covid19$TimeGender.csv %>%
+  rename_at(vars(-one_of('date')), ~ paste0(., '_gender'))
+
+#  Join all Time* sets
 time_df <- dataset_korean_covid19$Time.csv %>%
   full_join(dataset_korean_covid19$TimeAge.csv, by = "date") %>%
   full_join(dataset_korean_covid19$TimeGender.csv, by = "date") %>%
-  full_join(dataset_korean_covid19$TimeProvince.csv, by = "date") %>%
-  full_join(dataset_korean_covid19$SearchTrend.csv, by = "date") %>%
-  select(-contains("."))
+  full_join(dataset_korean_covid19$SearchTrend.csv, by = "date")
 
 # Write dataframe
 write_tsv(x = time_df, path = "data/01_dat_load.tsv")
@@ -35,11 +40,17 @@ write_tsv(x = time_df, path = "data/01_dat_load.tsv")
 # Patient dataframe
 # ------------------------------------------------------------------------------
 
-# Join Case, PatientInfo and PatientRoute sets without column duplicates
-patient_df <- dataset_korean_covid19$Case.csv %>%
-  full_join(dataset_korean_covid19$PatientInfo.csv, by = "infection_case") %>%
-  full_join(dataset_korean_covid19$PatientRoute.csv, by = "patient_id") %>%
-  select(-contains("."))
+# Add suffixes to PatientInfo and PatientRoute to prevent column name collisions
+dataset_korean_covid19$PatientInfo.csv <- dataset_korean_covid19$PatientInfo.csv %>% 
+  rename_at(vars(-one_of('infection_case', 'patient_id')), ~ paste0(., '_patient_info'))
+
+dataset_korean_covid19$PatientRoute.csv  <- dataset_korean_covid19$PatientRoute.csv %>%
+  rename_at(vars(-one_of('patient_id')), ~ paste0(., '_patient_route'))
+
+# Join Case, PatientInfo and PatientRoute sets
+patient_df <- dataset_korean_covid19$PatientRoute.csv %>%
+  full_join(dataset_korean_covid19$PatientInfo.csv, by = "patient_id") %>%
+  full_join(dataset_korean_covid19$Case, by = "infection_case")
 
 # Write dataframe
 write_tsv(x = patient_df, path = "data/02_dat_load.tsv")
