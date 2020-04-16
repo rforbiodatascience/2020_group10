@@ -42,15 +42,16 @@ write_tsv(x = time_df, path = "data/01_dat_load.tsv")
 
 # Add suffixes to PatientInfo and PatientRoute to prevent column name collisions
 dataset_korean_covid19$PatientInfo.csv <- dataset_korean_covid19$PatientInfo.csv %>% 
-  rename_at(vars(-one_of('infection_case', 'patient_id')), ~ paste0(., '_patient_info'))
+  rename_at(vars(-one_of('infection_case', 'patient_id', 'global_num')), ~ paste0(., '_patient_info'))
 
 dataset_korean_covid19$PatientRoute.csv  <- dataset_korean_covid19$PatientRoute.csv %>%
-  rename_at(vars(-one_of('patient_id')), ~ paste0(., '_patient_route'))
+  rename_at(vars(-one_of('patient_id', 'global_num')), ~ paste0(., '_patient_route'))
 
 # Join Case, PatientInfo and PatientRoute sets
 patient_df <- dataset_korean_covid19$PatientRoute.csv %>%
-  full_join(dataset_korean_covid19$PatientInfo.csv, by = "patient_id") %>%
-  full_join(dataset_korean_covid19$Case, by = "infection_case")
+  full_join(dataset_korean_covid19$PatientInfo.csv, by = c("patient_id", "global_num"))
+
+View(patient_df)
 
 # Write dataframe
 write_tsv(x = patient_df, path = "data/02_dat_load.tsv")
@@ -61,7 +62,9 @@ write_tsv(x = patient_df, path = "data/02_dat_load.tsv")
 # Join Region and Weather sets without column duplicates
 region_df <- dataset_korean_covid19$Region.csv %>%
   full_join(dataset_korean_covid19$Weather.csv, by = "province") %>% 
-  select(-contains("."))
+  full_join(dataset_korean_covid19$TimeProvince.csv, by = c("province", "date"))
+
+View(region_df)
 
 # Write dataframe 
 write_tsv(x = region_df, path = "data/03_dat_load.tsv")
