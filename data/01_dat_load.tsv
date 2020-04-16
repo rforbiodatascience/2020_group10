@@ -1,4 +1,4 @@
-date	time	test	negative	confirmed	released	deceased	time_age	age_age	confirmed_age	deceased_age	time_gender	sex_gender	confirmed_gender	deceased_gender	cold	flu	pneumonia	coronavirus
+date	time	test	negative	confirmed	released	deceased	time_age	age_age	confirmed_age	deceased_age	time_gender_gender	sex_gender_gender	confirmed_gender_gender	deceased_gender_gender	cold	flu	pneumonia	coronavirus
 2020-01-20	16	1	0	1	0	0	NA	NA	NA	NA	NA	NA	NA	NA	0.19217	0.70343	3.63716	20.6961
 2020-01-21	16	1	0	1	0	0	NA	NA	NA	NA	NA	NA	NA	NA	0.22462	0.59789	4.31987	35.33284
 2020-01-22	16	4	3	1	0	0	NA	NA	NA	NA	NA	NA	NA	NA	0.23808000000000001	0.56661	3.66416	29.74474
