@@ -56,3 +56,12 @@ patient_df <- patient_df %>%
 
 # time_df cleaning
 # ------------------------------------------------------------------------------
+
+# Adding two gender columns "male" and "female"
+time_df <- time_df %>% 
+  mutate(female = case_when(sex == "female" ~1,sex == "male" ~ 0)) %>% 
+  mutate(male = case_when(sex == "male" ~1, sex == "female" ~ 0))
+                                                 
+
+#Removing unwanted columns (time*4 and sex)
+time_df <- time_df %>%  select(-time, -time_time_age, -time_time_gender, -time_time_province, -sex)
