@@ -49,7 +49,7 @@ time_df <- dataset_tables$Time.csv %>%
   full_join(dataset_tables$TimeGender.csv, by = "date",
             suffix = c("", "_time_gender")) %>%
   full_join(dataset_tables$TimeProvince.csv, by = "date",
-            suffix = c("", "_time_province"))
+            suffix = c("", "_time_province")) %>% 
   full_join(dataset_tables$SearchTrend.csv, by = "date")
   
 # Write time data to disk
