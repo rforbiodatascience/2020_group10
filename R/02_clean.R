@@ -1,6 +1,6 @@
 # Clear workspace
 # ------------------------------------------------------------------------------
-rm(list = ls())
+rm(list = ls()) 
 
 # Load libraries
 # ------------------------------------------------------------------------------
@@ -12,6 +12,7 @@ source(file = "R/99_project_functions.R")
 
 # case_df cleaning
 # ------------------------------------------------------------------------------
+case_df <- read_tsv("data/case_data.tsv")
 case_df <- case_df %>% 
   mutate(city = replace (city, city == "-", "other")) %>% 
   mutate(city = replace (city, city == "from other city", "other")) %>% 
@@ -21,11 +22,11 @@ case_df <- case_df %>%
 
 # patient_df cleaning
 # ------------------------------------------------------------------------------
+patient_df <- read_tsv("data/patient_data.tsv", guess_max = 3000)
+
+
 #Delete unwanted columns
-patient_df$disease <- NULL
-patient_df$contact_number <- NULL
-patient_df$global_num_patient_route <- NULL
-#we can use select instead of NULL
+patient_df <- patient_df %>% select(., -c(disease, contact_number, global_num_patient_route ))
 
 patient_df <- patient_df %>% 
   mutate(infection_case = replace_na(infection_case, "other")) %>% 
@@ -56,7 +57,7 @@ patient_df <- patient_df %>%
 
 # time_df cleaning
 # ------------------------------------------------------------------------------
-
+time_df <- read_tsv("data/time_data.tsv")
 # Adding two gender columns "male" and "female"
 time_df <- time_df %>% 
   mutate(female = case_when(sex == "female" ~1,sex == "male" ~ 0)) %>% 
@@ -65,3 +66,7 @@ time_df <- time_df %>%
 
 #Removing unwanted columns (time*4 and sex)
 time_df <- time_df %>%  select(-time, -time_time_age, -time_time_gender, -time_time_province, -sex)
+
+# region_data cleaning
+# ------------------------------------------------------------------------------
+region_df <- read_tsv("data/region_data.tsv")
