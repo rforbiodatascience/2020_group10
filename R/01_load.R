@@ -25,7 +25,7 @@ dataset_tables <- dataset_files %>%
 # ------------------------------------------------------------------------------
 case_df <- dataset_tables$Case.csv
 
-# Write case data disk
+# Write case data to disk
 write_tsv(case_df, path = "data/case_data.tsv")
 
 # Patient data
@@ -34,7 +34,7 @@ write_tsv(case_df, path = "data/case_data.tsv")
 # Full join patient data by patient_id. Suffix are added for col collisions
 patient_df <- dataset_tables$PatientInfo.csv %>%
   full_join(dataset_tables$PatientRoute.csv, by = "patient_id", 
-            suffix = c("_patient_info", "_patient_route"))
+            suffix = c("_patient_info", "_patient_route")) 
 
 # Write patient data to disk
 write_tsv(patient_df, path = "data/patient_data.tsv")
