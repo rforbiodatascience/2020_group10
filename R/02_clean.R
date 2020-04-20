@@ -26,7 +26,7 @@ patient_df <- read_tsv("data/patient_data.tsv", guess_max = 3000)
 
 
 #Delete unwanted columns
-patient_df <- patient_df %>% select(., -c(disease, contact_number, global_num_patient_route ))
+patient_df <- patient_df %>% select(., -c(disease, contact_number, global_num_patient_route, age ))
 
 patient_df <- patient_df %>% 
   mutate(infection_case = replace_na(infection_case, "other")) %>% 
@@ -39,21 +39,18 @@ patient_df <- patient_df %>%
   mutate(type = replace_na(type, "other")) %>%
   mutate(type = replace(type, type == "etc", "other")) %>% 
   mutate(province_patient_route = replace(province_patient_route, province_patient_route == "etc", "unspecified")) %>% 
-  mutate(year_new = 2020 - birth_year) 
-  
-
-#### mutate(year_new = 2020 - birth_year)  %>% 
-# mutate(year_new = case_when( year_new < 10 ~ "0s",
-#                            year_new <= 10 ~ "10s", 
-#                             year_new <= 20 ~ "20s",
-#year_new <= 30 ~ "30s",
-#year_new <= 40 ~ "40s",
-#year_new <= 50 ~ "50s",
-#year_new <= 60 ~ "50s",
-#year_new <= 70 ~ "70s",
-#year_new <= 80 ~ "80s",
-#year_new <= 90 ~ "90s",
-#year_new >= 100 ~ "100s"))
+  mutate(age = 2020 - birth_year) %>% 
+  mutate(age = case_when( birth_year < 10 ~ "0s",
+                            age < 20 ~ "10s", 
+                          age < 30 ~ "20s",
+                          age < 40 ~ "30s",
+                          age < 50 ~ "40s", 
+                          age < 60 ~ "50s",
+                          age < 70 ~ "60s",
+                          age < 80 ~ "70s",
+                          age < 90 ~ "80s",
+                          age < 100 ~ "90s",
+                          age >= 100 ~ "100s"))
 
 # time_df cleaning
 # ------------------------------------------------------------------------------
