@@ -34,13 +34,15 @@ region_df <-region_df %>%
                               TRUE ~ "city"))
 
 province_summary <- region_df %>%
-  filter(province == city)
+  filter(province == city) %>%
+  group_by(province) %>%
+  summarise_at(vars(contains("count")), sum, na.rm = FALSE)
 
-region_df <- region_df %>% 
+city_summary <- region_df %>% 
   filter(province != city) %>%
-  group_by(province) %>% 
-  summarise(sum(kindergarten_count))
+  group_by(province) %>%
+  summarise_at(vars(contains("count")), sum, na.rm = FALSE)
+
+full_join(province_summary, city_summary, by = "province")
 
 
-View(region_df)
-View(province_summary)
