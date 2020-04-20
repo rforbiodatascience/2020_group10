@@ -31,7 +31,7 @@ write_tsv(case_df, "data/case_data_clean.tsv")
 patient_df <- read_tsv("data/patient_data.tsv", guess_max = 3000)
 
 #Delete unwanted columns
-patient_df <- patient_df %>% select(., -c(disease, contact_number, global_num_patient_route, age ))
+patient_df <- patient_df %>% select(., -c(disease, contact_number, global_num_patient_route, age, infection_order))
 
 patient_df <- patient_df %>% 
   mutate(infection_case = replace_na(infection_case, "other")) %>% 
