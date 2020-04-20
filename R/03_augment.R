@@ -30,7 +30,17 @@ region_df <-region_df %>%
   mutate(division = case_when(str_ends(city, "-do") ~ "province",
                               str_ends(city, "-si") ~ "city",
                               str_ends(city, "-gun") ~ "county",
-                              str_ends(city, "-gu") ~ "district"))
+                              str_ends(city, "-gu") ~ "district",
+                              TRUE ~ "city"))
+
+province_summary <- region_df %>%
+  filter(province == city)
+
+region_df <- region_df %>% 
+  filter(province != city) %>%
+  group_by(province) %>% 
+  summarise(sum(kindergarten_count))
+
 
 View(region_df)
-
+View(province_summary)
