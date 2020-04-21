@@ -63,13 +63,7 @@ write_tsv(patient_df, "data/patient_data_clean.tsv")
 # time_df cleaning
 # ------------------------------------------------------------------------------
 time_df <- read_tsv("data/time_data.tsv")
-# Adding two gender columns "male" and "female"
-time_df <- time_df %>% 
-  mutate(sex = case_when(sex == "male" ~ 0,
-                         sex == "female" ~ 1))
- 
-#Removing unwanted columns (time*4 and sex)
-time_df <- time_df %>% select(-time, -time_time_age, -time_time_gender, -time_time_province)
+
 
 # Write clean time dataframe to disk
 write_tsv(time_df, "data/time_data_clean.tsv")
@@ -78,5 +72,20 @@ write_tsv(time_df, "data/time_data_clean.tsv")
 # ------------------------------------------------------------------------------
 region_df <- read_tsv("data/region_data.tsv")
 
-# Write clean region dataframe to disk
-write_tsv(region_df, "data/region_data_clean.tsv")
+# Filter cities and small regions (add prefix to city for small regions with no explicitly stated cities)
+city_df <- region_df %>% 
+  filter(province != city | city == "Jeju-do" |city == "Sejong") %>% 
+  mutate(city = case_when(city == province ~ paste0("unknown_", city),
+                          TRUE ~ city))
+# Filter for provinces
+province_df <- region_df %>% 
+  filter(province == city & province != "Korea")
+
+# Get country summary for control calculations
+country_df <- region_df %>% 
+  filter(province == "Korea")
+
+# Write clean region dataframes to disk
+write_tsv(province_df, "data/province_data_clean.tsv")
+write_tsv(city_df, "data/city_data_clean.tsv")
+write_tsv(country_df, "data/country_data_clean.tsv")
