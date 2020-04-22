@@ -37,25 +37,16 @@ patient_df <- patient_df %>%
   mutate(infection_case = replace_na(infection_case, "other")) %>% 
   mutate(infection_case = replace(infection_case, infection_case == "etc", "other")) %>% 
   mutate(state = replace_na(state, "unspecified")) %>% 
-  mutate(sex = case_when(sex == "male" ~ 0,
-                         sex == "female" ~ 1)) %>% 
   mutate(country = replace_na(country, "other")) %>% 
   mutate(type = replace_na(type, "other")) %>%
   mutate(type = replace(type, type == "etc", "other")) %>% 
-  mutate(province_patient_route = replace(province_patient_route, province_patient_route == "etc", "unspecified")) %>% 
-  mutate(age = 2020 - birth_year) %>%
-  mutate(age_group = case_when( birth_year < 10 ~ "0s",
-                          age < 20 ~ "10s", 
-                          age < 30 ~ "20s",
-                          age < 40 ~ "30s",
-                          age < 50 ~ "40s", 
-                          age < 60 ~ "50s",
-                          age < 70 ~ "60s",
-                          age < 80 ~ "70s",
-                          age < 90 ~ "80s",
-                          age < 100 ~ "90s",
-                          age >= 100 ~ "100s")) %>%
-  select(-birth_year)
+  mutate(province_patient_route = replace(province_patient_route, province_patient_route == "etc", "unspecified")) %>%
+  mutate(province_patient_route = replace_na(province_patient_route, "unspecified")) %>% 
+  mutate(province_patient_info = replace(province_patient_info, province_patient_info == "etc", "other")) %>% 
+  mutate(city_patient_info = replace(city_patient_info, city_patient_info == "etc", "unspecified")) %>% 
+  mutate(city_patient_info = replace_na(city_patient_info, "unspecified")) %>% 
+  mutate(city_patient_route = replace_na(city_patient_route, "unspecified"))
+  
 
 # Write clean patient dataframe to disk
 write_tsv(patient_df, "data/patient_data_clean.tsv")
