@@ -30,23 +30,24 @@ write_tsv(case_df, "data/case_data_clean.tsv")
 
 patient_df <- read_tsv("data/patient_data.tsv", guess_max = 3000)
 
-#Delete unwanted columns
-patient_df <- patient_df %>% select(., -c(disease, contact_number, global_num_patient_route, age, infection_order))
+# Delete unwanted columns
+patient_df <- patient_df %>%
+  select(., -c(disease, contact_number, global_num_patient_route, age, infection_order))
 
-patient_df <- patient_df %>% 
-  mutate(infection_case = replace_na(infection_case, "other")) %>% 
-  mutate(infection_case = replace(infection_case, infection_case == "etc", "other")) %>% 
-  mutate(state = replace_na(state, "unspecified")) %>% 
-  mutate(country = replace_na(country, "other")) %>% 
+patient_df <- patient_df %>%
+  mutate(infection_case = replace_na(infection_case, "other")) %>%
+  mutate(infection_case = replace(infection_case, infection_case == "etc", "other")) %>%
+  mutate(state = replace_na(state, "unspecified")) %>%
+  mutate(country = replace_na(country, "other")) %>%
   mutate(type = replace_na(type, "other")) %>%
-  mutate(type = replace(type, type == "etc", "other")) %>% 
+  mutate(type = replace(type, type == "etc", "other")) %>%
   mutate(province_patient_route = replace(province_patient_route, province_patient_route == "etc", "unspecified")) %>%
-  mutate(province_patient_route = replace_na(province_patient_route, "unspecified")) %>% 
-  mutate(province_patient_info = replace(province_patient_info, province_patient_info == "etc", "other")) %>% 
-  mutate(city_patient_info = replace(city_patient_info, city_patient_info == "etc", "unspecified")) %>% 
-  mutate(city_patient_info = replace_na(city_patient_info, "unspecified")) %>% 
+  mutate(province_patient_route = replace_na(province_patient_route, "unspecified")) %>%
+  mutate(province_patient_info = replace(province_patient_info, province_patient_info == "etc", "other")) %>%
+  mutate(city_patient_info = replace(city_patient_info, city_patient_info == "etc", "unspecified")) %>%
+  mutate(city_patient_info = replace_na(city_patient_info, "unspecified")) %>%
   mutate(city_patient_route = replace_na(city_patient_route, "unspecified"))
-  
+
 
 # Write clean patient dataframe to disk
 write_tsv(patient_df, "data/patient_data_clean.tsv")
@@ -64,16 +65,19 @@ write_tsv(time_df, "data/time_data_clean.tsv")
 region_df <- read_tsv("data/region_data.tsv")
 
 # Filter cities and small regions (add prefix to city for small regions with no explicitly stated cities)
-city_df <- region_df %>% 
-  filter(province != city | city == "Jeju-do" |city == "Sejong") %>% 
-  mutate(city = case_when(city == province ~ paste0("unknown_", city),
-                          TRUE ~ city))
+city_df <- region_df %>%
+  filter(province != city | city == "Jeju-do" | city == "Sejong") %>%
+  mutate(city = case_when(
+    city == province ~ str_c("unknown_", city),
+    TRUE ~ city
+  ))
+
 # Filter for provinces
-province_df <- region_df %>% 
+province_df <- region_df %>%
   filter(province == city & province != "Korea")
 
 # Get country summary for control calculations
-country_df <- region_df %>% 
+country_df <- region_df %>%
   filter(province == "Korea")
 
 # Write clean region dataframes to disk
