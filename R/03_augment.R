@@ -42,7 +42,7 @@ patient_df <- patient_df %>%
   select(-birth_year)
   
 # Combine 'released_date' and 'deceased_date' and use state column
-patient_df %>%
+patient_df <- patient_df %>%
   unite("state_date", released_date : deceased_date, remove = TRUE) %>%
   mutate(state_date = str_replace_all(state_date, "[_NA]", ""))
 
