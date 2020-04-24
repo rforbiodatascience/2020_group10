@@ -42,9 +42,11 @@ patient_df <- patient_df %>%
   select(-birth_year)
   
 # Combine 'released_date' and 'deceased_date' and use state column
+# Unite merges NAs as str and have to be converted back to correct type
 patient_df <- patient_df %>%
   unite("state_date", released_date : deceased_date, remove = TRUE) %>%
-  mutate(state_date = str_replace_all(state_date, "[_NA]", ""))
+  mutate(state_date = str_replace_all(state_date, "[_NA]", "")) %>%
+  mutate(state_date = ifelse(state_date %in% "", NA, state_date))
 
 # Write to disk
 write_tsv(patient_df, "data/patient_data_augmented.tsv")
