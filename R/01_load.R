@@ -30,16 +30,26 @@ write_tsv(case_df, path = "data/case_data.tsv")
 
 # Patient data
 # ------------------------------------------------------------------------------
+patient_info_df <-dataset_tables$PatientInfo.csv
+patient_rout_df <- dataset_tables$PatientRoute.csv
 
+write_tsv(patient_info_df, path = "data/patient_info_data.tsv")
+write_tsv(patient_rout_df, path = "data/patient_route_data.tsv")
+
+#REMOVE
+#=================================================
 # Full join patient data by patient_id. Suffix are added for col collisions
-patient_df <- dataset_tables$PatientInfo.csv %>%
-  full_join(dataset_tables$PatientRoute.csv,
-    by = "patient_id",
-    suffix = c("_patient_info", "_patient_route")
-  )
+
+#patient_df <- dataset_tables$PatientInfo.csv %>%
+#  full_join(dataset_tables$PatientRoute.csv,
+#    by = "patient_id",
+#    suffix = c("_patient_info", "_patient_route")
+#  )
 
 # Write patient data to disk
-write_tsv(patient_df, path = "data/patient_data.tsv")
+#write_tsv(patient_df, path = "data/patient_data.tsv")
+#======================================================
+
 
 # Time series data
 # ------------------------------------------------------------------------------

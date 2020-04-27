@@ -33,7 +33,16 @@ case_df <- case_df %>%
 
 # Patient augment
 # ------------------------------------------------------------------------------
-patient_df <- read_tsv("data/patient_data_clean.tsv", guess_max = 3000)
+
+patient_info_df <- read_tsv("data/patient_info_data_clean.tsv", guess_max = 3000)
+patient_route_df <- read_tsv("data/patient_route_data_clean.tsv", guess_max = 3000)
+
+# Joining the the two patient data frames 
+patient_df <- patient_info_df %>%
+  full_join(patient_route_df,
+    by = "patient_id",
+    suffix = c("_patient_info", "_patient_route"))
+
 
 patient_df <- patient_df %>%
   # transform gender to binary
