@@ -33,7 +33,6 @@ case_df <- case_df %>%
 
 # Patient augment
 # ------------------------------------------------------------------------------
-
 patient_info_df <- read_tsv("data/patient_info_data_clean.tsv", guess_max = 3000)
 patient_route_df <- read_tsv("data/patient_route_data_clean.tsv", guess_max = 3000)
 
