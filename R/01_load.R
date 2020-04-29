@@ -23,49 +23,36 @@ dataset_tables <- dataset_files %>%
 
 # Case data
 # ------------------------------------------------------------------------------
-case_df <- dataset_tables$Case.csv
+write_tsv(dataset_tables$Case.csv, path = "data/case_data.tsv")
 
-# Write case data to disk
-write_tsv(case_df, path = "data/case_data.tsv")
-
-# Patient data
+# PatientInfo data
 # ------------------------------------------------------------------------------
+write_tsv(dataset_tables$PatientInfo.csv, path = "data/patient_info_data.tsv")
 
-# Full join patient data by patient_id. Suffix are added for col collisions
-patient_df <- dataset_tables$PatientInfo.csv %>%
-  full_join(dataset_tables$PatientRoute.csv,
-    by = "patient_id",
-    suffix = c("_patient_info", "_patient_route")
-  )
-
-# Write patient data to disk
-write_tsv(patient_df, path = "data/patient_data.tsv")
-
-# Time series data
+# PatientRoute data
 # ------------------------------------------------------------------------------
+write_tsv(dataset_tables$PatientRoute.csv, path = "data/patient_route_data.tsv")
 
-# Full join time series data by date. Suffix are added for col collisions
-time_df <- dataset_tables$Time.csv %>%
-  full_join(dataset_tables$TimeAge.csv,
-    by = "date",
-    suffix = c("", "_time_age")
-  ) %>%
-  full_join(dataset_tables$TimeGender.csv,
-    by = "date",
-    suffix = c("", "_time_gender")
-  ) %>%
-  full_join(dataset_tables$TimeProvince.csv,
-    by = "date",
-    suffix = c("", "_time_province")
-  ) %>%
-  full_join(dataset_tables$SearchTrend.csv, by = "date")
+# Time data
+# ------------------------------------------------------------------------------
+write_tsv(dataset_tables$Time.csv, path = "data/time_data.tsv")
 
-# Write time data to disk
-write_tsv(time_df, path = "data/time_data.tsv")
+# TimeAge data
+# ------------------------------------------------------------------------------
+write_tsv(dataset_tables$TimeAge.csv, path = "data/time_age_data.tsv")
+
+# TimeGender data
+# ------------------------------------------------------------------------------
+write_tsv(dataset_tables$TimeGender.csv, path = "data/time_gender_data.tsv")
+
+# TimeProvince data
+# ------------------------------------------------------------------------------
+write_tsv(dataset_tables$TimeProvince.csv, path = "data/time_province_data.tsv")
+
+# SearchTrend data
+# ------------------------------------------------------------------------------
+write_tsv(dataset_tables$SearchTrend.csv, path = "data/search_trend_data.tsv")
 
 # Regional data
 # ------------------------------------------------------------------------------
-region_df <- dataset_tables$Region.csv
-
-# Write region data to disk
-write_tsv(region_df, path = "data/region_data.tsv")
+write_tsv(dataset_tables$Region.csv, path = "data/region_data.tsv")

@@ -33,7 +33,15 @@ case_df <- case_df %>%
 
 # Patient augment
 # ------------------------------------------------------------------------------
-patient_df <- read_tsv("data/patient_data_clean.tsv", guess_max = 3000)
+patient_info_df <- read_tsv("data/patient_info_data_clean.tsv")
+patient_route_df <- read_tsv("data/patient_route_data_clean.tsv")
+
+# Joining the the two patient data frames 
+patient_df <- patient_info_df %>%
+  full_join(patient_route_df,
+    by = "patient_id",
+    suffix = c("_patient_info", "_patient_route"))
+
 
 patient_df <- patient_df %>%
   # transform gender to binary
@@ -70,7 +78,27 @@ write_tsv(patient_df, "data/patient_data_augmented.tsv")
 
 # Time augment
 # ------------------------------------------------------------------------------
-time_df <- read_tsv("data/time_data_clean.tsv")
+time_df           <- read_tsv("data/time_data_clean.tsv")
+time_age_df       <- read_tsv("data/time_age_data_clean.tsv")
+time_gender_df    <- read_tsv("data/time_gender_data_clean.tsv")
+time_province_df  <- read_tsv("data/time_province_data_clean.tsv")
+search_trend_df   <- read_tsv("data/search_trend_data_clean.tsv")
+
+# Full join time series data by date. Suffix are added for col collisions
+time_df <- time_df %>%
+  full_join(time_age_df,
+    by = "date",
+    suffix = c("", "_time_age")
+  ) %>%
+  full_join(time_gender_df,
+    by = "date",
+    suffix = c("", "_time_gender")
+  ) %>%
+  full_join(time_province_df,
+    by = "date",
+    suffix = c("", "_time_province")
+  ) %>%
+  full_join(search_trend_df, by = "date")
 
 # Adding a binary gender column
 time_df <- time_df %>%

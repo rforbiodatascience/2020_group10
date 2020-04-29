@@ -23,42 +23,70 @@ case_df <- case_df %>%
 # Write clean case dataframe to disk
 write_tsv(case_df, "data/case_data_clean.tsv")
 
-# patient_df cleaning
+# patient_info_df cleaning
 # ------------------------------------------------------------------------------
-
 # Increase guess_max to read all columns the right type
+patient_info_df <- read_tsv("data/patient_info_data.tsv", guess_max = 3000)
 
-patient_df <- read_tsv("data/patient_data.tsv", guess_max = 3000)
+#Delete unwanted columns patient_info_df
+patient_info_df <- patient_info_df %>% 
+  select(-c(disease, contact_number,age, infection_order))
 
-# Delete unwanted columns
-patient_df <- patient_df %>%
-  select(., -c(disease, contact_number, global_num_patient_route, age, infection_order))
-
-patient_df <- patient_df %>%
+patient_info_df <- patient_info_df %>% 
   mutate(infection_case = replace_na(infection_case, "other")) %>%
-  mutate(infection_case = replace(infection_case, infection_case == "etc", "other")) %>%
+  mutate(infection_case = replace(infection_case, infection_case == "etc", "other")) %>% 
   mutate(state = replace_na(state, "unspecified")) %>%
   mutate(country = replace_na(country, "other")) %>%
+  mutate(province = replace(province, province == "etc", "other")) %>%
+  mutate(city = replace(city, city == "etc", "unspecified")) %>%
+  mutate(city = replace_na(city, "unspecified")) 
+
+write_tsv(patient_info_df, "data/patient_info_data_clean.tsv")
+
+# patient_route_df cleaning
+# ------------------------------------------------------------------------------
+# Increase guess_max to read all columns the right type
+patient_route_df <- read_tsv("data/patient_route_data.tsv")
+
+#Delete unwanted columns patient_route_df
+patient_route_df <- patient_route_df %>% 
+  select(-global_num)
+
+patient_route_df <- patient_route_df %>%
   mutate(type = replace_na(type, "other")) %>%
   mutate(type = replace(type, type == "etc", "other")) %>%
-  mutate(province_patient_route = replace(province_patient_route, province_patient_route == "etc", "unspecified")) %>%
-  mutate(province_patient_route = replace_na(province_patient_route, "unspecified")) %>%
-  mutate(province_patient_info = replace(province_patient_info, province_patient_info == "etc", "other")) %>%
-  mutate(city_patient_info = replace(city_patient_info, city_patient_info == "etc", "unspecified")) %>%
-  mutate(city_patient_info = replace_na(city_patient_info, "unspecified")) %>%
-  mutate(city_patient_route = replace_na(city_patient_route, "unspecified"))
+  mutate(province = replace(province, province == "etc", "unspecified")) %>%
+  mutate(province = replace_na(province, "unspecified")) %>%
+  mutate(city = replace_na(city, "unspecified"))
 
-
-# Write clean patient dataframe to disk
-write_tsv(patient_df, "data/patient_data_clean.tsv")
+write_tsv(patient_route_df, "data/patient_route_data_clean.tsv")
 
 # time_df cleaning
 # ------------------------------------------------------------------------------
 time_df <- read_tsv("data/time_data.tsv")
-
-
-# Write clean time dataframe to disk
 write_tsv(time_df, "data/time_data_clean.tsv")
+
+#time_age_df cleaning
+#------------------------------------------------------------------------------
+time_age_df <- read_tsv("data/time_age_data.tsv")
+write_tsv(time_age_df, "data/time_age_data_clean.tsv")
+
+#time_gender_df cleaning
+#------------------------------------------------------------------------------
+time_gender_df <- read_tsv("data/time_gender_data.tsv")
+write_tsv(time_gender_df, "data/time_gender_data_clean.tsv")
+
+#time_province_df cleaning
+#------------------------------------------------------------------------------
+time_province_df <- read_tsv("data/time_province_data.tsv")
+write_tsv(time_province_df, "data/time_province_data_clean.tsv")
+
+#search_trend_df cleaning
+#------------------------------------------------------------------------------
+search_trend_df <- read_tsv("data/search_trend_data.tsv")
+write_tsv(search_trend_df, "data/search_trend_data_clean.tsv")
+
+
 
 # region_data cleaning
 # ------------------------------------------------------------------------------
