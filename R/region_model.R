@@ -10,81 +10,49 @@ library(tidyverse)
 # ------------------------------------------------------------------------------
 source(file = "R/99_project_functions.R")
 
-# Move to 
-# ------------------------------------------------------------------------------
-
-city_df <- read_tsv("data/city_data_augmented.tsv")
-
-province_df <- city_df %>%
-  group_by(province) %>% 
-  summarise_at(vars(elementary_school_count:nursing_home_count), sum)
-
-# Get province confirmed and non confirmed
+# Load data ---------------------------------------------------------------
+province_df <- read_tsv("data/province_data_clean.tsv")
 time_province_df <- read_tsv("data/time_data_augmented.tsv")
 
-time_province_df <- time_province_df %>% 
-  group_by(province) %>%
-  summarise(confirmed = max(confirmed_time_province),
-            released = max(confirmed_time_province),
-            deceased = max(deceased_time_province))
+# Wrangle data ------------------------------------------------------------
 
+# Get infection numbers from time dataframe of each province
+time_province_df <- time_province_df %>%
+  group_by(province) %>%
+  summarise(
+    confirmed = max(confirmed_time_province),
+    released = max(confirmed_time_province),
+    deceased = max(deceased_time_province)
+  )
+
+# Join province and infection numbers
 province_df <- province_df %>%
   left_join(time_province_df, by = "province")
 
-############ CORRELATION PLOTS ########################
+# Pivot longer province dataframe columns for correlation plot
+vars_remove <- c("code", "city", "latitude", "longitude", "released", "deceased")
 
-deceased_cor <- province_df %>% 
-  pivot_longer(c(-deceased, -province), 
-               names_to = "variable", 
-               values_to = "value") %>% 
-  filter(deceased > 0) %>% 
-  arrange(desc(deceased))
+deceased_cor <- province_df %>%
+  select(-vars_remove) %>% 
+  pivot_longer(c(-confirmed, -province),
+    names_to = "variable",
+    values_to = "value"
+  ) %>%
+  filter(confirmed > 0) %>% 
+  arrange(desc(confirmed))
 
-ggplot(deceased_cor) +
-  geom_jitter(aes(value, deceased, colour=variable),) + 
-  geom_smooth(aes(value, deceased, colour=variable), method=lm) +
-  facet_wrap(~variable, scales="free") +
-  labs(x = "Values", y = "Death count")
+# Visualise data ----------------------------------------------------------
 
-############################ PCA ########################
+# Plot multiple correlation plots.
+# Diseased against province society stats
+correlation_plot <- ggplot(deceased_cor) +
+  geom_jitter(aes(value, confirmed, colour = variable), ) +
+  geom_smooth(aes(value, confirmed, colour = variable), method = lm) +
+  facet_wrap(~variable, scales = "free") +
+  labs(x = "Var value(s)", y = "N Deceased")
 
-# PCA of regional data
-city_pca <- city_df %>%
-  select_at(vars(elementary_school_count:nursing_home_count)) %>% 
-  prcomp(center = TRUE, scale. = TRUE)
-
-# REMOVE IN FUTURE. Check variance explained for each pca
-city_pca %>% broom::tidy("pcs")
-
-# Putting the non-numeric columns back
-city_pca_augment <- city_pca %>% 
-  broom::augment(city_df)
-
-city_pca_augment %>%
-  ggplot(aes(x = .fittedPC1, 
-             y = .fittedPC2, 
-             color = division)) +
-  geom_point()
-
-############################ PCA ########################
-
-# PCA of regional data
-province_pca <- province_df %>%
-  select_at(vars(elementary_school_count:nursing_home_count)) %>% 
-  prcomp(center = TRUE, scale. = TRUE)
-
-# REMOVE IN FUTURE. Check variance explained for each pca
-province_pca %>% broom::tidy("pcs")
-
-# Putting the non-numeric columns back
-province_pca_augment <- province_pca %>% 
-  broom::augment(province_df)
-
-province_pca_augment %>%
-  ggplot(aes(x = .fittedPC1, 
-             y = .fittedPC2, 
-             color = deceased,
-             size = deceased)) +
-  geom_point() +
-  guides(size = FALSE)
-
+# Write plots and data to file --------------------------------------------
+ggsave(
+  filename = "results/correlation_province_confirmed.png",
+  plot = correlation_plot
+)
