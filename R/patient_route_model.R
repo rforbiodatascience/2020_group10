@@ -14,7 +14,9 @@ library(raster)
 library(spData)
 library(spDataLarge)
 library(mapview)
+library(ggmap)
 
+# install_github("dkahle/ggmap")
 # install.packages("spData")
 # install.packages("mapview")
 # install_github("Nowosad/spDataLarge")
@@ -32,9 +34,10 @@ patient_df <- read_tsv("data/patient_data_augmented.tsv")
 
 # Model the data
 # ------------------------------------------------------------------------------
-# ggplot figure of a map where we can see either places of infection or route of the patients (Google maps). 
+#map where we can see either places of infection or route of the patients (Google maps). 
 # Coloring regions by age group. 
 
-# Add fill layer to nz shape
-tm_shape(world) +
-  tm_fill() 
+localizacion="South Korea"
+myMap <- get_map(location=localizacion, zoom= 18, source="google", 
+                 maptype="roadmap", crop=TRUE)
+
