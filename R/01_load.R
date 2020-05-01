@@ -23,36 +23,54 @@ dataset_tables <- dataset_files %>%
 
 # Case data
 # ------------------------------------------------------------------------------
-write_tsv(dataset_tables$Case.csv, path = "data/case_data.tsv")
+dataset_tables %>%
+  pluck("Case.csv") %>% 
+  write_tsv(path = "data/case_data.tsv")
 
 # PatientInfo data
 # ------------------------------------------------------------------------------
-write_tsv(dataset_tables$PatientInfo.csv, path = "data/patient_info_data.tsv")
+dataset_tables %>%
+  pluck("PatientInfo.csv") %>% 
+  write_tsv(path = "data/patient_info_data.tsv")
 
 # PatientRoute data
 # ------------------------------------------------------------------------------
-write_tsv(dataset_tables$PatientRoute.csv, path = "data/patient_route_data.tsv")
+dataset_tables %>%
+  pluck("PatientRoute.csv") %>% 
+  write_tsv(path = "data/patient_route_data.tsv")
 
 # Time data
 # ------------------------------------------------------------------------------
-write_tsv(dataset_tables$Time.csv, path = "data/time_data.tsv")
+dataset_tables %>%
+  pluck("Time.csv") %>% 
+  write_tsv(path = "data/time_data.tsv")
 
 # TimeAge data
 # ------------------------------------------------------------------------------
-write_tsv(dataset_tables$TimeAge.csv, path = "data/time_age_data.tsv")
+dataset_tables %>%
+  pluck("TimeAge.csv") %>% 
+  write_tsv(path = "data/time_age_data.tsv")
 
 # TimeGender data
 # ------------------------------------------------------------------------------
-write_tsv(dataset_tables$TimeGender.csv, path = "data/time_gender_data.tsv")
+dataset_tables %>%
+  pluck("TimeGender.csv") %>% 
+  write_tsv(path = "data/time_gender_data.tsv")
 
 # TimeProvince data
 # ------------------------------------------------------------------------------
-write_tsv(dataset_tables$TimeProvince.csv, path = "data/time_province_data.tsv")
+dataset_tables %>%
+  pluck("TimeProvince.csv") %>% 
+  write_tsv(path = "data/time_province_data.tsv")
 
 # SearchTrend data
 # ------------------------------------------------------------------------------
-write_tsv(dataset_tables$SearchTrend.csv, path = "data/search_trend_data.tsv")
+dataset_tables %>%
+  pluck("SearchTrend.csv") %>% 
+  write_tsv(path = "data/search_trend_data.tsv")
 
 # Regional data
 # ------------------------------------------------------------------------------
-write_tsv(dataset_tables$Region.csv, path = "data/region_data.tsv")
+dataset_tables %>%
+  pluck("Region.csv") %>% 
+  write_tsv(path = "data/region_data.tsv")
