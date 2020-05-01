@@ -15,33 +15,35 @@ patient_df <- read_tsv(file = "data/patient_data_augmented.tsv")
 
 # Wrangle data ------------------------------------------------------------
 
-# each pair of infecting person - infected person and age group of infected
+# each pair of infecting person - infected person with both age groups
 transmission_df <- patient_df %>% 
-  select(infected_by, patient_id, age_group) %>% 
+  select(infected_by, patient_id, age_group) %>%
+  rename(age_group_infected = age_group,
+         infected = patient_id,
+         infecting = infected_by) %>% 
+  left_join(select(patient_df, patient_id, age_group), by = c("infecting" = "patient_id")) %>% 
+  rename(age_group_infecting = age_group) %>% 
   drop_na() %>% 
   distinct()
 
-# the persons who infected someone
-infecting <- transmission_df %>%
-  distinct(infected_by) %>%
-  rename(patient_id = infected_by)
-
-# the persons who were infected
-infected <- transmission_df %>%
-  distinct(patient_id)
-
-#make df with age of patients
-age_df <- patient_df %>% 
-  select(patient_id, age_group)
 
 # both infected and infecting persons have to be nodes. Add age to each node.
-# consider dropping NAs and remove edges correspondingly
-nodes <- full_join(infecting, infected) %>% 
-  left_join(., age_df, by = "patient_id") %>% 
-  distinct() 
+nodes <- transmission_df %>% 
+  pivot_longer(
+    cols = c(infected, infecting),
+    names_to = "status",
+    values_to = "patient_id") %>% 
+  mutate(age_group = case_when(
+    status == "infecting" ~ age_group_infecting,
+    status == "infected"  ~ age_group_infected)) %>% 
+  select(patient_id, age_group) %>% 
+  distinct()
 
+
+
+# remove edges between nodes that have been filtered out
 edges <- transmission_df %>% 
-  rename(from = infected_by, to = patient_id)
+  rename(from = infecting, to = infected)
 
 # Visualise data ----------------------------------------------------------
 graph_obj <- graph_from_data_frame(edges, vertices = nodes, directed = TRUE) %>% 
@@ -56,4 +58,4 @@ transmission_plot <- ggraph(graph_obj, layout = "fr") +
 
 # Write plots and data to file --------------------------------------------
 ggsave(filename = "results/04_plot.png", plot = transmission_plot)
-#write_tsv(x = dat, path = "data/wrangled_dat.tsv")
+write_tsv(x = transmission_df, path = "data/wrangled_transmission.tsv")
