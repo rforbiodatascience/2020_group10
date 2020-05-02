@@ -597,7 +597,7 @@ patient_id	global_num	sex	birth_year	country	province	city	infection_case	infect
 1100000025	NA	female	1976	Korea	Busan	Haeundae-gu	contact with patient	1100000002	2020-02-23	2020-02-23	NA	NA	released
 1100000026	NA	male	1993	Korea	Busan	Haeundae-gu	Onchun Church	NA	NA	2020-02-23	NA	NA	released
 1100000027	NA	female	1992	Korea	Busan	Suyeong-gu	other	NA	NA	2020-02-23	NA	NA	released
-1100000028	NA	female	1955	Korea	Busan	Suyeong-gu	contact with patient	1100000028	2020-02-22	2020-02-23	NA	NA	released
+1100000028	NA	female	1955	Korea	Busan	Suyeong-gu	contact with patient	NA	2020-02-22	2020-02-23	NA	NA	released
 1100000029	NA	male	1999	Korea	Busan	Dongnae-gu	other	NA	NA	2020-02-23	NA	NA	released
 1100000030	NA	male	1993	Korea	Busan	Geumjeong-gu	Onchun Church	NA	2020-02-22	2020-02-23	NA	NA	released
 1100000031	NA	female	1998	Korea	Busan	Dongnae-gu	Onchun Church	NA	NA	2020-02-23	NA	NA	released
@@ -764,8 +764,8 @@ patient_id	global_num	sex	birth_year	country	province	city	infection_case	infect
 1300000007	489	male	NA	Korea	Gwangju	unspecified	contact with patient	1300000003	NA	2020-02-22	2020-03-17	NA	released
 1300000008	589	female	NA	Korea	Gwangju	unspecified	contact with patient	1300000003	NA	2020-02-22	2020-03-06	NA	released
 1300000009	611	female	NA	Korea	Gwangju	unspecified	contact with patient	1300000004	NA	2020-02-23	2020-03-19	NA	released
-1300000010	4388	female	NA	Korea	Gwangju	unspecified	contact with patient	1300000011	NA	2020-03-02	2020-04-02	NA	released
-1300000011	4257	male	NA	Korea	Gwangju	unspecified	contact with patient	1300000010	NA	2020-03-02	2020-03-30	NA	released
+1300000010	4388	female	NA	Korea	Gwangju	unspecified	contact with patient	NA	NA	2020-03-02	2020-04-02	NA	released
+1300000011	4257	male	NA	Korea	Gwangju	unspecified	contact with patient	NA	NA	2020-03-02	2020-03-30	NA	released
 1300000012	5141	female	NA	Korea	Gwangju	unspecified	contact with patient	1300000011	NA	2020-03-02	NA	NA	isolated
 1300000013	5031	male	NA	Korea	Gwangju	unspecified	other	NA	2020-02-27	2020-03-04	2020-03-29	NA	released
 1300000014	7268	male	NA	Korea	Gwangju	unspecified	contact with patient	1300000003	NA	2020-03-07	2020-03-23	NA	released
@@ -1664,8 +1664,8 @@ patient_id	global_num	sex	birth_year	country	province	city	infection_case	infect
 4100000003	NA	female	1970	Korea	Chungcheongnam-do	Cheonan-si	gym facility in Cheonan	4100000008	2020-02-24	2020-02-25	2020-03-20	NA	released
 4100000004	NA	female	1973	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	4100000006	2020-02-24	2020-02-25	2020-03-17	NA	released
 4100000005	NA	female	1976	Korea	Chungcheongnam-do	Cheonan-si	gym facility in Cheonan	4100000008	2020-02-23	2020-02-26	2020-03-27	NA	released
-4100000006	NA	female	1978	Korea	Chungcheongnam-do	Asan-si	contact with patient	4100000007	2020-02-22	2020-02-26	2020-03-22	NA	released
-4100000007	NA	male	1975	Korea	Chungcheongnam-do	Asan-si	contact with patient	4100000006	2020-02-22	2020-02-26	2020-03-26	NA	released
+4100000006	NA	female	1978	Korea	Chungcheongnam-do	Asan-si	contact with patient	NA	2020-02-22	2020-02-26	2020-03-22	NA	released
+4100000007	NA	male	1975	Korea	Chungcheongnam-do	Asan-si	contact with patient	NA	2020-02-22	2020-02-26	2020-03-26	NA	released
 4100000008	NA	female	1974	Korea	Chungcheongnam-do	Cheonan-si	gym facility in Cheonan	NA	2020-02-20	2020-02-26	2020-03-29	NA	released
 4100000009	NA	female	1982	Korea	Chungcheongnam-do	Cheonan-si	gym facility in Cheonan	4100000008	2020-02-23	2020-02-26	2020-03-23	NA	released
 4100000010	NA	female	1971	Korea	Chungcheongnam-do	Cheonan-si	gym facility in Cheonan	4100000008	2020-02-25	2020-02-27	NA	NA	isolated
@@ -1710,7 +1710,7 @@ patient_id	global_num	sex	birth_year	country	province	city	infection_case	infect
 4100000049	NA	male	1983	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	4100000022	NA	2020-02-29	NA	NA	isolated
 4100000050	NA	female	1991	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	4100000006	2020-02-27	2020-02-29	2020-03-13	NA	released
 4100000051	NA	female	1959	Korea	Chungcheongnam-do	Cheonan-si	other	NA	2020-02-25	2020-02-29	NA	NA	isolated
-4100000052	NA	female	1978	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	4100000070	2020-02-24	2020-02-29	2020-03-18	NA	released
+4100000052	NA	female	1978	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	NA	2020-02-24	2020-02-29	2020-03-18	NA	released
 4100000053	NA	female	1959	Korea	Chungcheongnam-do	Cheonan-si	gym facility in Cheonan	4100000008	NA	2020-02-29	2020-03-24	NA	released
 4100000054	NA	female	1969	Korea	Chungcheongnam-do	Cheonan-si	gym facility in Cheonan	4100000008	NA	2020-02-29	2020-03-23	NA	released
 4100000055	NA	female	1997	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	4100000008	2020-02-27	2020-02-29	2020-03-17	NA	released
@@ -1728,7 +1728,7 @@ patient_id	global_num	sex	birth_year	country	province	city	infection_case	infect
 4100000067	NA	male	1984	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	4100000071	2020-02-27	2020-03-01	2020-03-12	NA	released
 4100000068	NA	male	1972	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	4100000077	NA	2020-03-01	2020-03-24	NA	released
 4100000069	NA	female	1972	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	4100000006	2020-02-29	2020-03-01	2020-03-24	NA	released
-4100000070	NA	male	2007	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	4100000052	NA	2020-03-01	2020-03-18	NA	released
+4100000070	NA	male	2007	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	NA	NA	2020-03-01	2020-03-18	NA	released
 4100000071	NA	female	1986	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	4100000022	2020-02-25	2020-03-01	2020-03-24	NA	released
 4100000072	NA	male	2012	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	4100000022	NA	2020-03-01	2020-03-18	NA	released
 4100000073	NA	male	1974	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	4100000039	NA	2020-03-01	2020-03-23	NA	released
@@ -1774,13 +1774,13 @@ patient_id	global_num	sex	birth_year	country	province	city	infection_case	infect
 4100000113	NA	male	1983	Korea	Chungcheongnam-do	Seosan-si	contact with patient	4100000104	NA	2020-03-10	2020-03-29	NA	released
 4100000114	NA	male	1967	Korea	Chungcheongnam-do	Seosan-si	contact with patient	4100000104	NA	2020-03-10	2020-03-29	NA	released
 4100000115	NA	female	1939	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	4100000002	2020-03-11	2020-03-11	2020-03-20	NA	released
-4100000116	NA	male	1955	Korea	Chungcheongnam-do	Hongseong-gun	overseas inflow	4100000118	2020-03-16	2020-03-17	2020-04-03	NA	released
+4100000116	NA	male	1955	Korea	Chungcheongnam-do	Hongseong-gun	overseas inflow	NA	2020-03-16	2020-03-17	2020-04-03	NA	released
 4100000117	NA	male	1995	Korea	Chungcheongnam-do	Cheonan-si	River of Grace Community Church	NA	2020-03-09	2020-03-17	2020-04-05	NA	released
-4100000118	NA	female	1958	Korea	Chungcheongnam-do	Hongseong-gun	overseas inflow	4100000116	NA	2020-03-17	NA	NA	isolated
+4100000118	NA	female	1958	Korea	Chungcheongnam-do	Hongseong-gun	overseas inflow	NA	NA	2020-03-17	NA	NA	isolated
 4100000119	NA	female	1984	Korea	Chungcheongnam-do	Taean-gun	other	NA	NA	2020-03-19	NA	NA	isolated
 4100000120	NA	female	1975	Korea	Chungcheongnam-do	Cheonan-si	other	NA	NA	2020-03-21	2020-03-28	NA	released
-4100000121	NA	male	1972	Korea	Chungcheongnam-do	Buyeo-gun	contact with patient	4100000122	NA	2020-03-24	NA	NA	isolated
-4100000122	NA	female	1975	Korea	Chungcheongnam-do	Buyeo-gun	contact with patient	4100000121	NA	2020-03-24	NA	NA	isolated
+4100000121	NA	male	1972	Korea	Chungcheongnam-do	Buyeo-gun	contact with patient	NA	NA	2020-03-24	NA	NA	isolated
+4100000122	NA	female	1975	Korea	Chungcheongnam-do	Buyeo-gun	contact with patient	NA	NA	2020-03-24	NA	NA	isolated
 4100000123	NA	male	1971	Korea	Chungcheongnam-do	Cheonan-si	overseas inflow	NA	2020-03-13	2020-03-24	NA	NA	isolated
 4100000124	NA	male	1990	Korea	Chungcheongnam-do	Cheonan-si	overseas inflow	NA	2020-03-21	2020-03-25	NA	NA	isolated
 4100000125	NA	male	1981	Korea	Chungcheongnam-do	Buyeo-gun	contact with patient	4100000122	2020-03-27	2020-03-27	NA	NA	isolated
@@ -2690,8 +2690,8 @@ patient_id	global_num	sex	birth_year	country	province	city	infection_case	infect
 6009000004	NA	female	1983	Korea	Gyeongsangbuk-do	Sangju-si	other	NA	NA	2020-02-25	NA	NA	isolated
 6009000005	NA	female	1971	Korea	Gyeongsangbuk-do	Sangju-si	other	NA	NA	2020-02-26	NA	NA	isolated
 6009000006	NA	female	1959	Korea	Gyeongsangbuk-do	Sangju-si	contact with patient	6009000003	NA	2020-02-26	2020-03-23	NA	released
-6009000007	NA	male	1948	Korea	Gyeongsangbuk-do	Sangju-si	contact with patient	6009000008	NA	2020-02-26	2020-03-23	NA	released
-6009000008	NA	female	1956	Korea	Gyeongsangbuk-do	Sangju-si	contact with patient	6009000007	NA	2020-02-26	2020-03-23	NA	released
+6009000007	NA	male	1948	Korea	Gyeongsangbuk-do	Sangju-si	contact with patient	NA	NA	2020-02-26	2020-03-23	NA	released
+6009000008	NA	female	1956	Korea	Gyeongsangbuk-do	Sangju-si	contact with patient	NA	NA	2020-02-26	2020-03-23	NA	released
 6009000009	NA	male	1985	Korea	Gyeongsangbuk-do	Sangju-si	contact with patient	6019000015	NA	2020-02-26	2020-03-23	NA	released
 6009000010	NA	male	1983	Korea	Gyeongsangbuk-do	Sangju-si	contact with patient	6009000004	NA	2020-02-26	2020-03-25	NA	released
 6009000011	NA	male	2015	Korea	Gyeongsangbuk-do	Sangju-si	contact with patient	6009000004	NA	2020-02-26	2020-03-23	NA	released
@@ -3073,7 +3073,7 @@ patient_id	global_num	sex	birth_year	country	province	city	infection_case	infect
 6100000063	NA	female	2000	Korea	Gyeongsangnam-do	Goseong-gun	Shincheonji Church	NA	NA	2020-03-01	NA	NA	released
 6100000064	NA	female	1999	Korea	Gyeongsangnam-do	Geochang-gun	Shincheonji Church	NA	NA	2020-03-02	2020-03-19	NA	released
 6100000065	NA	female	1962	Korea	Gyeongsangnam-do	Geoje-si	Shincheonji Church	NA	NA	2020-03-03	2020-03-20	NA	released
-6100000066	NA	female	1958	Korea	Gyeongsangnam-do	Geochang-gun	contact with patient	6100000066	NA	2020-03-03	2020-03-25	NA	released
+6100000066	NA	female	1958	Korea	Gyeongsangnam-do	Geochang-gun	contact with patient	NA	NA	2020-03-03	2020-03-25	NA	released
 6100000067	NA	male	1960	Korea	Gyeongsangnam-do	Geochang-gun	contact with patient	6100000069	2020-03-02	2020-03-04	2020-04-02	NA	released
 6100000068	NA	female	1957	Korea	Gyeongsangnam-do	Geochang-gun	other	NA	NA	2020-03-04	2020-03-26	NA	released
 6100000069	NA	female	1960	Korea	Gyeongsangnam-do	Geochang-gun	other	NA	NA	2020-03-04	2020-03-20	NA	released
