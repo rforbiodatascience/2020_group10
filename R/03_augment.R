@@ -14,20 +14,20 @@ source(file = "R/99_project_functions.R")
 # ------------------------------------------------------------------------------
 case_df <- read_tsv("data/case_data_clean.tsv")
 
-case_df <- case_df %>% 
+case_df <- case_df %>%
   mutate(case_type = case_when(
-    str_detect(infection_case,"Hospital") ~ "hospital", 
-    str_detect(infection_case,"Church") ~ "church",
-    str_detect(infection_case,"overseas") ~ "overseas",
-    str_detect(infection_case,"Pilgrimage") ~ "overseas",
-    str_detect(infection_case,"patient") ~ "contact with patient",
-    str_detect(infection_case,"Call") ~ "call center",
-    str_detect(infection_case,"Nursing") ~ "nursing home",
-    str_detect(infection_case,"gym") ~ "gym",
-    str_detect(infection_case,"Lab") ~ "lab",
-    str_detect(infection_case,"Community Center") ~ "community center",
-    str_detect(infection_case,"other") ~ "other",
-    )) %>% 
+    str_detect(infection_case, "Hospital") ~ "hospital",
+    str_detect(infection_case, "Church") ~ "church",
+    str_detect(infection_case, "overseas") ~ "overseas",
+    str_detect(infection_case, "Pilgrimage") ~ "overseas",
+    str_detect(infection_case, "patient") ~ "contact with patient",
+    str_detect(infection_case, "Call") ~ "call center",
+    str_detect(infection_case, "Nursing") ~ "nursing home",
+    str_detect(infection_case, "gym") ~ "gym",
+    str_detect(infection_case, "Lab") ~ "lab",
+    str_detect(infection_case, "Community Center") ~ "community center",
+    str_detect(infection_case, "other") ~ "other",
+    )) %>%
   mutate(case_type = replace(case_type, is.na(case_type), "other"))
   
 
@@ -36,7 +36,7 @@ case_df <- case_df %>%
 patient_info_df <- read_tsv("data/patient_info_data_clean.tsv")
 patient_route_df <- read_tsv("data/patient_route_data_clean.tsv")
 
-# Joining the the two patient data frames 
+# Joining the the two patient data frames
 patient_df <- patient_info_df %>%
   full_join(patient_route_df,
     by = "patient_id",
