@@ -2237,10 +2237,10 @@ patient_id	global_num	sex	country	province_patient_info	city_patient_info	infect
 1100000027	NA	1	Korea	Busan	Suyeong-gu	other	NA	NA	2020-02-23	NA	released	2020-02-21	Busan	Suyeong-gu	cafe	35.1574164	129.113435	28	20s
 1100000027	NA	1	Korea	Busan	Suyeong-gu	other	NA	NA	2020-02-23	NA	released	2020-02-23	Busan	Suyeong-gu	hospital	35.1500199	129.1107612	28	20s
 1100000027	NA	1	Korea	Busan	Suyeong-gu	other	NA	NA	2020-02-23	NA	released	2020-02-24	Busan	Seo-gu	hospital	35.100814	129.018729	28	20s
-1100000028	NA	1	Korea	Busan	Suyeong-gu	contact with patient	1100000028	2020-02-22	2020-02-23	NA	released	2020-02-21	Busan	Suyeong-gu	other	35.1689761	129.1165481	65	60s
-1100000028	NA	1	Korea	Busan	Suyeong-gu	contact with patient	1100000028	2020-02-22	2020-02-23	NA	released	2020-02-22	Busan	Suyeong-gu	other	35.1689761	129.1165481	65	60s
-1100000028	NA	1	Korea	Busan	Suyeong-gu	contact with patient	1100000028	2020-02-22	2020-02-23	NA	released	2020-02-22	Busan	Busanjin-gu	store	35.1639096	129.0525986	65	60s
-1100000028	NA	1	Korea	Busan	Suyeong-gu	contact with patient	1100000028	2020-02-22	2020-02-23	NA	released	2020-02-23	Busan	Suyeong-gu	hospital	35.1500199	129.1107612	65	60s
+1100000028	NA	1	Korea	Busan	Suyeong-gu	contact with patient	NA	2020-02-22	2020-02-23	NA	released	2020-02-21	Busan	Suyeong-gu	other	35.1689761	129.1165481	65	60s
+1100000028	NA	1	Korea	Busan	Suyeong-gu	contact with patient	NA	2020-02-22	2020-02-23	NA	released	2020-02-22	Busan	Suyeong-gu	other	35.1689761	129.1165481	65	60s
+1100000028	NA	1	Korea	Busan	Suyeong-gu	contact with patient	NA	2020-02-22	2020-02-23	NA	released	2020-02-22	Busan	Busanjin-gu	store	35.1639096	129.0525986	65	60s
+1100000028	NA	1	Korea	Busan	Suyeong-gu	contact with patient	NA	2020-02-22	2020-02-23	NA	released	2020-02-23	Busan	Suyeong-gu	hospital	35.1500199	129.1107612	65	60s
 1100000029	NA	0	Korea	Busan	Dongnae-gu	other	NA	NA	2020-02-23	NA	released	2020-02-21	Gyeonggi-do	Suwon-si	other	37.2801259	127.0075025	21	20s
 1100000029	NA	0	Korea	Busan	Dongnae-gu	other	NA	NA	2020-02-23	NA	released	2020-02-22	Busan	Busanjin-gu	other	35.1562305	129.062021	21	20s
 1100000029	NA	0	Korea	Busan	Dongnae-gu	other	NA	NA	2020-02-23	NA	released	2020-02-22	Busan	Dongnae-gu	pc_cafe	35.1961894	129.0613173	21	20s
@@ -2938,26 +2938,26 @@ patient_id	global_num	sex	country	province_patient_info	city_patient_info	infect
 1300000008	589	1	Korea	Gwangju	unspecified	contact with patient	1300000003	NA	2020-02-22	2020-03-06	released	2020-02-20	Gwangju	Seo-gu	restaurant	35.1254322	126.8796482	NA	NA
 1300000008	589	1	Korea	Gwangju	unspecified	contact with patient	1300000003	NA	2020-02-22	2020-03-06	released	2020-02-20	Gwangju	Dong-gu	hospital	35.1386047	126.9266779	NA	NA
 1300000009	611	1	Korea	Gwangju	unspecified	contact with patient	1300000004	NA	2020-02-23	2020-03-19	released	NA	NA	NA	NA	NA	NA	NA	NA
-1300000010	4388	1	Korea	Gwangju	unspecified	contact with patient	1300000011	NA	2020-03-02	2020-04-02	released	2020-02-28	Gwangju	Dong-gu	store	35.154519	126.91229	NA	NA
-1300000010	4388	1	Korea	Gwangju	unspecified	contact with patient	1300000011	NA	2020-03-02	2020-04-02	released	2020-02-28	Gwangju	Dong-gu	post_office	35.1541026	126.9145398	NA	NA
-1300000010	4388	1	Korea	Gwangju	unspecified	contact with patient	1300000011	NA	2020-03-02	2020-04-02	released	2020-02-28	Gwangju	Nam-gu	store	35.1388678	126.9145133	NA	NA
-1300000010	4388	1	Korea	Gwangju	unspecified	contact with patient	1300000011	NA	2020-03-02	2020-04-02	released	2020-02-28	Gwangju	Nam-gu	other	35.1371073	126.914245	NA	NA
-1300000010	4388	1	Korea	Gwangju	unspecified	contact with patient	1300000011	NA	2020-03-02	2020-04-02	released	2020-03-01	Seoul	Gangnam-gu	post_office	37.5135304	127.0315341	NA	NA
-1300000010	4388	1	Korea	Gwangju	unspecified	contact with patient	1300000011	NA	2020-03-02	2020-04-02	released	2020-03-01	Gwangju	Dong-gu	other	35.1413894	126.9209665	NA	NA
-1300000010	4388	1	Korea	Gwangju	unspecified	contact with patient	1300000011	NA	2020-03-02	2020-04-02	released	2020-03-01	Gwangju	Nam-gu	church	35.1390514	126.9152767	NA	NA
-1300000010	4388	1	Korea	Gwangju	unspecified	contact with patient	1300000011	NA	2020-03-02	2020-04-02	released	2020-03-01	Gwangju	Dong-gu	hospital	35.14191	126.921678	NA	NA
-1300000010	4388	1	Korea	Gwangju	unspecified	contact with patient	1300000011	NA	2020-03-02	2020-04-02	released	2020-03-02	Gwangju	Dong-gu	hospital	35.14191	126.921678	NA	NA
-1300000011	4257	0	Korea	Gwangju	unspecified	contact with patient	1300000010	NA	2020-03-02	2020-03-30	released	2020-02-28	Gwangju	Dong-gu	restaurant	35.1458977	126.9174842	NA	NA
-1300000011	4257	0	Korea	Gwangju	unspecified	contact with patient	1300000010	NA	2020-03-02	2020-03-30	released	2020-02-28	Gwangju	Nam-gu	cafe	35.1399599	126.9154241	NA	NA
-1300000011	4257	0	Korea	Gwangju	unspecified	contact with patient	1300000010	NA	2020-03-02	2020-03-30	released	2020-02-29	Gwangju	Buk-gu	restaurant	35.1748141	126.9154675	NA	NA
-1300000011	4257	0	Korea	Gwangju	unspecified	contact with patient	1300000010	NA	2020-03-02	2020-03-30	released	2020-02-29	Gwangju	Buk-gu	other	35.1751241	126.9153525	NA	NA
-1300000011	4257	0	Korea	Gwangju	unspecified	contact with patient	1300000010	NA	2020-03-02	2020-03-30	released	2020-02-29	Gwangju	Dong-gu	bakery	35.1453716	126.9190264	NA	NA
-1300000011	4257	0	Korea	Gwangju	unspecified	contact with patient	1300000010	NA	2020-03-02	2020-03-30	released	2020-02-29	Gwangju	Dong-gu	other	35.1453716	126.9190264	NA	NA
-1300000011	4257	0	Korea	Gwangju	unspecified	contact with patient	1300000010	NA	2020-03-02	2020-03-30	released	2020-02-29	Gwangju	Nam-gu	store	35.1376662	126.9141616	NA	NA
-1300000011	4257	0	Korea	Gwangju	unspecified	contact with patient	1300000010	NA	2020-03-02	2020-03-30	released	2020-02-29	Gwangju	Nam-gu	other	35.1371073	126.914245	NA	NA
-1300000011	4257	0	Korea	Gwangju	unspecified	contact with patient	1300000010	NA	2020-03-02	2020-03-30	released	2020-03-01	Gwangju	Nam-gu	church	35.1390514	126.9152767	NA	NA
-1300000011	4257	0	Korea	Gwangju	unspecified	contact with patient	1300000010	NA	2020-03-02	2020-03-30	released	2020-03-01	Gwangju	Dong-gu	hospital	35.14191	126.921678	NA	NA
-1300000011	4257	0	Korea	Gwangju	unspecified	contact with patient	1300000010	NA	2020-03-02	2020-03-30	released	2020-03-02	Gwangju	Dong-gu	hospital	35.14191	126.921678	NA	NA
+1300000010	4388	1	Korea	Gwangju	unspecified	contact with patient	NA	NA	2020-03-02	2020-04-02	released	2020-02-28	Gwangju	Dong-gu	store	35.154519	126.91229	NA	NA
+1300000010	4388	1	Korea	Gwangju	unspecified	contact with patient	NA	NA	2020-03-02	2020-04-02	released	2020-02-28	Gwangju	Dong-gu	post_office	35.1541026	126.9145398	NA	NA
+1300000010	4388	1	Korea	Gwangju	unspecified	contact with patient	NA	NA	2020-03-02	2020-04-02	released	2020-02-28	Gwangju	Nam-gu	store	35.1388678	126.9145133	NA	NA
+1300000010	4388	1	Korea	Gwangju	unspecified	contact with patient	NA	NA	2020-03-02	2020-04-02	released	2020-02-28	Gwangju	Nam-gu	other	35.1371073	126.914245	NA	NA
+1300000010	4388	1	Korea	Gwangju	unspecified	contact with patient	NA	NA	2020-03-02	2020-04-02	released	2020-03-01	Seoul	Gangnam-gu	post_office	37.5135304	127.0315341	NA	NA
+1300000010	4388	1	Korea	Gwangju	unspecified	contact with patient	NA	NA	2020-03-02	2020-04-02	released	2020-03-01	Gwangju	Dong-gu	other	35.1413894	126.9209665	NA	NA
+1300000010	4388	1	Korea	Gwangju	unspecified	contact with patient	NA	NA	2020-03-02	2020-04-02	released	2020-03-01	Gwangju	Nam-gu	church	35.1390514	126.9152767	NA	NA
+1300000010	4388	1	Korea	Gwangju	unspecified	contact with patient	NA	NA	2020-03-02	2020-04-02	released	2020-03-01	Gwangju	Dong-gu	hospital	35.14191	126.921678	NA	NA
+1300000010	4388	1	Korea	Gwangju	unspecified	contact with patient	NA	NA	2020-03-02	2020-04-02	released	2020-03-02	Gwangju	Dong-gu	hospital	35.14191	126.921678	NA	NA
+1300000011	4257	0	Korea	Gwangju	unspecified	contact with patient	NA	NA	2020-03-02	2020-03-30	released	2020-02-28	Gwangju	Dong-gu	restaurant	35.1458977	126.9174842	NA	NA
+1300000011	4257	0	Korea	Gwangju	unspecified	contact with patient	NA	NA	2020-03-02	2020-03-30	released	2020-02-28	Gwangju	Nam-gu	cafe	35.1399599	126.9154241	NA	NA
+1300000011	4257	0	Korea	Gwangju	unspecified	contact with patient	NA	NA	2020-03-02	2020-03-30	released	2020-02-29	Gwangju	Buk-gu	restaurant	35.1748141	126.9154675	NA	NA
+1300000011	4257	0	Korea	Gwangju	unspecified	contact with patient	NA	NA	2020-03-02	2020-03-30	released	2020-02-29	Gwangju	Buk-gu	other	35.1751241	126.9153525	NA	NA
+1300000011	4257	0	Korea	Gwangju	unspecified	contact with patient	NA	NA	2020-03-02	2020-03-30	released	2020-02-29	Gwangju	Dong-gu	bakery	35.1453716	126.9190264	NA	NA
+1300000011	4257	0	Korea	Gwangju	unspecified	contact with patient	NA	NA	2020-03-02	2020-03-30	released	2020-02-29	Gwangju	Dong-gu	other	35.1453716	126.9190264	NA	NA
+1300000011	4257	0	Korea	Gwangju	unspecified	contact with patient	NA	NA	2020-03-02	2020-03-30	released	2020-02-29	Gwangju	Nam-gu	store	35.1376662	126.9141616	NA	NA
+1300000011	4257	0	Korea	Gwangju	unspecified	contact with patient	NA	NA	2020-03-02	2020-03-30	released	2020-02-29	Gwangju	Nam-gu	other	35.1371073	126.914245	NA	NA
+1300000011	4257	0	Korea	Gwangju	unspecified	contact with patient	NA	NA	2020-03-02	2020-03-30	released	2020-03-01	Gwangju	Nam-gu	church	35.1390514	126.9152767	NA	NA
+1300000011	4257	0	Korea	Gwangju	unspecified	contact with patient	NA	NA	2020-03-02	2020-03-30	released	2020-03-01	Gwangju	Dong-gu	hospital	35.14191	126.921678	NA	NA
+1300000011	4257	0	Korea	Gwangju	unspecified	contact with patient	NA	NA	2020-03-02	2020-03-30	released	2020-03-02	Gwangju	Dong-gu	hospital	35.14191	126.921678	NA	NA
 1300000012	5141	1	Korea	Gwangju	unspecified	contact with patient	1300000011	NA	2020-03-02	NA	isolated	2020-03-01	Gwangju	Nam-gu	church	35.1390514	126.9152767	NA	NA
 1300000013	5031	0	Korea	Gwangju	unspecified	other	NA	2020-02-27	2020-03-04	2020-03-29	released	2020-02-26	Gwangju	Dong-gu	other	35.1344106	126.924206	NA	NA
 1300000013	5031	0	Korea	Gwangju	unspecified	other	NA	2020-02-27	2020-03-04	2020-03-29	released	2020-02-27	Gwangju	Dong-gu	other	35.1344106	126.924206	NA	NA
@@ -4687,24 +4687,24 @@ patient_id	global_num	sex	country	province_patient_info	city_patient_info	infect
 4100000005	NA	1	Korea	Chungcheongnam-do	Cheonan-si	gym facility in Cheonan	4100000008	2020-02-23	2020-02-26	2020-03-27	released	2020-02-22	Chungcheongnam-do	Cheonan-si	restaurant	36.8268184	127.1219873	44	40s
 4100000005	NA	1	Korea	Chungcheongnam-do	Cheonan-si	gym facility in Cheonan	4100000008	2020-02-23	2020-02-26	2020-03-27	released	2020-02-22	Chungcheongnam-do	Cheonan-si	other	36.8220519	127.1153475	44	40s
 4100000005	NA	1	Korea	Chungcheongnam-do	Cheonan-si	gym facility in Cheonan	4100000008	2020-02-23	2020-02-26	2020-03-27	released	2020-02-23	Chungcheongnam-do	Cheonan-si	pharmacy	36.8226032	127.1100401	44	40s
-4100000006	NA	1	Korea	Chungcheongnam-do	Asan-si	contact with patient	4100000007	2020-02-22	2020-02-26	2020-03-22	released	2020-02-21	Chungcheongnam-do	Cheonan-si	other	36.8346175	127.1346578	42	40s
-4100000006	NA	1	Korea	Chungcheongnam-do	Asan-si	contact with patient	4100000007	2020-02-22	2020-02-26	2020-03-22	released	2020-02-22	Chungcheongnam-do	Asan-si	other	36.8003919	127.0516906	42	40s
-4100000006	NA	1	Korea	Chungcheongnam-do	Asan-si	contact with patient	4100000007	2020-02-22	2020-02-26	2020-03-22	released	2020-02-23	Chungcheongnam-do	Asan-si	store	36.8019435	127.0673962	42	40s
-4100000006	NA	1	Korea	Chungcheongnam-do	Asan-si	contact with patient	4100000007	2020-02-22	2020-02-26	2020-03-22	released	2020-02-24	Chungcheongnam-do	Cheonan-si	other	36.8083197	127.106278	42	40s
-4100000006	NA	1	Korea	Chungcheongnam-do	Asan-si	contact with patient	4100000007	2020-02-22	2020-02-26	2020-03-22	released	2020-02-24	Chungcheongnam-do	Cheonan-si	hospital	36.8116846	127.1090056	42	40s
-4100000006	NA	1	Korea	Chungcheongnam-do	Asan-si	contact with patient	4100000007	2020-02-22	2020-02-26	2020-03-22	released	2020-02-24	Chungcheongnam-do	Cheonan-si	pharmacy	36.8117098	127.1090222	42	40s
-4100000006	NA	1	Korea	Chungcheongnam-do	Asan-si	contact with patient	4100000007	2020-02-22	2020-02-26	2020-03-22	released	2020-02-25	Chungcheongnam-do	Cheonan-si	hospital	36.8047971	127.1387529	42	40s
-4100000007	NA	0	Korea	Chungcheongnam-do	Asan-si	contact with patient	4100000006	2020-02-22	2020-02-26	2020-03-26	released	2020-02-21	Chungcheongnam-do	Cheonan-si	other	36.8411513	127.1174874	45	40s
-4100000007	NA	0	Korea	Chungcheongnam-do	Asan-si	contact with patient	4100000006	2020-02-22	2020-02-26	2020-03-26	released	2020-02-21	Chungcheongnam-do	Asan-si	other	36.789796	127.0018494	45	40s
-4100000007	NA	0	Korea	Chungcheongnam-do	Asan-si	contact with patient	4100000006	2020-02-22	2020-02-26	2020-03-26	released	2020-02-21	Chungcheongnam-do	Cheonan-si	hospital	36.8365568	127.137901	45	40s
-4100000007	NA	0	Korea	Chungcheongnam-do	Asan-si	contact with patient	4100000006	2020-02-22	2020-02-26	2020-03-26	released	2020-02-22	Chungcheongnam-do	Asan-si	other	36.8003919	127.0516906	45	40s
-4100000007	NA	0	Korea	Chungcheongnam-do	Asan-si	contact with patient	4100000006	2020-02-22	2020-02-26	2020-03-26	released	2020-02-23	Chungcheongnam-do	Asan-si	other	36.8003919	127.0516906	45	40s
-4100000007	NA	0	Korea	Chungcheongnam-do	Asan-si	contact with patient	4100000006	2020-02-22	2020-02-26	2020-03-26	released	2020-02-24	Chungcheongnam-do	Cheonan-si	other	36.8411513	127.1174874	45	40s
-4100000007	NA	0	Korea	Chungcheongnam-do	Asan-si	contact with patient	4100000006	2020-02-22	2020-02-26	2020-03-26	released	2020-02-24	Chungcheongnam-do	Asan-si	other	36.789796	127.0018494	45	40s
-4100000007	NA	0	Korea	Chungcheongnam-do	Asan-si	contact with patient	4100000006	2020-02-22	2020-02-26	2020-03-26	released	2020-02-24	Chungcheongnam-do	Cheonan-si	hospital	36.8365568	127.137901	45	40s
-4100000007	NA	0	Korea	Chungcheongnam-do	Asan-si	contact with patient	4100000006	2020-02-22	2020-02-26	2020-03-26	released	2020-02-24	Chungcheongnam-do	Cheonan-si	pharmacy	36.8725108	127.1195307	45	40s
-4100000007	NA	0	Korea	Chungcheongnam-do	Asan-si	contact with patient	4100000006	2020-02-22	2020-02-26	2020-03-26	released	2020-02-25	Chungcheongnam-do	Asan-si	other	36.789796	127.0018494	45	40s
-4100000007	NA	0	Korea	Chungcheongnam-do	Asan-si	contact with patient	4100000006	2020-02-22	2020-02-26	2020-03-26	released	2020-02-25	Chungcheongnam-do	Cheonan-si	hospital	36.8047971	127.1387529	45	40s
+4100000006	NA	1	Korea	Chungcheongnam-do	Asan-si	contact with patient	NA	2020-02-22	2020-02-26	2020-03-22	released	2020-02-21	Chungcheongnam-do	Cheonan-si	other	36.8346175	127.1346578	42	40s
+4100000006	NA	1	Korea	Chungcheongnam-do	Asan-si	contact with patient	NA	2020-02-22	2020-02-26	2020-03-22	released	2020-02-22	Chungcheongnam-do	Asan-si	other	36.8003919	127.0516906	42	40s
+4100000006	NA	1	Korea	Chungcheongnam-do	Asan-si	contact with patient	NA	2020-02-22	2020-02-26	2020-03-22	released	2020-02-23	Chungcheongnam-do	Asan-si	store	36.8019435	127.0673962	42	40s
+4100000006	NA	1	Korea	Chungcheongnam-do	Asan-si	contact with patient	NA	2020-02-22	2020-02-26	2020-03-22	released	2020-02-24	Chungcheongnam-do	Cheonan-si	other	36.8083197	127.106278	42	40s
+4100000006	NA	1	Korea	Chungcheongnam-do	Asan-si	contact with patient	NA	2020-02-22	2020-02-26	2020-03-22	released	2020-02-24	Chungcheongnam-do	Cheonan-si	hospital	36.8116846	127.1090056	42	40s
+4100000006	NA	1	Korea	Chungcheongnam-do	Asan-si	contact with patient	NA	2020-02-22	2020-02-26	2020-03-22	released	2020-02-24	Chungcheongnam-do	Cheonan-si	pharmacy	36.8117098	127.1090222	42	40s
+4100000006	NA	1	Korea	Chungcheongnam-do	Asan-si	contact with patient	NA	2020-02-22	2020-02-26	2020-03-22	released	2020-02-25	Chungcheongnam-do	Cheonan-si	hospital	36.8047971	127.1387529	42	40s
+4100000007	NA	0	Korea	Chungcheongnam-do	Asan-si	contact with patient	NA	2020-02-22	2020-02-26	2020-03-26	released	2020-02-21	Chungcheongnam-do	Cheonan-si	other	36.8411513	127.1174874	45	40s
+4100000007	NA	0	Korea	Chungcheongnam-do	Asan-si	contact with patient	NA	2020-02-22	2020-02-26	2020-03-26	released	2020-02-21	Chungcheongnam-do	Asan-si	other	36.789796	127.0018494	45	40s
+4100000007	NA	0	Korea	Chungcheongnam-do	Asan-si	contact with patient	NA	2020-02-22	2020-02-26	2020-03-26	released	2020-02-21	Chungcheongnam-do	Cheonan-si	hospital	36.8365568	127.137901	45	40s
+4100000007	NA	0	Korea	Chungcheongnam-do	Asan-si	contact with patient	NA	2020-02-22	2020-02-26	2020-03-26	released	2020-02-22	Chungcheongnam-do	Asan-si	other	36.8003919	127.0516906	45	40s
+4100000007	NA	0	Korea	Chungcheongnam-do	Asan-si	contact with patient	NA	2020-02-22	2020-02-26	2020-03-26	released	2020-02-23	Chungcheongnam-do	Asan-si	other	36.8003919	127.0516906	45	40s
+4100000007	NA	0	Korea	Chungcheongnam-do	Asan-si	contact with patient	NA	2020-02-22	2020-02-26	2020-03-26	released	2020-02-24	Chungcheongnam-do	Cheonan-si	other	36.8411513	127.1174874	45	40s
+4100000007	NA	0	Korea	Chungcheongnam-do	Asan-si	contact with patient	NA	2020-02-22	2020-02-26	2020-03-26	released	2020-02-24	Chungcheongnam-do	Asan-si	other	36.789796	127.0018494	45	40s
+4100000007	NA	0	Korea	Chungcheongnam-do	Asan-si	contact with patient	NA	2020-02-22	2020-02-26	2020-03-26	released	2020-02-24	Chungcheongnam-do	Cheonan-si	hospital	36.8365568	127.137901	45	40s
+4100000007	NA	0	Korea	Chungcheongnam-do	Asan-si	contact with patient	NA	2020-02-22	2020-02-26	2020-03-26	released	2020-02-24	Chungcheongnam-do	Cheonan-si	pharmacy	36.8725108	127.1195307	45	40s
+4100000007	NA	0	Korea	Chungcheongnam-do	Asan-si	contact with patient	NA	2020-02-22	2020-02-26	2020-03-26	released	2020-02-25	Chungcheongnam-do	Asan-si	other	36.789796	127.0018494	45	40s
+4100000007	NA	0	Korea	Chungcheongnam-do	Asan-si	contact with patient	NA	2020-02-22	2020-02-26	2020-03-26	released	2020-02-25	Chungcheongnam-do	Cheonan-si	hospital	36.8047971	127.1387529	45	40s
 4100000008	NA	1	Korea	Chungcheongnam-do	Cheonan-si	gym facility in Cheonan	NA	2020-02-20	2020-02-26	2020-03-29	released	2020-02-19	Chungcheongnam-do	Cheonan-si	other	36.8225551	127.1408156	46	40s
 4100000008	NA	1	Korea	Chungcheongnam-do	Cheonan-si	gym facility in Cheonan	NA	2020-02-20	2020-02-26	2020-03-29	released	2020-02-19	Gyeonggi-do	Seongnam-si	other	37.3995301	127.1271264	46	40s
 4100000008	NA	1	Korea	Chungcheongnam-do	Cheonan-si	gym facility in Cheonan	NA	2020-02-20	2020-02-26	2020-03-29	released	2020-02-19	Chungcheongnam-do	Cheonan-si	church	36.7296391	127.2600261	46	40s
@@ -5030,17 +5030,17 @@ patient_id	global_num	sex	country	province_patient_info	city_patient_info	infect
 4100000051	NA	1	Korea	Chungcheongnam-do	Cheonan-si	other	NA	2020-02-25	2020-02-29	NA	isolated	2020-02-26	Chungcheongnam-do	Cheonan-si	gas_station	36.815129	127.1138939	61	60s
 4100000051	NA	1	Korea	Chungcheongnam-do	Cheonan-si	other	NA	2020-02-25	2020-02-29	NA	isolated	2020-02-26	Seoul	Gangnam-gu	other	37.5095141	127.057214	61	60s
 4100000051	NA	1	Korea	Chungcheongnam-do	Cheonan-si	other	NA	2020-02-25	2020-02-29	NA	isolated	2020-02-28	Chungcheongnam-do	Cheonan-si	hospital	36.8047971	127.1387529	61	60s
-4100000052	NA	1	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	4100000070	2020-02-24	2020-02-29	2020-03-18	released	2020-02-23	Chungcheongnam-do	Cheonan-si	restaurant	36.8098152	127.1408523	42	40s
-4100000052	NA	1	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	4100000070	2020-02-24	2020-02-29	2020-03-18	released	2020-02-23	Chungcheongnam-do	Cheonan-si	other	36.82684	127.1315162	42	40s
-4100000052	NA	1	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	4100000070	2020-02-24	2020-02-29	2020-03-18	released	2020-02-23	Chungcheongnam-do	Cheonan-si	other	36.8225551	127.1408156	42	40s
-4100000052	NA	1	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	4100000070	2020-02-24	2020-02-29	2020-03-18	released	2020-02-24	Chungcheongnam-do	Cheonan-si	hospital	36.7960202	127.1291152	42	40s
-4100000052	NA	1	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	4100000070	2020-02-24	2020-02-29	2020-03-18	released	2020-02-24	Chungcheongnam-do	Cheonan-si	other	36.7969072	127.1293118	42	40s
-4100000052	NA	1	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	4100000070	2020-02-24	2020-02-29	2020-03-18	released	2020-02-24	Chungcheongnam-do	Cheonan-si	store	36.8240098	127.1372853	42	40s
-4100000052	NA	1	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	4100000070	2020-02-24	2020-02-29	2020-03-18	released	2020-02-24	Chungcheongnam-do	Cheonan-si	store	36.8127406	127.1387805	42	40s
-4100000052	NA	1	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	4100000070	2020-02-24	2020-02-29	2020-03-18	released	2020-02-25	Chungcheongnam-do	Cheonan-si	restaurant	36.7869444	127.12	42	40s
-4100000052	NA	1	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	4100000070	2020-02-24	2020-02-29	2020-03-18	released	2020-02-25	Chungcheongnam-do	Cheonan-si	bank	36.8225551	127.1408156	42	40s
-4100000052	NA	1	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	4100000070	2020-02-24	2020-02-29	2020-03-18	released	2020-02-27	Chungcheongnam-do	Cheonan-si	hospital	36.7753729	127.1791721	42	40s
-4100000052	NA	1	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	4100000070	2020-02-24	2020-02-29	2020-03-18	released	2020-02-27	Chungcheongnam-do	Cheonan-si	other	36.8179178	127.1415108	42	40s
+4100000052	NA	1	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	NA	2020-02-24	2020-02-29	2020-03-18	released	2020-02-23	Chungcheongnam-do	Cheonan-si	restaurant	36.8098152	127.1408523	42	40s
+4100000052	NA	1	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	NA	2020-02-24	2020-02-29	2020-03-18	released	2020-02-23	Chungcheongnam-do	Cheonan-si	other	36.82684	127.1315162	42	40s
+4100000052	NA	1	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	NA	2020-02-24	2020-02-29	2020-03-18	released	2020-02-23	Chungcheongnam-do	Cheonan-si	other	36.8225551	127.1408156	42	40s
+4100000052	NA	1	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	NA	2020-02-24	2020-02-29	2020-03-18	released	2020-02-24	Chungcheongnam-do	Cheonan-si	hospital	36.7960202	127.1291152	42	40s
+4100000052	NA	1	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	NA	2020-02-24	2020-02-29	2020-03-18	released	2020-02-24	Chungcheongnam-do	Cheonan-si	other	36.7969072	127.1293118	42	40s
+4100000052	NA	1	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	NA	2020-02-24	2020-02-29	2020-03-18	released	2020-02-24	Chungcheongnam-do	Cheonan-si	store	36.8240098	127.1372853	42	40s
+4100000052	NA	1	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	NA	2020-02-24	2020-02-29	2020-03-18	released	2020-02-24	Chungcheongnam-do	Cheonan-si	store	36.8127406	127.1387805	42	40s
+4100000052	NA	1	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	NA	2020-02-24	2020-02-29	2020-03-18	released	2020-02-25	Chungcheongnam-do	Cheonan-si	restaurant	36.7869444	127.12	42	40s
+4100000052	NA	1	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	NA	2020-02-24	2020-02-29	2020-03-18	released	2020-02-25	Chungcheongnam-do	Cheonan-si	bank	36.8225551	127.1408156	42	40s
+4100000052	NA	1	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	NA	2020-02-24	2020-02-29	2020-03-18	released	2020-02-27	Chungcheongnam-do	Cheonan-si	hospital	36.7753729	127.1791721	42	40s
+4100000052	NA	1	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	NA	2020-02-24	2020-02-29	2020-03-18	released	2020-02-27	Chungcheongnam-do	Cheonan-si	other	36.8179178	127.1415108	42	40s
 4100000053	NA	1	Korea	Chungcheongnam-do	Cheonan-si	gym facility in Cheonan	4100000008	NA	2020-02-29	2020-03-24	released	2020-02-28	Chungcheongnam-do	Cheonan-si	hospital	36.8074162	127.1512298	61	60s
 4100000054	NA	1	Korea	Chungcheongnam-do	Cheonan-si	gym facility in Cheonan	4100000008	NA	2020-02-29	2020-03-23	released	2020-02-27	Chungcheongnam-do	Cheonan-si	hospital	36.8156927	127.1136868	51	50s
 4100000055	NA	1	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	4100000008	2020-02-27	2020-02-29	2020-03-17	released	2020-02-24	Chungcheongnam-do	Cheonan-si	university	36.850264	127.1500561	23	20s
@@ -5097,7 +5097,7 @@ patient_id	global_num	sex	country	province_patient_info	city_patient_info	infect
 4100000069	NA	1	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	4100000006	2020-02-29	2020-03-01	2020-03-24	released	2020-02-27	Chungcheongnam-do	Asan-si	restaurant	36.7297503	127.0132922	48	40s
 4100000069	NA	1	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	4100000006	2020-02-29	2020-03-01	2020-03-24	released	2020-02-28	Chungcheongnam-do	Cheonan-si	other	36.8195724	127.1150607	48	40s
 4100000069	NA	1	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	4100000006	2020-02-29	2020-03-01	2020-03-24	released	2020-02-29	Chungcheongnam-do	Cheonan-si	hospital	36.8156927	127.1136868	48	40s
-4100000070	NA	0	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	4100000052	NA	2020-03-01	2020-03-18	released	2020-02-29	Chungcheongnam-do	Cheonan-si	hospital	36.8156927	127.1136868	13	10s
+4100000070	NA	0	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	NA	NA	2020-03-01	2020-03-18	released	2020-02-29	Chungcheongnam-do	Cheonan-si	hospital	36.8156927	127.1136868	13	10s
 4100000071	NA	1	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	4100000022	2020-02-25	2020-03-01	2020-03-24	released	2020-02-21	Chungcheongnam-do	Cheonan-si	other	36.8064714	127.1138424	34	30s
 4100000071	NA	1	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	4100000022	2020-02-25	2020-03-01	2020-03-24	released	2020-02-24	Chungcheongnam-do	Cheonan-si	store	36.7959368	127.1270876	34	30s
 4100000071	NA	1	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	4100000022	2020-02-25	2020-03-01	2020-03-24	released	2020-02-24	Chungcheongnam-do	Cheonan-si	store	36.815129	127.1138939	34	30s
@@ -5332,13 +5332,13 @@ patient_id	global_num	sex	country	province_patient_info	city_patient_info	infect
 4100000113	NA	0	Korea	Chungcheongnam-do	Seosan-si	contact with patient	4100000104	NA	2020-03-10	2020-03-29	released	2020-03-10	Chungcheongnam-do	Seosan-si	hospital	36.7756106	126.4650989	37	30s
 4100000114	NA	0	Korea	Chungcheongnam-do	Seosan-si	contact with patient	4100000104	NA	2020-03-10	2020-03-29	released	NA	NA	NA	NA	NA	NA	53	50s
 4100000115	NA	1	Korea	Chungcheongnam-do	Cheonan-si	contact with patient	4100000002	2020-03-11	2020-03-11	2020-03-20	released	NA	NA	NA	NA	NA	NA	81	80s
-4100000116	NA	0	Korea	Chungcheongnam-do	Hongseong-gun	overseas inflow	4100000118	2020-03-16	2020-03-17	2020-04-03	released	NA	NA	NA	NA	NA	NA	65	60s
+4100000116	NA	0	Korea	Chungcheongnam-do	Hongseong-gun	overseas inflow	NA	2020-03-16	2020-03-17	2020-04-03	released	NA	NA	NA	NA	NA	NA	65	60s
 4100000117	NA	0	Korea	Chungcheongnam-do	Cheonan-si	River of Grace Community Church	NA	2020-03-09	2020-03-17	2020-04-05	released	NA	NA	NA	NA	NA	NA	25	20s
-4100000118	NA	1	Korea	Chungcheongnam-do	Hongseong-gun	overseas inflow	4100000116	NA	2020-03-17	NA	isolated	NA	NA	NA	NA	NA	NA	62	60s
+4100000118	NA	1	Korea	Chungcheongnam-do	Hongseong-gun	overseas inflow	NA	NA	2020-03-17	NA	isolated	NA	NA	NA	NA	NA	NA	62	60s
 4100000119	NA	1	Korea	Chungcheongnam-do	Taean-gun	other	NA	NA	2020-03-19	NA	isolated	NA	NA	NA	NA	NA	NA	36	30s
 4100000120	NA	1	Korea	Chungcheongnam-do	Cheonan-si	other	NA	NA	2020-03-21	2020-03-28	released	NA	NA	NA	NA	NA	NA	45	40s
-4100000121	NA	0	Korea	Chungcheongnam-do	Buyeo-gun	contact with patient	4100000122	NA	2020-03-24	NA	isolated	NA	NA	NA	NA	NA	NA	48	40s
-4100000122	NA	1	Korea	Chungcheongnam-do	Buyeo-gun	contact with patient	4100000121	NA	2020-03-24	NA	isolated	NA	NA	NA	NA	NA	NA	45	40s
+4100000121	NA	0	Korea	Chungcheongnam-do	Buyeo-gun	contact with patient	NA	NA	2020-03-24	NA	isolated	NA	NA	NA	NA	NA	NA	48	40s
+4100000122	NA	1	Korea	Chungcheongnam-do	Buyeo-gun	contact with patient	NA	NA	2020-03-24	NA	isolated	NA	NA	NA	NA	NA	NA	45	40s
 4100000123	NA	0	Korea	Chungcheongnam-do	Cheonan-si	overseas inflow	NA	2020-03-13	2020-03-24	NA	isolated	NA	NA	NA	NA	NA	NA	49	40s
 4100000124	NA	0	Korea	Chungcheongnam-do	Cheonan-si	overseas inflow	NA	2020-03-21	2020-03-25	NA	isolated	NA	NA	NA	NA	NA	NA	30	30s
 4100000125	NA	0	Korea	Chungcheongnam-do	Buyeo-gun	contact with patient	4100000122	2020-03-27	2020-03-27	NA	isolated	NA	NA	NA	NA	NA	NA	39	30s
@@ -6569,8 +6569,8 @@ patient_id	global_num	sex	country	province_patient_info	city_patient_info	infect
 6009000004	NA	1	Korea	Gyeongsangbuk-do	Sangju-si	other	NA	NA	2020-02-25	NA	isolated	NA	NA	NA	NA	NA	NA	37	30s
 6009000005	NA	1	Korea	Gyeongsangbuk-do	Sangju-si	other	NA	NA	2020-02-26	NA	isolated	NA	NA	NA	NA	NA	NA	49	40s
 6009000006	NA	1	Korea	Gyeongsangbuk-do	Sangju-si	contact with patient	6009000003	NA	2020-02-26	2020-03-23	released	NA	NA	NA	NA	NA	NA	61	60s
-6009000007	NA	0	Korea	Gyeongsangbuk-do	Sangju-si	contact with patient	6009000008	NA	2020-02-26	2020-03-23	released	NA	NA	NA	NA	NA	NA	72	70s
-6009000008	NA	1	Korea	Gyeongsangbuk-do	Sangju-si	contact with patient	6009000007	NA	2020-02-26	2020-03-23	released	NA	NA	NA	NA	NA	NA	64	60s
+6009000007	NA	0	Korea	Gyeongsangbuk-do	Sangju-si	contact with patient	NA	NA	2020-02-26	2020-03-23	released	NA	NA	NA	NA	NA	NA	72	70s
+6009000008	NA	1	Korea	Gyeongsangbuk-do	Sangju-si	contact with patient	NA	NA	2020-02-26	2020-03-23	released	NA	NA	NA	NA	NA	NA	64	60s
 6009000009	NA	0	Korea	Gyeongsangbuk-do	Sangju-si	contact with patient	6019000015	NA	2020-02-26	2020-03-23	released	NA	NA	NA	NA	NA	NA	35	30s
 6009000010	NA	0	Korea	Gyeongsangbuk-do	Sangju-si	contact with patient	6009000004	NA	2020-02-26	2020-03-25	released	NA	NA	NA	NA	NA	NA	37	30s
 6009000011	NA	0	Korea	Gyeongsangbuk-do	Sangju-si	contact with patient	6009000004	NA	2020-02-26	2020-03-23	released	NA	NA	NA	NA	NA	NA	5	0s
@@ -7372,11 +7372,11 @@ patient_id	global_num	sex	country	province_patient_info	city_patient_info	infect
 6100000065	NA	1	Korea	Gyeongsangnam-do	Geoje-si	Shincheonji Church	NA	NA	2020-03-03	2020-03-20	released	2020-02-22	Daegu	Dalseong-gun	hospital	35.8581285	128.465523	58	50s
 6100000065	NA	1	Korea	Gyeongsangnam-do	Geoje-si	Shincheonji Church	NA	NA	2020-03-03	2020-03-20	released	2020-02-23	Gyeongsangnam-do	Geoje-si	other	34.8806427	128.6210824	58	50s
 6100000065	NA	1	Korea	Gyeongsangnam-do	Geoje-si	Shincheonji Church	NA	NA	2020-03-03	2020-03-20	released	2020-03-01	Gyeongsangnam-do	Geoje-si	hospital	34.8719625	128.7221814	58	50s
-6100000066	NA	1	Korea	Gyeongsangnam-do	Geochang-gun	contact with patient	6100000066	NA	2020-03-03	2020-03-25	released	2020-02-25	Gyeongsangnam-do	Geochang-gun	store	35.8723956	127.9216201	62	60s
-6100000066	NA	1	Korea	Gyeongsangnam-do	Geochang-gun	contact with patient	6100000066	NA	2020-03-03	2020-03-25	released	2020-02-27	Gyeongsangnam-do	Geochang-gun	store	35.8723956	127.9216201	62	60s
-6100000066	NA	1	Korea	Gyeongsangnam-do	Geochang-gun	contact with patient	6100000066	NA	2020-03-03	2020-03-25	released	2020-02-27	Gyeongsangnam-do	Geochang-gun	store	35.6890426	127.9068284	62	60s
-6100000066	NA	1	Korea	Gyeongsangnam-do	Geochang-gun	contact with patient	6100000066	NA	2020-03-03	2020-03-25	released	2020-02-28	Gyeongsangnam-do	Geochang-gun	store	35.8723956	127.9216201	62	60s
-6100000066	NA	1	Korea	Gyeongsangnam-do	Geochang-gun	contact with patient	6100000066	NA	2020-03-03	2020-03-25	released	2020-03-02	Gyeongsangnam-do	Geochang-gun	store	35.8723956	127.9216201	62	60s
+6100000066	NA	1	Korea	Gyeongsangnam-do	Geochang-gun	contact with patient	NA	NA	2020-03-03	2020-03-25	released	2020-02-25	Gyeongsangnam-do	Geochang-gun	store	35.8723956	127.9216201	62	60s
+6100000066	NA	1	Korea	Gyeongsangnam-do	Geochang-gun	contact with patient	NA	NA	2020-03-03	2020-03-25	released	2020-02-27	Gyeongsangnam-do	Geochang-gun	store	35.8723956	127.9216201	62	60s
+6100000066	NA	1	Korea	Gyeongsangnam-do	Geochang-gun	contact with patient	NA	NA	2020-03-03	2020-03-25	released	2020-02-27	Gyeongsangnam-do	Geochang-gun	store	35.6890426	127.9068284	62	60s
+6100000066	NA	1	Korea	Gyeongsangnam-do	Geochang-gun	contact with patient	NA	NA	2020-03-03	2020-03-25	released	2020-02-28	Gyeongsangnam-do	Geochang-gun	store	35.8723956	127.9216201	62	60s
+6100000066	NA	1	Korea	Gyeongsangnam-do	Geochang-gun	contact with patient	NA	NA	2020-03-03	2020-03-25	released	2020-03-02	Gyeongsangnam-do	Geochang-gun	store	35.8723956	127.9216201	62	60s
 6100000067	NA	0	Korea	Gyeongsangnam-do	Geochang-gun	contact with patient	6100000069	2020-03-02	2020-03-04	2020-04-02	released	2020-03-01	Gyeongsangnam-do	Geochang-gun	hospital	35.6867229	127.9095155	60	60s
 6100000068	NA	1	Korea	Gyeongsangnam-do	Geochang-gun	other	NA	NA	2020-03-04	2020-03-26	released	2020-02-18	Gyeongsangnam-do	Hapcheon-gun	other	35.5680293	128.1636661	63	60s
 6100000069	NA	1	Korea	Gyeongsangnam-do	Geochang-gun	other	NA	NA	2020-03-04	2020-03-20	released	2020-03-03	Gyeongsangnam-do	Geochang-gun	hospital	35.6867229	127.9095155	60	60s
