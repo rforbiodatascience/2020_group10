@@ -30,6 +30,7 @@ case_df <- case_df %>%
     )) %>% 
   mutate(case_type = replace(case_type, is.na(case_type), "other"))
   
+write_tsv(case_df, "data/case_data_augmented.tsv")
 
 # Patient augment
 # ------------------------------------------------------------------------------
