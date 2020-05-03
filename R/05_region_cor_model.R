@@ -5,54 +5,69 @@ rm(list = ls())
 # Load libraries
 # ------------------------------------------------------------------------------
 library(tidyverse)
+library(reshape2)
 
 # Define functions
 # ------------------------------------------------------------------------------
 source(file = "R/99_project_functions.R")
 
 # Load data ---------------------------------------------------------------
-province_df <- read_tsv("data/province_data_clean.tsv")
-time_province_df <- read_tsv("data/time_data_augmented.tsv")
+city_df <- read_tsv("data/city_data_augmented.tsv")
 
 # Wrangle data ------------------------------------------------------------
 
-# Get infection numbers from time dataframe of each province
-time_province_df <- time_province_df %>%
-  group_by(province) %>%
-  summarise(
-    confirmed = max(confirmed_time_province),
-    released = max(confirmed_time_province),
-    deceased = max(deceased_time_province)
-  )
+# Select columns of interest for the cor heatmap
 
-# Join province and infection numbers
-province_df <- province_df %>%
-  left_join(time_province_df, by = "province")
+city_df <- city_df %>%
+  select(elementary_school_count:nursing_home_count)
 
-# Pivot longer province dataframe columns for correlation plot
-vars_remove <- c("code", "city", "latitude", "longitude", "released", "deceased")
+# Get correlation matrix and round numbers
 
-deceased_cor <- province_df %>%
-  select(-vars_remove) %>% 
-  pivot_longer(c(-confirmed, -province),
-    names_to = "variable",
-    values_to = "value"
-  ) %>%
-  filter(confirmed > 0) %>% 
-  arrange(desc(confirmed))
+city_cor_matrix <- city_df %>% 
+  cor() %>%
+  round(2)
+
+# Keep only lower triangle of matrix
+
+city_cor_matrix <- city_cor_matrix %>% 
+  get_lower_tri()
+
+# Pivot the matrix into dataframe for plotting
+
+city_cor_df <- city_cor_matrix %>%
+  melt()
 
 # Visualise data ----------------------------------------------------------
 
-# Plot multiple correlation plots.
-# Diseased against province society stats
-correlation_plot <- ggplot(deceased_cor) +
-  geom_jitter(aes(value, confirmed, colour = variable), ) +
-  geom_smooth(aes(value, confirmed, colour = variable), method = lm) +
-  facet_wrap(~variable, scales = "free") +
-  labs(x = "Var value(s)", y = "N Deceased")
+correlation_heatmap <- city_cor_df %>% 
+  ggplot(
+    aes(x = Var1, y = Var2, fill = value)
+  ) +
+  geom_tile(color = "white") +
+  scale_fill_gradient2(
+    low = "#132B43",
+    high = "#132B43",
+    na.value = "white",
+    midpoint = 0,
+    limit = c(-1, 1),
+    space = "Lab",
+    name = "Pearson Correlation"
+  ) +
+  geom_text(
+    aes(Var1, Var2, label = value), color = "white", size = 4
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, vjust = 1, size = 12, hjust = 1),
+    axis.text.y = element_text(size = 12),
+    plot.title = element_text(size = 24),
+  ) +
+  ggtitle("Korean Covid19 Regional Correlational Heatmap") +
+  xlab("") +
+  ylab("")
 
 # Write plots and data to file --------------------------------------------
 ggsave(
-  filename = "results/correlation_province_confirmed.png",
-  plot = correlation_plot
+  filename = "results/05_correlation_heatmap.png",
+  plot = correlation_heatmap
 )
