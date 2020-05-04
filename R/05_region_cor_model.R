@@ -23,48 +23,57 @@ city_df <- city_df %>%
 
 # Get correlation matrix and round numbers
 
-city_cor_matrix <- city_df %>% 
+city_cor_matrix <- city_df %>%
   cor() %>%
   round(2)
 
-# Keep only lower triangle of matrix
+# Keep only the lower triangle of matrix
 
-city_cor_matrix <- city_cor_matrix %>% 
+city_cor_matrix <- city_cor_matrix %>%
   get_lower_tri()
 
 # Pivot the matrix into dataframe for plotting
 
 city_cor_df <- city_cor_matrix %>%
-  melt()
+  melt() %>% 
+  mutate(var1 = Var1, var2 = Var2)
 
 # Visualise data ----------------------------------------------------------
 
-correlation_heatmap <- city_cor_df %>% 
+correlation_heatmap <- city_cor_df %>%
   ggplot(
-    aes(x = Var1, y = Var2, fill = value)
+    aes(x = var1, y = var2, fill = value)
   ) +
-  geom_tile(color = "white") +
+  geom_tile(
+    color = "white",
+  ) +
   scale_fill_gradient2(
-    low = "#132B43",
-    high = "#132B43",
+    low = "#44344F",
+    high = "#98A6D4",
+    mid = "#56638A",
     na.value = "white",
     midpoint = 0,
     limit = c(-1, 1),
     space = "Lab",
     name = "Pearson Correlation"
   ) +
-  geom_text(
-    aes(Var1, Var2, label = value), color = "white", size = 4
-  ) +
   theme_minimal() +
-  theme(
-    axis.text.x = element_text(angle = 45, vjust = 1, size = 12, hjust = 1),
-    axis.text.y = element_text(size = 12),
-    plot.title = element_text(size = 24),
+  geom_text(
+    aes(var1, var2, label = value),
+    color = "white",
+    size = 4
   ) +
-  ggtitle("Korean Covid19 Regional Correlational Heatmap") +
-  xlab("") +
-  ylab("")
+  theme(
+    axis.text.x = element_text(angle = 45, size = 10, hjust = 1),
+    axis.text.y = element_text(size = 10),
+    plot.title = element_text(size = 16),
+  ) +
+  labs(
+    title = "Regional city variable correlation heatmap\nof South Korea",
+    x = "",
+    y = "",
+    caption = "Data from Korea Centers for Disease Control & Prevention (2020)"
+  )
 
 # Write plots and data to file --------------------------------------------
 ggsave(
