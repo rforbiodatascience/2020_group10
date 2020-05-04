@@ -10,6 +10,10 @@ library(forcats)
 library(ggplot2)
 library(maps)
 library(mapproj)
+library(rgdal)
+library(broom)
+library(maptools)
+library(ggrepel)
 
 #library(ggmap)
 #library(sf)
@@ -30,7 +34,7 @@ lon_lan <- patient_df %>%
   filter(!is.na(c(longitude))) %>% 
   mutate(sex = as_factor(sex))  
 
-
+# Create a range of coordinates per city
 range_coordinates <- lon_lan %>% 
   dplyr::select(.,c(province_patient_route, state, longitude, latitude)) %>%
   rename(x= longitude) %>% 
@@ -51,13 +55,18 @@ cases_number <- range_coordinates %>%
 
 # Set map location and parameters
 # ------------------------------------------------------------------------------
-south_korea <- map_data("world") %>% filter(region=="South Korea")
-south_korea
+south_korea <- readOGR( 
+  dsn= paste0(getwd(),"/data/Igismap/") , 
+  layer="South_Korea_Polygon",
+  verbose=FALSE
+)
+
+spdf_fortified <- tidy(south_korea, region = "name")
 
 #Data visualization for state
 # ------------------------------------------------------------------------------
 sk_state <- ggplot() +
-  geom_polygon(data = south_korea, aes(x=long, y = lat, group = group), fill="grey", alpha=0.3) +
+  geom_polygon(data = spdf_fortified, aes( x = long, y = lat, group = group), fill="grey", alpha= 0.4, color="white") +
   theme_void() +
   coord_map() +
   geom_point( data = lon_lan, aes( x=longitude, y=latitude, color= state)) +
@@ -65,8 +74,8 @@ sk_state <- ggplot() +
 
 #Data visualization for age_gruop
 # ------------------------------------------------------------------------------
-sk_age_group <- ggplot() +
-  geom_polygon(data= south_korea, aes(x=long, y = lat, group = group), fill="grey", alpha=0.4) +
+sk_age_group <-ggplot() +
+  geom_polygon(data = spdf_fortified, aes( x = long, y = lat, group = group), fill="grey", alpha= 0.4, color="white") +
   theme_void() +
   coord_map() +
   geom_point( data = lon_lan, aes( x=longitude, y=latitude, color= age_group)) +
@@ -75,14 +84,20 @@ sk_age_group <- ggplot() +
 #Data visualization by number
 # ------------------------------------------------------------------------------
 sk_cases_number <- ggplot() +
-  geom_polygon(data= south_korea, aes(x=long, y = lat, group = group), fill="grey", alpha=0.4) +
+  geom_polygon(data = spdf_fortified, aes( x = long, y = lat, group = group), fill="grey", alpha= 0.4, color="white") +
   theme_void() +
   coord_map() +
   geom_point( data = cases_number, aes( y=min_latt,  x=max_lonn, color= state, size= n)) +
   scale_color_viridis(option= "inferno", discrete=TRUE, alpha= 0.7)  +
   scale_alpha_continuous() + 
-  scale_size_continuous(range= c(1,15), name= "Number of patients") +
-  guides(colour = guide_legend())
+  scale_size_continuous(range= c(1,15), name= "number of cases") +
+  guides(size= FALSE) +
+  theme(legend.position = "bottom", legend.box = "horizontal") +
+  geom_text_repel(data = spdf_fortified, aes(x=long, y=lat, label="name"), size=5) 
+
+
+sk_cases_number
+
 
 
 # Save the plots 
