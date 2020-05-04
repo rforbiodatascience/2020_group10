@@ -63,6 +63,14 @@ south_korea <- readOGR(
 
 spdf_fortified <- tidy(south_korea, region = "name")
 
+# Wrangle location for labels
+# ------------------------------------------------------------------------------
+spdf_fortified_provs <- spdf_fortified %>% 
+  dplyr::select(.,c(id, long, lat)) %>%
+  group_by(id) %>% 
+  summarise(lat = min (lat), long = max (long))
+   
+
 #Data visualization for state
 # ------------------------------------------------------------------------------
 sk_state <- ggplot() +
@@ -93,12 +101,7 @@ sk_cases_number <- ggplot() +
   scale_size_continuous(range= c(1,15), name= "number of cases") +
   guides(size= FALSE) +
   theme(legend.position = "bottom", legend.box = "horizontal") +
-  geom_text_repel(data = spdf_fortified, aes(x=long, y=lat, label="name"), size=5) 
-
-
-sk_cases_number
-
-
+  geom_text_repel(data = spdf_fortified_provs, aes(x = long, y = lat, label = id), size= 3) 
 
 # Save the plots 
 # ------------------------------------------------------------------------------
