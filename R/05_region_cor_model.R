@@ -1,14 +1,11 @@
-# Clear workspace
-# ------------------------------------------------------------------------------
+# Clear workspace ---------------------------------------------------------------
 rm(list = ls())
 
-# Load libraries
-# ------------------------------------------------------------------------------
+# Load libraries ---------------------------------------------------------------
 library(tidyverse)
 library(reshape2)
 
-# Define functions
-# ------------------------------------------------------------------------------
+# Define functions ---------------------------------------------------------------
 source(file = "R/99_project_functions.R")
 
 # Load data ---------------------------------------------------------------
@@ -17,29 +14,24 @@ city_df <- read_tsv("data/city_data_augmented.tsv")
 # Wrangle data ------------------------------------------------------------
 
 # Select columns of interest for the cor heatmap
-
 city_df <- city_df %>%
   select(elementary_school_count:nursing_home_count)
 
 # Get correlation matrix and round numbers
-
 city_cor_matrix <- city_df %>%
   cor() %>%
   round(2)
 
 # Keep only the lower triangle of matrix
-
 city_cor_matrix <- city_cor_matrix %>%
   get_lower_tri()
 
 # Pivot the matrix into dataframe for plotting
-
 city_cor_df <- city_cor_matrix %>%
   melt() %>% 
   mutate(var1 = Var1, var2 = Var2)
 
 # Visualise data ----------------------------------------------------------
-
 correlation_heatmap <- city_cor_df %>%
   ggplot(
     aes(x = var1, y = var2, fill = value)
@@ -54,7 +46,6 @@ correlation_heatmap <- city_cor_df %>%
     na.value = "white",
     midpoint = 0,
     limit = c(-1, 1),
-    space = "Lab",
     name = "Pearson Correlation"
   ) +
   theme_minimal() +
@@ -78,5 +69,7 @@ correlation_heatmap <- city_cor_df %>%
 # Write plots and data to file --------------------------------------------
 ggsave(
   filename = "results/05_correlation_heatmap.png",
-  plot = correlation_heatmap
+  plot = correlation_heatmap,
+  width = 10,
+  height = 8
 )

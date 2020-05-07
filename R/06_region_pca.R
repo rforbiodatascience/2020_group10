@@ -1,9 +1,7 @@
-# Clear workspace
-# ------------------------------------------------------------------------------
+# Clear workspace ---------------------------------------------------------------
 rm(list = ls())
 
-# Load libraries
-# ------------------------------------------------------------------------------
+# Load libraries ---------------------------------------------------------------
 library(tidyverse)
 library(ggrepel)
 library(patchwork)
@@ -11,8 +9,7 @@ library(patchwork)
 # library(devtools)
 #install_github("thomasp85/patchwork")
 
-# Define functions
-# ------------------------------------------------------------------------------
+# Define functions ---------------------------------------------------------------
 source(file = "R/99_project_functions.R")
 
 # Load data ---------------------------------------------------------------
@@ -22,7 +19,6 @@ patient_df <- read_tsv("data/patient_data_augmented.tsv")
 # Wrangle data ------------------------------------------------------------
 
 # Get city confirmed cases using patient dataframe
-
 confirmed_cases <- patient_df %>%
   group_by(city_patient_info) %>%
   distinct(patient_id, .keep_all = TRUE) %>%
@@ -30,26 +26,22 @@ confirmed_cases <- patient_df %>%
   summarise(confirmed = length(confirmed_date))
 
 # Join city confirmed cases to city regional data
-
 city_conf_df <- confirmed_cases %>%
   full_join(city_df, by = "city") %>%
   mutate(confirmed = replace_na(confirmed, 0)) %>%
   drop_na()
 
 # Quantile of confirmed cases
-
 q_conf <- city_conf_df %>%
   select(confirmed) %>%
   map(quantile)
 
 # Convert quantile to vector list
-
 q_conf <- q_conf %>%
   as.data.frame(col.names = "values") %>%
   pluck("values")
 
 # Classify confirmed cases into 4 quantile classes
-
 city_conf_df <- city_conf_df %>%
   mutate(class = case_when(
     confirmed >= q_conf[1] & confirmed <= q_conf[2] ~ "1. None",
@@ -59,54 +51,23 @@ city_conf_df <- city_conf_df %>%
     TRUE ~ "0"
   ))
 
-# Do PCA
-
+# Apply PCA
 city_conf_pca <- city_conf_df %>%
   select(elementary_school_count:nursing_home_count) %>%
   prcomp(center = TRUE, scale. = TRUE)
 
 # Augment the PCA with columns from before PCA
-
 city_conf_pca_aug <- city_conf_pca %>%
   broom::augment(city_conf_df)
 
 # Get PCA eigenvectors
-
 pca_vectors <- city_conf_pca %>%
   pluck("rotation") %>%
   data.frame(variables = rownames(.), .)
 
-# Setting seeds to obtain same clustering results
-
-set.seed(5)
-
-# K-means clustering of original data
-
-center_clusters <- 4
-
-city_conf_pca_orig <- city_conf_pca_aug %>%
-  select(elementary_school_count:nursing_home_count) %>%
-  kmeans(centers = center_clusters)
-
-city_conf_kmean_orig_aug <- city_conf_pca_orig %>%
-  broom::augment(city_conf_pca_aug) %>%
-  rename(cluster_org = .cluster)
-
-city_conf_kmean_pca <- city_conf_pca_aug %>%
-  select(.fittedPC1, .fittedPC2) %>%
-  kmeans(centers = center_clusters)
-
-city_conf_kmean_pca_aug <- city_conf_kmean_pca %>%
-  broom::augment(city_conf_kmean_orig_aug) %>%
-  rename(cluster_pca = .cluster)
-
-
-
-
 # Visualise data ----------------------------------------------------------
 
 # Plot the variance explained of each PC
-
 pca_var <- city_conf_pca %>%
   broom::tidy("pcs") %>%
   ggplot(aes(x = PC, y = percent, label = str_c(round(percent * 100, 0), "%"))) +
@@ -126,7 +87,6 @@ pca_var <- city_conf_pca %>%
   )
 
 # Plot PC1 and PC2 and their corresponding eigenvectors
-
 pca_plot <- city_conf_pca_aug %>%
   ggplot(aes(x = .fittedPC1, y = .fittedPC2, color = class)) +
   geom_point() +
@@ -155,112 +115,20 @@ pca_plot <- city_conf_pca_aug %>%
     caption = "Data from Korea Centers for Disease Control & Prevention (2020)"
   )
 
-pl1 <- city_conf_kmean_pca_aug %>%
-  ggplot(aes(x = .fittedPC1, y = .fittedPC2, colour = class)) +
-  geom_point() +
-  theme(
-    legend.position = c(.95, .25),
-    legend.justification = c("right", "top"),
-    legend.box.just = "right",
-    legend.margin = margin(2, 2, 2, 2),
-    legend.box.background = element_rect(colour = "black")
-  ) +
-  scale_color_manual(
-    values = c("lightgreen", "yellow", "red", "darkred")
-  ) +
-  labs(
-    title = "Original PCA",
-    x = "PC1",
-    y = "PC2",
-    color = "Confirmed cases"
-  )
-
-pl2 <- city_conf_kmean_pca_aug %>%
-  ggplot(aes(x = .fittedPC1, y = .fittedPC2, colour = cluster_org)) +
-  geom_point() +
-  theme(
-    legend.position = c(.95, .25),
-    legend.justification = c("right", "top"),
-    legend.box.just = "right",
-    legend.margin = margin(2, 2, 2, 2),
-    legend.box.background = element_rect(colour = "black")
-  ) +
-  scale_color_manual(
-    values = c("lightgreen", "yellow", "red", "darkred")
-  ) +
-  labs(
-    title = "K-means clustering using\noriginal variables (k=4)",
-    x = "PC1",
-    y = "PC2",
-    color = "Clusters"
-  )
-
-pl3 <- city_conf_kmean_pca_aug %>%
-  ggplot(aes(x = .fittedPC1, y = .fittedPC2, colour = cluster_pca)) +
-  geom_point() +
-  theme(
-    legend.position = c(.95, .25),
-    legend.justification = c("right", "top"),
-    legend.box.just = "right",
-    legend.margin = margin(2, 2, 2, 2),
-    legend.box.background = element_rect(colour = "black")
-  ) +
-  scale_color_manual(
-    values = c("lightgreen", "yellow", "red", "darkred")
-  ) +
-  labs(
-    title = "K-means clustering using\nPC1 and PC2 (k=4)",
-    x = "PC1",
-    y = "PC2",
-    color = "Clusters"
-  )
-
-final <- (pl1 + pl2 + pl3) +
-  plot_annotation(
-    title = "Clustering comparison of regional city data from South Korea",
-    subtitle = "Unsupervised prediction of confirmed cases by applying k-means clustering ",
-    caption = "Data from Korea Centers for Disease Control & Prevention (2020)"
-  )
-
-final
-
-clustering_pred <- city_conf_kmean_pca_aug %>%
-  select(class, cluster_org, cluster_pca) %>%
-  mutate(
-    cluster_org = case_when(
-      cluster_org == 1 ~ "3. Moderate",
-      cluster_org == 2 ~ "4. High",
-      cluster_org == 3 ~ "2. Low",
-      cluster_org == 4 ~ "1. None"
-    ),
-    cluster_pca = case_when(
-      cluster_pca == 1 ~ "2. Low",
-      cluster_pca == 2 ~ "4. High",
-      cluster_pca == 3 ~ "3. Moderate",
-      cluster_pca == 4 ~ "1. None"
-    ),
-    cluster_org_correct = case_when(
-      class == cluster_org ~ 1,
-      class != cluster_org ~ 0
-    ),
-    cluster_pca_correct = case_when(
-      class == cluster_pca ~ 1,
-      class != cluster_pca ~ 0
-    )
-  ) %>%
-  summarise(
-    score_org = mean(cluster_org_correct),
-    score_pca = mean(cluster_pca_correct)
-  )
-
 # Write plots and data to file --------------------------------------------
-
 ggsave(
   filename = "results/06_pca_variance.png",
-  plot = pca_var
+  plot = pca_var,
+  width = 8,
+  height = 8,
 )
 
 ggsave(
   filename = "results/06_pca_plot.png",
-  plot = pca_plot
+  plot = pca_plot,
+  width = 8,
+  height = 8,
 )
+
+write_tsv(city_conf_pca_aug, "data/06_city_conf_pca_aug.tsv")
+
