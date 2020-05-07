@@ -1,32 +1,26 @@
-# Clear workspace
-# ------------------------------------------------------------------------------
+# Clear workspace ---------------------------------------------------------------
 rm(list = ls())
 
-# Load libraries
-# ------------------------------------------------------------------------------
+# Load libraries ---------------------------------------------------------------
 library(tidyverse)
 library(ggrepel)
 library(patchwork)
 
 # library(devtools)
-#install_github("thomasp85/patchwork")
+# install_github("thomasp85/patchwork")
 
-# Define functions
-# ------------------------------------------------------------------------------
+# Define functions ---------------------------------------------------------------
 source(file = "R/99_project_functions.R")
 
 # Load data ---------------------------------------------------------------
-city_df <- read_tsv("data/city_data_augmented.tsv")
-patient_df <- read_tsv("data/patient_data_augmented.tsv")
+city_conf_pca_aug <- read_tsv("data/06_city_conf_pca_aug.tsv")
 
 # Wrangle data ------------------------------------------------------------
-
 set.seed(5)
-
-# K-means clustering of original data
 
 center_clusters <- 4
 
+# K-means clustering of original data
 city_conf_pca_orig <- city_conf_pca_aug %>%
   select(elementary_school_count:nursing_home_count) %>%
   kmeans(centers = center_clusters)
@@ -35,6 +29,7 @@ city_conf_kmean_orig_aug <- city_conf_pca_orig %>%
   broom::augment(city_conf_pca_aug) %>%
   rename(cluster_org = .cluster)
 
+# K-means clustering of PC1 and PC2
 city_conf_kmean_pca <- city_conf_pca_aug %>%
   select(.fittedPC1, .fittedPC2) %>%
   kmeans(centers = center_clusters)
@@ -46,7 +41,6 @@ city_conf_kmean_pca_aug <- city_conf_kmean_pca %>%
 # Visualise data ----------------------------------------------------------
 
 # Plot original PCA
-
 pl1 <- city_conf_kmean_pca_aug %>%
   ggplot(aes(x = .fittedPC1, y = .fittedPC2, colour = class)) +
   geom_point() +
@@ -148,8 +142,11 @@ clustering_pred <- city_conf_kmean_pca_aug %>%
   )
 
 # Write plots and data to file --------------------------------------------
-
 ggsave(
   filename = "results/07_clustering.png",
-  plot = combined_plots
+  plot = combined_plots,
+  width = 16,
+  height = 8,
 )
+
+write_tsv(clustering_pred, "data/07_clustering_pred.tsv")
