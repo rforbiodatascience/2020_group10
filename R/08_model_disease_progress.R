@@ -12,8 +12,6 @@ source(file = "R/99_project_functions.R")
 
 # Read the data ------------------------------------------------------------------------------
 time_df <- read_tsv("data/time_data_augmented.tsv")
-time_gender_df <- read_tsv("data/time_gender_data_clean.tsv")
-time_age_df <- read_tsv("data/time_age_data_clean.tsv")
 
 # Wrangle the data ------------------------------------------------------------------------------
 
