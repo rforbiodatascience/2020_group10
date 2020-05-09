@@ -3,7 +3,6 @@ rm(list = ls())
 
 # Load libraries ---------------------------------------------------------------
 library(tidyverse)
-library(ggrepel)
 library(patchwork)
 
 # library(devtools)

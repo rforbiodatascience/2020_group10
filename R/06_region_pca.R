@@ -3,8 +3,8 @@ rm(list = ls())
 
 # Load libraries ---------------------------------------------------------------
 library(tidyverse)
-library(ggrepel)
-library(patchwork)
+library(ggrepel) # Non-overlapping ggplot labels
+library(patchwork) # Combining plots
 
 # library(devtools)
 #install_github("thomasp85/patchwork")
@@ -72,7 +72,7 @@ pca_var <- city_conf_pca %>%
   broom::tidy("pcs") %>%
   ggplot(aes(x = PC, y = percent, label = str_c(round(percent * 100, 0), "%"))) +
   geom_col(fill = "#98A6D4") +
-  geom_text(size = 3, position = position_stack(vjust = 0.5), fontface = "bold") +
+  geom_text(size = 6, position = position_stack(vjust = 0.5), fontface = "bold") +
   scale_x_continuous("PC", breaks = 1:10) +
   theme_minimal() +
   labs(
