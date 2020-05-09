@@ -28,8 +28,9 @@ city_cor_matrix <- city_cor_matrix %>%
 
 # Pivot the matrix into dataframe for plotting
 city_cor_df <- city_cor_matrix %>%
-  melt() %>% 
-  mutate(var1 = Var1, var2 = Var2)
+  as.data.frame() %>%
+  mutate(var1 = factor(row.names(.), levels=row.names(.))) %>% 
+  gather(key = var2, value = value, -var1, na.rm = TRUE, factor_key = TRUE) 
 
 # Visualise data ----------------------------------------------------------
 correlation_heatmap <- city_cor_df %>%
