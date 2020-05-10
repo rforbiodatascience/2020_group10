@@ -28,11 +28,12 @@ write_tsv(case_df, "data/case_data_clean.tsv")
 # Increase guess_max to read all columns the right type
 patient_info_df <- read_tsv("data/patient_info_data.tsv", guess_max = 3000)
 
-#Delete unwanted columns patient_info_df
-patient_info_df <- patient_info_df %>%
-  select(-c(disease, contact_number, age, infection_order))
+# Delete unwanted columns patient_info_df
+patient_info_df <- patient_info_df %>% 
+  select(-c(disease, contact_number,age, infection_order))
 
-patient_info_df <- patient_info_df %>%
+# Clean up inconsistent string values
+patient_info_df <- patient_info_df %>% 
   mutate(infection_case = replace_na(infection_case, "other")) %>%
   mutate(infection_case = replace(infection_case, infection_case == "etc", "other")) %>%
   mutate(state = replace_na(state, "unspecified")) %>%
@@ -40,6 +41,20 @@ patient_info_df <- patient_info_df %>%
   mutate(province = replace(province, province == "etc", "other")) %>%
   mutate(city = replace(city, city == "etc", "unspecified")) %>%
   mutate(city = replace_na(city, "unspecified"))
+
+# Convert infected_by to NA if two persons both have infected each other
+# or if they have infected themselves
+patient_info_df <- patient_info_df %>% 
+  mutate(infected_by = replace(infected_by, infected_by == patient_id, NA)) %>% 
+  rowwise %>%
+  mutate(inf_pair = str_c(sort(c(patient_id, infected_by)), collapse = ",")) %>%
+  ungroup %>%
+  group_by(inf_pair) %>%
+  mutate(
+    infected_by = case_when(
+      n() == 1 ~ infected_by)) %>% 
+  ungroup %>%
+  select(-inf_pair)
 
 write_tsv(patient_info_df, "data/patient_info_data_clean.tsv")
 
