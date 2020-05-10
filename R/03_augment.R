@@ -14,6 +14,7 @@ source(file = "R/99_project_functions.R")
 # ------------------------------------------------------------------------------
 case_df <- read_tsv("data/case_data_clean.tsv")
 
+<<<<<<< HEAD
 case_df <- case_df %>%
   mutate(case_type = case_when(
     str_detect(infection_case, "Hospital") ~ "hospital",
@@ -33,13 +34,35 @@ case_df <- case_df %>%
 # Write to disk
 write_tsv(case_df, "data/case_data_augmented.tsv")
 
+=======
+case_df <- case_df %>% 
+  mutate(case_type = case_when(
+    str_detect(infection_case,"Hospital") ~ "hospital", 
+    str_detect(infection_case,"Church") ~ "church",
+    str_detect(infection_case,"overseas") ~ "overseas",
+    str_detect(infection_case,"Pilgrimage") ~ "overseas",
+    str_detect(infection_case,"patient") ~ "contact with patient",
+    str_detect(infection_case,"Call") ~ "call center",
+    str_detect(infection_case,"Nursing") ~ "nursing home",
+    str_detect(infection_case,"gym") ~ "gym",
+    str_detect(infection_case,"Lab") ~ "lab",
+    str_detect(infection_case,"Community Center") ~ "community center",
+    str_detect(infection_case,"other") ~ "other",
+    )) %>% 
+  mutate(case_type = replace(case_type, is.na(case_type), "other"))
+  
+>>>>>>> f1800d851bb1b03bde48f8f1fe50917c6fb16322
 
 # Patient augment
 # ------------------------------------------------------------------------------
 patient_info_df <- read_tsv("data/patient_info_data_clean.tsv")
 patient_route_df <- read_tsv("data/patient_route_data_clean.tsv")
 
+<<<<<<< HEAD
 # Joining the the two patient data frames
+=======
+# Joining the the two patient data frames 
+>>>>>>> f1800d851bb1b03bde48f8f1fe50917c6fb16322
 patient_df <- patient_info_df %>%
   full_join(patient_route_df,
     by = "patient_id",

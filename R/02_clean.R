@@ -35,12 +35,20 @@ patient_info_df <- patient_info_df %>%
 # Clean up inconsistent string values
 patient_info_df <- patient_info_df %>% 
   mutate(infection_case = replace_na(infection_case, "other")) %>%
+<<<<<<< HEAD
   mutate(infection_case = replace(infection_case, infection_case == "etc", "other")) %>%
+=======
+  mutate(infection_case = replace(infection_case, infection_case == "etc", "other")) %>% 
+>>>>>>> f1800d851bb1b03bde48f8f1fe50917c6fb16322
   mutate(state = replace_na(state, "unspecified")) %>%
   mutate(country = replace_na(country, "other")) %>%
   mutate(province = replace(province, province == "etc", "other")) %>%
   mutate(city = replace(city, city == "etc", "unspecified")) %>%
+<<<<<<< HEAD
   mutate(city = replace_na(city, "unspecified"))
+=======
+  mutate(city = replace_na(city, "unspecified")) 
+>>>>>>> f1800d851bb1b03bde48f8f1fe50917c6fb16322
 
 # Convert infected_by to NA if two persons both have infected each other
 # or if they have infected themselves
@@ -64,7 +72,11 @@ write_tsv(patient_info_df, "data/patient_info_data_clean.tsv")
 patient_route_df <- read_tsv("data/patient_route_data.tsv")
 
 #Delete unwanted columns patient_route_df
+<<<<<<< HEAD
 patient_route_df <- patient_route_df %>%
+=======
+patient_route_df <- patient_route_df %>% 
+>>>>>>> f1800d851bb1b03bde48f8f1fe50917c6fb16322
   select(-global_num)
 
 patient_route_df <- patient_route_df %>%
@@ -107,8 +119,12 @@ write_tsv(search_trend_df, "data/search_trend_data_clean.tsv")
 # ------------------------------------------------------------------------------
 region_df <- read_tsv("data/region_data.tsv")
 
+<<<<<<< HEAD
 # Filter cities and small regions
 #(add prefix to city for small regions with no explicitly stated cities)
+=======
+# Filter cities and small regions (add prefix to city for small regions with no explicitly stated cities)
+>>>>>>> f1800d851bb1b03bde48f8f1fe50917c6fb16322
 city_df <- region_df %>%
   filter(province != city | city == "Jeju-do" | city == "Sejong") %>%
   mutate(city = case_when(
