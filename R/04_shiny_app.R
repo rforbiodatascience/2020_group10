@@ -81,4 +81,3 @@ ui <- shinyUI(pageWithSidebar(
 
 # Run app
 shinyApp(ui = ui, server = server)
-

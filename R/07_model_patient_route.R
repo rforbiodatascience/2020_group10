@@ -7,7 +7,8 @@ library(viridis)
 library(rgdal)
 library(plotly)
 library(maptools)
-if (!require(gpclib)) install.packages("gpclib", type = "source")
+library(gpclib)
+if (!require(gpclib)) install.packages("gpclib", type="source")
 gpclibPermit()
 
 # Define functions ------------------------------------------------------------------------------
@@ -51,7 +52,7 @@ cases_number_ploty <- cases_number %>%
 
 # Data for South Korea map
 south_korea <- readOGR(
-  dsn = str_c(getwd(), "/data/Igismap/"),
+  dsn = str_c(getwd(), "/_raw/Igismap/"),
   layer = "South_Korea_Polygon",
   verbose = FALSE
 )
@@ -122,5 +123,8 @@ write_tsv(
   path = "data/wrangled_cases_number_df.tsv"
 )
 
-# Detach conflicting packages ---------------------------------------------------------------------
+# Detach external packages ---------------------------------------------------------------------
 detach("package:maptools", unload=TRUE)
+detach("package:rgdal", unload=TRUE)
+detach("package:plotly", unload=TRUE)
+detach("package:gpclib", unload=TRUE)

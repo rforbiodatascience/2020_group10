@@ -27,6 +27,10 @@ get_lower_tri <- function(cormat) {
 # Deceased_model --------------------------------------------------------------
 
 deceased_model <- function(df) {
-  #lm(height ~ weight, data = df)
   lm(deceased_time_age ~ confirmed_time_age, data = df)
+}
+
+# Sigmoid model ---------------------------------------------------------------
+sigm_model <- function(df) {
+  nls(value ~ SSlogis(date, Asym, xmid, scal), data = df)
 }

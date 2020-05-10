@@ -131,3 +131,8 @@ ggsave(
 write_tsv(city_conf_pca_aug, "data/wrangled_city_pca.tsv")
 write_tsv(pca_vectors, "data/wrangled_pca_vectors.tsv")
 
+# Detach external packages ---------------------------------------------------------------------
+detach("package:ggrepel", unload=TRUE)
+detach("package:patchwork", unload=TRUE)
+
+

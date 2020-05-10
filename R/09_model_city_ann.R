@@ -9,7 +9,7 @@ library("keras")
 source(file = "R/99_project_functions.R")
 
 # Load data ---------------------------------------------------------------
-city_conf_pca_aug <- read_tsv("data/wrangled_pca.tsv")
+city_conf_pca_aug <- read_tsv("data/wrangled_city_pca.tsv")
 
 # Wrangle data ---------------------------------------------------------------
 
@@ -89,3 +89,6 @@ perf <- model %>%
 # Save model performance  ---------------------------------------------------------------
 
 write_tsv(perf, "data/wrangled_ann_pred")
+
+# Detach external packages ---------------------------------------------------------------------
+detach("package:keras", unload=TRUE)

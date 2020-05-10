@@ -149,3 +149,6 @@ ggsave(
 )
 
 write_tsv(clustering_pred, "data/wrangled_cluster_pred.tsv")
+
+# Detach external packages ---------------------------------------------------------------------
+detach("package:patchwork", unload=TRUE)

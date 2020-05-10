@@ -2,77 +2,102 @@
 rm(list = ls())
 
 # Load libraries ----------------------------------------------------------
-library("tidyverse")
-library("ggrepel")
+library(tidyverse)
+library(ggrepel)
 
 # Load functions ----------------------------------------------------------
 source(file = "R/99_project_functions.R")
 
 # Load data ---------------------------------------------------------------
-options(scipen=999)
 time_df <- read_tsv(file = "data/time_data_augmented.tsv")
 
 # Wrangle data ------------------------------------------------------------
+
 # Extract relevant data
-new_cases_coronavirus <- time_df %>% 
-  select(date, coronavirus, confirmed) %>%  
-  filter(date >= as.Date("2020-01-01")) %>% 
-  rename(coronavirus_search_trend = coronavirus) %>% 
-  distinct() 
+new_cases_coronavirus <- time_df %>%
+  select(date, coronavirus, confirmed) %>%
+  filter(date >= as.Date("2020-01-01")) %>%
+  rename(coronavirus_search_trend = coronavirus) %>%
+  distinct()
 
 # Create column with new cases from accumulated cases
-new_cases_coronavirus <- new_cases_coronavirus %>% 
-  mutate(confirmed_cases_per_day = confirmed - lag(confirmed),
-         confirmed_cases_per_day = replace_na(confirmed_cases_per_day,0)) %>%
-  select(-confirmed) %>% 
-  pivot_longer(., cols = c(confirmed_cases_per_day, coronavirus_search_trend), names_to = "parameter", values_to = "value") 
-
+new_cases_coronavirus <- new_cases_coronavirus %>%
+  mutate(
+    confirmed_cases_per_day = confirmed - lag(confirmed),
+    confirmed_cases_per_day = replace_na(confirmed_cases_per_day, 0)
+  ) %>%
+  select(-confirmed) %>%
+  pivot_longer(.,
+    cols = c(confirmed_cases_per_day, coronavirus_search_trend),
+    names_to = "parameter",
+    values_to = "value"
+  )
 
 # Visualise data ----------------------------------------------------------
-# Prepare new facet label names, dates and annotations 
-plot_labels <- as_labeller(c("confirmed_cases_per_day" = 
-                               "Number of new confirmed COVID-19 cases per day", 
-                             "coronavirus_search_trend" = 
-                               "Search activity for 'coronavirus' relative to maximum"))
-dates <- c("2020-01-03",
-           "2020-01-20",
-           "2020-02-07", 
-           "2020-02-18", 
-           "2020-03-07", 
-           "2020-03-28")
 
-annotation_upper <- tibble(x = as.Date(dates), 
-               label = c("Wuhan travellers\nquarantined",
-                         "National alert\nlevel increased",
-                         "Test capacity\nboost", 
-                         "Church super-\nspreader confirmed", 
-                         "GPS-enforced\nquarantine", 
-                         "Recovered >\nisolated"), 
-               parameter = "confirmed_cases_per_day")
+# Prepare new facet label names, dates and annotations
+plot_labels <- as_labeller(c(
+  "confirmed_cases_per_day" =
+  "Number of new confirmed COVID-19 cases per day",
+  "coronavirus_search_trend" =
+  "Search activity for 'coronavirus' relative to maximum"
+))
+
+dates <- c(
+  "2020-01-03",
+  "2020-01-20",
+  "2020-02-07",
+  "2020-02-18",
+  "2020-03-07",
+  "2020-03-28"
+)
+
+annotation_upper <- tibble(
+  x = as.Date(dates),
+  label = c(
+    "Wuhan travellers\nquarantined",
+    "National alert\nlevel increased",
+    "Test capacity\nboost",
+    "Church super-\nspreader confirmed",
+    "GPS-enforced\nquarantine",
+    "Recovered >\nisolated"
+  ),
+  parameter = "confirmed_cases_per_day"
+)
 
 vertical_lines <- tibble(x = as.Date(dates), parameter = "coronavirus_search_trend")
 
 # Plot the data with annotations
-trend_plot <- ggplot(new_cases_coronavirus, aes(date)) +
-  geom_segment(annotation_upper, mapping = aes(x=x, y=0, xend=x, yend=775), colour = "grey") +
+trend_plot <- new_cases_coronavirus %>%
+  ggplot(aes(date)) +
+  geom_segment(annotation_upper, mapping = aes(x = x, y = 0, xend = x, yend = 775), colour = "grey") +
   geom_vline(vertical_lines, mapping = aes(xintercept = x), colour = "grey") +
-  geom_text_repel(data = annotation_upper, mapping = aes(x = x, y = 1000, label = label), size = 2.5)+
+  geom_text_repel(data = annotation_upper, mapping = aes(x = x, y = 1000, label = label), size = 2.5) +
   geom_line(aes(y = value, colour = parameter)) +
-  facet_wrap(~ parameter, scales="free_y", nrow = 2, labeller=plot_labels) 
-  
-# Adjust labels, theme and axis 
-trend_plot <- trend_plot +
+  facet_wrap(~parameter, scales = "free_y", nrow = 2, labeller = plot_labels) +
   labs(
-    title ="COVID-19 cases and coronavirus search trend in South Korea", 
-    subtitle = "Number of new COVID-19 cases per day and selected events (upper panel) and\nsearch activity for 'coronavirus' in the portal NAVER relative to maximum (lower panel).",  
-    caption ="Data from Korea Centers for Disease Control & Prevention (2020)") +
+    title = "COVID-19 cases and coronavirus search trend in South Korea",
+    subtitle = str_c("Number of new COVID-19 cases per day and selected events (upper panel) and",
+               "\nsearch activity for 'coronavirus' in the portal NAVER relative to maximum (lower panel)."),
+    caption = "Data from Korea Centers for Disease Control & Prevention (2020)"
+  ) +
   xlab("Time (2020)") +
   ylab("") +
-  theme(legend.position = "none", 
-        plot.subtitle= element_text(size = 9))+
-  scale_x_date(date_breaks = "2 weeks" , date_labels = "%d-%b") 
-
+  theme(
+    legend.position = "none",
+    plot.subtitle = element_text(size = 9)
+  ) +
+  scale_x_date(date_breaks = "2 weeks", date_labels = "%d-%b")
 
 # Write plots and data to file --------------------------------------------
-ggsave(filename = "results/trend_plot.png", plot = trend_plot, width = 10, height = 5)
-write_tsv(x = new_cases_coronavirus, path = "data/wrangled_new_cases_and_search_trend.tsv")
+ggsave(
+  filename = "results/15_searchtrend.png",
+  plot = trend_plot,
+  width = 10,
+  height = 5
+)
+
+write_tsv(x = new_cases_coronavirus, path = "data/wrangled_cases_searchtrend.tsv")
+
+# Detach external packages ---------------------------------------------------------------------
+detach("package:ggrepel", unload=TRUE)
