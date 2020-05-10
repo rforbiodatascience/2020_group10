@@ -128,6 +128,6 @@ ggsave(
   height = 8,
 )
 
-write_tsv(city_conf_pca_aug, "data/wrangled_pca.tsv")
+write_tsv(city_conf_pca_aug, "data/wrangled_city_pca.tsv")
 write_tsv(pca_vectors, "data/wrangled_pca_vectors.tsv")
 

@@ -4,13 +4,9 @@ rm(list = ls())
 # Load libraries ------------------------------------------------------------------------------
 library(tidyverse)
 library(viridis)
-library(forcats)
-library(mapproj)
 library(rgdal)
-library(broom)
 library(plotly)
 library(maptools)
-
 if (!require(gpclib)) install.packages("gpclib", type = "source")
 gpclibPermit()
 
@@ -24,7 +20,7 @@ patient_df <- read_tsv("data/patient_data_augmented.tsv")
 
 # Create a range of coordinates per city
 range_coordinates <- patient_df %>%
-  dplyr::select(., c(province_patient_route, state, longitude, latitude)) %>%
+  select(., c(province_patient_route, state, longitude, latitude)) %>%
   rename(x = longitude) %>%
   rename(y = latitude) %>%
   group_by(province_patient_route, state) %>%
@@ -32,7 +28,7 @@ range_coordinates <- patient_df %>%
 
 # Get a total of released, isolated, diseased by province
 cases_number <- patient_df %>%
-  dplyr::select(., c(province_patient_route, state)) %>%
+  select(., c(province_patient_route, state)) %>%
   group_by(province_patient_route, state) %>%
   tally() %>%
   as_tibble()
@@ -61,7 +57,7 @@ south_korea <- readOGR(
 )
 
 # Tidy map data
-spdf_fortified <- tidy(
+spdf_fortified <- broom::tidy(
   south_korea,
   region = "name"
 )
@@ -80,7 +76,7 @@ sk_cases_number <- ggplot() +
   coord_map() +
   geom_point(
     data = cases_number_ploty,
-    aes(y = lat, x = lon, color = state, size = n, text = mytext)
+    aes(y = min_latt, x = max_lonn, color = state, size = n, text = mytext)
   ) +
   scale_color_viridis(
     option = "inferno",
@@ -91,13 +87,6 @@ sk_cases_number <- ggplot() +
   scale_size_continuous(
     range = c(1, 15),
     name = "number of cases"
-  ) +
-  guides(
-    size = FALSE
-  ) +
-  theme(
-    legend.position = "bottom",
-    legend.box = "horizontal"
   ) +
   labs(
     title = "South Korea: number of cases per province",
@@ -114,15 +103,17 @@ interactive_sk_cases <- sk_cases_number %>%
   )
 
 # Save interactive map ------------------------------------------------------------------------------
-htmlwidgets::saveWidget(
-  interactive_sk_cases,
-  "interactive_province_patient_route.html"
-)
+#htmlwidgets::saveWidget(
+#  interactive_sk_cases,
+#  "results/interactive_province_patient_route.html"
+#)
 
 # Save the plots ------------------------------------------------------------------------------
 ggsave(
-  filename = "results/plot_cases_number.png",
-  plot = sk_cases_number
+  filename = "results/07_cases_number.png",
+  plot = sk_cases_number,
+  height = 8,
+  width = 10
 )
 
 # Save the data frame ------------------------------------------------------------------------------
@@ -130,3 +121,6 @@ write_tsv(
   x = cases_number,
   path = "data/wrangled_cases_number_df.tsv"
 )
+
+# Detach conflicting packages ---------------------------------------------------------------------
+detach("package:maptools", unload=TRUE)

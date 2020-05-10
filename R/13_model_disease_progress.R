@@ -3,8 +3,6 @@ rm(list = ls())
 
 # Load libraries ------------------------------------------------------------------------------
 library(tidyverse)
-library(ggplot2)
-library(tidyverse)
 library(lubridate)
 
 # Define functions ------------------------------------------------------------------------------
@@ -14,22 +12,18 @@ source(file = "R/99_project_functions.R")
 time_df <- read_tsv("data/time_data_augmented.tsv")
 
 # Wrangle the data ------------------------------------------------------------------------------
+time_df <- time_df %>%
+  filter(date > ymd(20200120))
 
-#maybe we can leave the sex as female and male instead of binary in the augmenting
+# Overall disease progress
 disease_progress <- time_df %>% 
   select(c(date, sex, test, negative, confirmed)) %>% 
-  mutate(sex = case_when(sex == 1 ~ "female",
-                         sex == 0 ~ "male")) %>% 
-  filter(date > ymd(20200120))  %>%
   pivot_wider(values_fn = list(confirmed = summary_fun),  names_from= sex) %>% 
-  pivot_longer(c(`test`, `confirmed`, `negative`), names_to = "key", values_to = "value")
+  pivot_longer(c(test, confirmed, negative), names_to = "key", values_to = "value")
 
 # Stratification by sex
 disease_gender <- time_df %>% 
   select(c(date, sex, confirmed_time_gender)) %>% 
-  mutate(sex = case_when(sex == 1 ~ "female",
-                         sex == 0 ~ "male")) %>% 
-  filter(date > ymd(20200120))  %>%
   group_by(date, confirmed_time_gender, sex) %>% 
   summarise() %>% 
   drop_na() 
@@ -37,7 +31,6 @@ disease_gender <- time_df %>%
 # Stratification by age
 disease_age <- time_df %>% 
   select(c(date, age, confirmed_time_age)) %>% 
-  filter(date > ymd(20200120))  %>%
   group_by(date, confirmed_time_age, age) %>% 
   summarise() %>% 
   drop_na()
@@ -112,15 +105,15 @@ disease_age_plot <- disease_age %>%
 
 # Save the plots ------------------------------------------------------------------------------
 ggsave(
-  filename = "results/disease_progress_plot.png", 
+  filename = "results/13_disease_progress.png", 
   plot = disease_progress_plot
   )
 ggsave(
-  filename = "results/disease_gender_plot.png", 
+  filename = "results/13_disease_gender.png", 
   plot = disease_gender_plot
   )
 ggsave(
-  filename = "results/disease_age_plot.png",
+  filename = "results/13_disease_age.png",
   plot = disease_age_plot
   )
 

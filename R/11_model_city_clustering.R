@@ -12,7 +12,7 @@ library(patchwork)
 source(file = "R/99_project_functions.R")
 
 # Load data ---------------------------------------------------------------
-city_conf_pca_aug <- read_tsv("data/06_city_conf_pca_aug.tsv")
+city_conf_pca_aug <- read_tsv("data/wrangled_city_pca.tsv")
 
 # Wrangle data ------------------------------------------------------------
 set.seed(5)
@@ -142,10 +142,10 @@ clustering_pred <- city_conf_kmean_pca_aug %>%
 
 # Write plots and data to file --------------------------------------------
 ggsave(
-  filename = "results/07_clustering.png",
+  filename = "results/11_city_clustering.png",
   plot = combined_plots,
   width = 16,
   height = 8,
 )
 
-write_tsv(clustering_pred, "data/07_clustering_pred.tsv")
+write_tsv(clustering_pred, "data/wrangled_cluster_pred.tsv")

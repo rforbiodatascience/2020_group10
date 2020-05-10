@@ -12,7 +12,7 @@ time_df <- read_tsv("data/time_data_augmented.tsv")
 
 # Wrangle data ---------------------------------------------------------------
 
-# Stratefy confirmed and deceased by age
+# Stratify confirmed and deceased by age
 time_age_disease <- time_df %>%
   select(confirmed_time_age, deceased_time_age, age) %>% 
   drop_na() %>% 
@@ -23,7 +23,7 @@ time_age_disease <- time_df %>%
 time_age_disease <- time_age_disease %>% 
   mutate(model = map(data, deceased_model))
 
-# Get model stats and unnest. Filter unce
+# Get model stats and unnest
 time_age_disease <- time_age_disease %>%
   mutate(result = map(model, broom::tidy, conf.int = TRUE)) %>% 
   unnest(result)
@@ -36,27 +36,32 @@ time_age_disease <- time_age_disease %>%
 # Visualization ---------------------------------------------------------------
   
 deceased_by_confirmed_plot <- time_age_disease %>%
-  ggplot(mapping = aes(x = estimate, y = age, label = estimate_percentage)) +
-  geom_point() +
+  ggplot(aes(x=age, y=estimate, label = estimate_percentage, fill = age)) +
+  geom_bar(stat="identity") +
   theme_bw() +
-  geom_label(nudge_y = 0.4) +
-  geom_errorbarh(aes(xmax = conf.high, xmin = conf.low, height=.2)) +
-  theme(plot.title = element_text(size = 18)) +
+  geom_label(nudge_y = 0.02) +
+  geom_errorbar(aes(ymin=conf.low, ymax=conf.high), width=.2,
+                position=position_dodge(.9))+
+  theme(plot.title = element_text(size = 18),
+        legend.position = "none") +
   labs(
-    title = "Estimated deceased foreach confirmed case by age",
-    subtitle = "Labels show estimate in percentage",
-    x = "estimate",
-    y = "age",
+    title = "Case fatality rate by age",
+    x = "age group",
+    y = "case fatality rate in percent",
     caption = "Data from Korea Centers for Disease Control & Prevention (2020)"
   )
   
 # Write plots and data to file --------------------------------------------
   
 ggsave(
-  filename = "results/08_age_deceased_ratio.png",
+  filename = "results/12_age_deceased_ratio.png",
   plot = deceased_by_confirmed_plot,
   width = 8,
   height = 8,
 )
-  
+
+# Deselect nested columns
+time_age_disease <- time_age_disease %>%
+  select(-c(data, model, term))
+write_tsv(time_age_disease, path = "results/12_case_fatality_ratio.tsv")  
   
