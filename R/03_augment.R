@@ -1,17 +1,15 @@
-# Clear workspace
-# ------------------------------------------------------------------------------
+# Clear workspace ------------------------------------------------------------------------------
 rm(list = ls())
 
-# Load libraries
-# ------------------------------------------------------------------------------
+# Load libraries ------------------------------------------------------------------------------
 library(tidyverse)
 
-# Define functions
-# ------------------------------------------------------------------------------
+# Define functions ------------------------------------------------------------------------------
 source(file = "R/99_project_functions.R")
 
+# Wrangle data ------------------------------------------------------------------------------
+
 # Case augment
-# ------------------------------------------------------------------------------
 case_df <- read_tsv("data/case_data_clean.tsv")
 
 case_df <- case_df %>%
@@ -29,13 +27,12 @@ case_df <- case_df %>%
     str_detect(infection_case, "other") ~ "other",
     )) %>%
   mutate(case_type = replace(case_type, is.na(case_type), "other"))
-  
-# Write to disk
-write_tsv(case_df, "data/case_data_augmented.tsv")
 
+# Remove unnecessary columns
+case_df <- case_df %>%
+  select(case_id, confirmed, case_type)
 
 # Patient augment
-# ------------------------------------------------------------------------------
 patient_info_df <- read_tsv("data/patient_info_data_clean.tsv")
 patient_route_df <- read_tsv("data/patient_route_data_clean.tsv")
 
@@ -45,13 +42,9 @@ patient_df <- patient_info_df %>%
     by = "patient_id",
     suffix = c("_patient_info", "_patient_route"))
 
-
 patient_df <- patient_df %>%
-  # transform gender to binary
-  mutate(sex = case_when(
-    sex == "male" ~ 0,
-    sex == "female" ~ 1
-  )) %>%
+  # Remove unnecessary columns
+  select(-sex) %>%
   # add an age column and one more column to subset the ages into age_group
   mutate(age = 2020 - birth_year) %>%
   mutate(age_group = case_when(
@@ -76,11 +69,7 @@ patient_df <- patient_df %>%
   mutate(state_date = str_replace_all(state_date, "[_NA]", "")) %>%
   mutate(state_date = ifelse(state_date %in% "", NA, state_date))
 
-# Write to disk
-write_tsv(patient_df, "data/patient_data_augmented.tsv")
-
 # Time augment
-# ------------------------------------------------------------------------------
 time_df           <- read_tsv("data/time_data_clean.tsv")
 time_age_df       <- read_tsv("data/time_age_data_clean.tsv")
 time_gender_df    <- read_tsv("data/time_gender_data_clean.tsv")
@@ -103,33 +92,32 @@ time_df <- time_df %>%
   ) %>%
   full_join(search_trend_df, by = "date")
 
-# Adding a binary gender column
-time_df <- time_df %>%
-  mutate(sex = case_when(
-    sex == "male" ~ 0,
-    sex == "female" ~ 1
-  ))
-
 # Removing unwanted columns (time*4)
 time_df <- time_df %>%
   select(-time, -time_time_age, -time_time_gender, -time_time_province)
 
+# Region augment
+city_df <- read_tsv("data/city_data_clean.tsv")
+
+city <- city_df %>% 
+  select(-code, -latitude, -longitude, -province)
+
+# TODO
+# -	Add joining of patient data and city_df together.
+# -	Update PCA with new city_df
+
+# Write data to file --------------------------------------------
+
+# Write to disk
+write_tsv(case_df, "data/case_data_augmented.tsv")
+
+# Write to disk
+write_tsv(patient_df, "data/patient_data_augmented.tsv")
+
 # Write to disk
 write_tsv(time_df, "data/time_data_augmented.tsv")
 
-# Region augment
-# ------------------------------------------------------------------------------
-city_df <- read_tsv("data/city_data_clean.tsv")
-
-# Use the suffixes to identify divisions in
-city_df <- city_df %>%
-  mutate(division = case_when(
-    str_ends(city, "-do") ~ "province",
-    str_ends(city, "-si") ~ "city",
-    str_ends(city, "-gun") ~ "county",
-    str_ends(city, "-gu") ~ "district",
-    TRUE ~ "city"
-  ))
-
 # Write to disk
 write_tsv(city_df, "data/city_data_augmented.tsv")
+
+

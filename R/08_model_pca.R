@@ -6,9 +6,6 @@ library(tidyverse)
 library(ggrepel) # Non-overlapping ggplot labels
 library(patchwork) # Combining plots
 
-# library(devtools)
-#install_github("thomasp85/patchwork")
-
 # Define functions ---------------------------------------------------------------
 source(file = "R/99_project_functions.R")
 
@@ -32,8 +29,8 @@ city_conf_df <- confirmed_cases %>%
   drop_na()
 
 # Quantile of confirmed cases
-q_conf <- city_conf_df %>%
-  select(confirmed) %>%
+q_conf <- city_conf_df %>% 
+  select(confirmed) %>% 
   map(quantile)
 
 # Convert quantile to vector list
@@ -65,11 +62,12 @@ pca_vectors <- city_conf_pca %>%
   pluck("rotation") %>%
   data.frame(variables = rownames(.), .)
 
+city_conf_pca <- city_conf_pca %>% broom::tidy("pcs")
+
 # Visualise data ----------------------------------------------------------
 
 # Plot the variance explained of each PC
 pca_var <- city_conf_pca %>%
-  broom::tidy("pcs") %>%
   ggplot(aes(x = PC, y = percent, label = str_c(round(percent * 100, 0), "%"))) +
   geom_col(fill = "#98A6D4") +
   geom_text(size = 6, position = position_stack(vjust = 0.5), fontface = "bold") +
@@ -78,7 +76,7 @@ pca_var <- city_conf_pca %>%
   labs(
     title = "Explained variance of PCA\nfrom regional city data in South Korea",
     x = "PC",
-    y = "Percentage variance explained (%)"
+    y = "Variance explained (%)"
   ) +
   theme(
     plot.title = element_text(size = 18),
@@ -117,18 +115,19 @@ pca_plot <- city_conf_pca_aug %>%
 
 # Write plots and data to file --------------------------------------------
 ggsave(
-  filename = "results/06_pca_variance.png",
+  filename = "results/08_model_pca_variance.png",
   plot = pca_var,
   width = 8,
   height = 8,
 )
 
 ggsave(
-  filename = "results/06_pca_plot.png",
+  filename = "results/08_model_pca.png",
   plot = pca_plot,
   width = 8,
   height = 8,
 )
 
-write_tsv(city_conf_pca_aug, "data/06_city_conf_pca_aug.tsv")
+write_tsv(city_conf_pca_aug, "data/wrangled_pca.tsv")
+write_tsv(pca_vectors, "data/wrangled_pca_vectors.tsv")
 

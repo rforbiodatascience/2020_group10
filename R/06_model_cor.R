@@ -3,7 +3,6 @@ rm(list = ls())
 
 # Load libraries ---------------------------------------------------------------
 library(tidyverse)
-library(reshape2)
 
 # Define functions ---------------------------------------------------------------
 source(file = "R/99_project_functions.R")
@@ -69,8 +68,10 @@ correlation_heatmap <- city_cor_df %>%
 
 # Write plots and data to file --------------------------------------------
 ggsave(
-  filename = "results/05_correlation_heatmap.png",
+  filename = "results/06_model_cor.png",
   plot = correlation_heatmap,
   width = 10,
   height = 8
 )
+
+write_tsv(city_cor_df, "data/wrangled_city_var_cor.tsv")

@@ -20,4 +20,4 @@ dataset_tables <- dataset_files %>%
 # Writing all tables to the data folder
 dataset_tables %>%
   names(.) %>%
-  map(~ write_tsv(dataset_tables[[.]], str_c("data/", ., "_data.tsv")))
+  map(~ write_tsv(pluck(dataset_tables, .), str_c("data/", ., "_data.tsv")))

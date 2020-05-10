@@ -9,9 +9,9 @@ library("keras")
 source(file = "R/99_project_functions.R")
 
 # Load data ---------------------------------------------------------------
-city_conf_pca_aug <- read_tsv("data/06_city_conf_pca_aug.tsv")
+city_conf_pca_aug <- read_tsv("data/wrangled_pca.tsv")
 
-# Wrange data ---------------------------------------------------------------
+# Wrangle data ---------------------------------------------------------------
 
 # Convert classes to numeric
 nn_dat <- city_conf_pca_aug %>%
@@ -21,7 +21,7 @@ nn_dat <- city_conf_pca_aug %>%
     class_label = class
   )
 
-# Set aside 20% test
+# Define test size
 test_f <- 0.20
 
 # Create partion of the data
@@ -82,8 +82,10 @@ history <- model %>%
 
 # Performance of the model ---------------------------------------------------------------
 
-perf <- model %>% evaluate(x_test, y_test) %>% as_tibble()
+perf <- model %>% 
+  evaluate(x_test, y_test) %>%
+  as_tibble()
 
 # Save model performance  ---------------------------------------------------------------
 
-write_tsv(city_conf_pca_aug, "data/07_ann_performance.tsv")
+write_tsv(perf, "data/wrangled_ann_pred")

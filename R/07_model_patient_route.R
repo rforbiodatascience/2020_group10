@@ -1,38 +1,31 @@
-# Clear workspace
-# ------------------------------------------------------------------------------
+# Clear workspace ------------------------------------------------------------------------------
 rm(list = ls())
 
-# Load libraries
-# ------------------------------------------------------------------------------
+# Load libraries ------------------------------------------------------------------------------
 library(tidyverse)
 library(viridis)
 library(forcats)
-library(ggplot2)
 library(maps)
 library(mapproj)
-library(rgdal)
-library(broom)
 library(maptools)
 library(ggrepel)
+library(rgdal)
 
 #library(ggmap)
 #library(sf)
 #library(devtools)
 
-# Define functions
-# ------------------------------------------------------------------------------
+# Define functions ------------------------------------------------------------------------------
 source(file = "R/99_project_functions.R")
 
-# Read the data
-# ------------------------------------------------------------------------------
+# Wrangle data ------------------------------------------------------------------------------
 patient_df <- read_tsv("data/patient_data_augmented.tsv")
 
 # Wrangle the data
 # ------------------------------------------------------------------------------
 lon_lan <- patient_df %>% 
-  dplyr::select(.,c(longitude, latitude, sex, age_group, province_patient_route, state)) %>% 
-  filter(!is.na(c(longitude))) %>% 
-  mutate(sex = as_factor(sex))  
+  dplyr::select(.,c(longitude, latitude, province_patient_route, state)) %>% 
+  filter(!is.na(c(longitude)))
 
 # Create a range of coordinates per city
 range_coordinates <- lon_lan %>% 
