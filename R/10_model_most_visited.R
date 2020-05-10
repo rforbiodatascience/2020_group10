@@ -26,12 +26,17 @@ mvp_plot <- ggplot(
     ) +
   coord_flip() +
   labs(
-    title = "MOST VISITED PLACES", 
+    title = "Most visited places", 
        y = "Number of patients", 
        x = "Place", 
        caption ="Data from Korea Centers for Disease Control & Prevention (2020)"
     ) 
+
 # Save the plot------------------------------------------------------------------------------
 ggsave(
-  filename = "results/most_visited_places.png", mvp_plot)
+  filename = "results/10_most_visited_places.png", 
+  width = 8, 
+  height = 8, 
+  mvp_plot)
+
   
