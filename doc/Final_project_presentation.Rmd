@@ -4,33 +4,40 @@ subtitle: "22100 - Course Programme Spring 2020"
 author: "Group 10"
 date: "5/11/2020"
 output: ioslides_presentation
+theme: default  
 widescreen: true
 ---
-```{r "setup", include=FALSE}
+```{r setup, include=FALSE}
 library(knitr)
+opts_chunk$set(echo = FALSE)
 ```
-## Introduction
+## **Introduction**
 
-### South Korea during COVID-19
+### *South Korea during COVID-19*
+South Korea is a one of the world's most densely populated countries with a population of 51.64 million people.
 
+The first case of COVID-19 in South Korea was confirmed on the 20th of January 2020.
 
-## Hypothesis
+Since then there has only been 256 deaths caused by COVID-19.
+
+(Insert one of our graphs showing no of cases?)
+
+## Research questions
+What measures taken by the South Korean government has been effective to contain the outbreak?
 
 ## Materials and methods
-### Brief description of the dataset
-The dataset Data Science for COVID-19, with the following structure, was retreived from Kaggle.
-```{r, fig.width = 1, echo=FALSE}
+```{r out.width = "60%", fig.align='right',fig.cap= "COVID-19 dataset from kaggle" }
 include_graphics('dataset.png')
 ```
 
-Data wrangling and visualization were done in R Studio.
 
 
 ***
 
 ### Structure of the project
-```{r, fig.width = 1, echo=FALSE}
+```{r, fig.width = 1}
 include_graphics('project_structure.png')
+include_graphics('images/workflow.png')
 ```
 
 
@@ -66,7 +73,7 @@ Four main data frames were created regarding:
 ### Patient data
 Tracking the place where people got infected and the places they have been.
 
-```{r out.width = "50%", fig.show = "hold", echo=FALSE}
+```{r out.width = "50%", fig.show = "hold"}
 include_graphics(c('../results/05_model_case_type.png', '../results/10_most_visited_places.png'))
 
 ```
