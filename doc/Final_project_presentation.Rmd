@@ -1,0 +1,83 @@
+---
+title: "Revealing the success behind South Korea's approach to COVID-19"
+subtitle: "22100 - Course Programme Spring 2020"
+author: "Group 10"
+date: "5/11/2020"
+output: ioslides_presentation
+widescreen: true
+---
+```{r "setup", include=FALSE}
+library(knitr)
+```
+## Introduction
+
+### South Korea during COVID-19
+
+
+## Hypothesis
+
+## Materials and methods
+### Brief description of the dataset
+The dataset Data Science for COVID-19, with the following structure, was retreived from Kaggle.
+```{r, fig.width = 1, echo=FALSE}
+include_graphics('dataset.png')
+```
+
+Data wrangling and visualization were done in R Studio.
+
+
+***
+
+### Structure of the project
+```{r, fig.width = 1, echo=FALSE}
+include_graphics('project_structure.png')
+```
+
+
+***
+### Packages used
+- [Tidyverse](https://github.com/tidyverse/tidyverse)
+- [igraph](https://github.com/igraph/igraph)
+- [viridis](https://github.com/sjmgarnier/viridis)    
+- [maptools](https://github.com/RPTools/maptool)
+- [gpclib](https://github.com/rdpeng/gpclib)
+- [rgdal](https://github.com/cran/rgdal/tree/master/inst)
+- [plotly](https://github.com/plotly)  
+
+***
+
+### Data cleaning
+- Get rid of unnecessary data
+
+
+***
+### Data augmenting
+- Join tibbles
+- Create new variables
+
+Four main data frames were created regarding:
+
+- patient
+- case
+- city
+- time
+
+## Results
+### Patient data
+Tracking the place where people got infected and the places they have been.
+
+```{r out.width = "50%", fig.show = "hold", echo=FALSE}
+include_graphics(c('../results/05_model_case_type.png', '../results/10_most_visited_places.png'))
+
+```
+
+
+```{r out.width = "100%", fig.align = "center"}
+
+```
+## Slide
+
+```{r }
+
+```
+
