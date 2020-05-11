@@ -16,10 +16,10 @@ time_df <- time_df %>%
   filter(date > ymd(20200120))
 
 # Overall disease progress
-disease_progress <- time_df %>%
-  select(c(date, sex, test, negative, confirmed)) %>%
-  pivot_wider(values_fn = list(confirmed = summary_fun), names_from = sex) %>%
-  pivot_longer(c(test, confirmed, negative), names_to = "key", values_to = "value")
+disease_progress <- time_df %>% 
+  select(c(date, sex, test, negative, confirmed, deceased)) %>% 
+  pivot_wider(values_fn = list(confirmed = summary_fun),  names_from= sex) %>% 
+  pivot_longer(c(test, confirmed, negative, deceased), names_to = "key", values_to = "value")
 
 # Stratification by sex
 confirmed_gender <- time_df %>%
@@ -41,11 +41,39 @@ disease_age <- time_df %>%
   summarise() %>%
   drop_na()
 
+# Logistic modelling
+# Extract relevant data
+time_df_to_model <- disease_progress %>% 
+  filter(key == "confirmed" | key == "deceased") %>%
+  mutate(date = date - as.Date("2020-01-01")) %>%
+  mutate(date = as.integer(date)) %>% 
+  distinct() 
+
+# Do regression to find asymptote and peak day
+model_summary <- time_df_to_model %>%
+  group_by(key) %>%
+  nest() %>%
+  mutate(model = map(data, sigm_model)) %>% 
+  mutate(tidied = map(model, tidy)) %>% 
+  unnest(tidied) 
+
+features_to_plot <- model_summary %>% 
+  filter(term == "Asym" | term == "xmid") %>% 
+  select(-c(statistic, model, p.value, std.error)) %>% 
+  pivot_wider(., names_from = term, values_from = estimate)
+
+# Calculate deceased and confirmed as estimated by model
+fitted_data <- time_df_to_model %>% 
+  group_by(key) %>% 
+  do(fit = sigm_model(.)) %>%
+  augment(fit)
+
 
 # Data visualization ------------------------------------------------------------------------------
 
 # Disease progress
 disease_progress_plot <- disease_progress %>%
+  filter(key != "deceased") %>% 
   ggplot(
     aes(x = date, y = value, colour = key)
   ) +
@@ -65,7 +93,7 @@ disease_progress_plot <- disease_progress %>%
   ) +
   scale_color_discrete(
     name = "",
-    labels = c("confirmed", "negtive", "total tested")
+    labels = c("confirmed", "negative", "total tested")
   )
 
 
@@ -130,23 +158,55 @@ disease_age_plot <- disease_age %>%
   ) +
   theme(legend.position = "bottom")
 
+# Logistic modelling
+logistic_plot <- fitted_data %>% 
+  ggplot() +
+  geom_point(aes(x= date, y= value, colour=key)
+  ) +
+  geom_line(aes(x= date, y= .fitted), colour = "black", alpha = 0.5
+  ) +
+  facet_wrap(~key, nrow=4, scales = "free_y") +
+  geom_point(data = features_to_plot, colour = "black", aes(x = xmid, y = Asym/2), shape = 19) + 
+  geom_hline(data = features_to_plot, aes(yintercept=Asym), colour = "black", alpha = 0.5, linetype = "dashed", size = 0.8) +
+  labs(
+    x = "Days after January 1st, 2020", 
+    y = "Number of people", 
+    title = "Logistic modelling of the course of the epidemic",
+    subtitle = "Number of confirmed and deceased people over time fitted to a logistic model",
+    caption = "Data from Korea Centers for Disease Control & Prevention (2020)"
+  ) +
+  theme(legend.position = "none")
 
 # Save the plots ------------------------------------------------------------------------------
 ggsave(
   filename = "results/13_disease_progress.png",
-  plot = disease_progress_plot
+  plot = disease_progress_plot,
+  height = 8,
+  width = 10
 )
 ggsave(
   filename = "results/13_confirmed_gender.png",
-  plot = confirmed_gender_plot
+  plot = confirmed_gender_plot,
+  height = 8,
+  width = 10
 )
 ggsave(
   filename = "results/13_deceased_gender.png",
-  plot = deceased_gender_plot
+  plot = deceased_gender_plot,
+  height = 8,
+  width = 10
 )
 ggsave(
   filename = "results/13_disease_age.png",
-  plot = disease_age_plot
+  plot = disease_age_plot,
+  height = 8,
+  width = 10
+)
+ggsave(
+  filename = "results/13_logistic_model.png",
+  plot = logistic_plot,
+  height = 8,
+  width = 10
 )
 
 # Save the data frame ------------------------------------------------------------------------------
@@ -161,4 +221,13 @@ write_tsv(
 write_tsv(
   x = disease_age,
   path = "data/disease_age_plot.tsv"
+)
+
+# remove features that cannot be written in a tidy way
+model_summary <- model_summary %>%
+  select(-c(data, model))
+
+write_tsv(
+  x = model_summary,
+  path = "results/logistic_model.tsv"
 )
