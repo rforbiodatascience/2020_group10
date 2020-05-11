@@ -34,9 +34,7 @@ Since then there has only been 256 deaths caused by COVID-19.
 include_graphics('dataset.png')
 ```
 
-***
-
-### Workflow and Structure of the project
+## Workflow and Structure of the project
 ```{r, fig.width = 1}
 include_graphics('project_structure.png')
 include_graphics('images/workflow.png')
@@ -71,8 +69,8 @@ Four main data frames were created regarding:
 - city
 - time
 
-***
-### Results
+
+## Results
 
 ```{r out.width = "50%", fig.show = "hold"}
 include_graphics(c('../results/10_most_visited_places.png', '../results/05_model_case_type.png'))
@@ -80,4 +78,52 @@ include_graphics(c('../results/10_most_visited_places.png', '../results/05_model
 ```
 
 ***
-### Conclustion and discussion 
+### PCA
+```{r out.width = "50%", fig.align = "center"}
+include_graphics('../results/08_model_pca.png')
+```
+
+***
+### PCA - variance
+```{r out.width = "50%", fig.align = "center"}
+include_graphics('../results/08_model_pca_variance.png')
+```
+
+***
+### Correlation matrix
+```{r out.width = "50%", fig.align = "center"}
+include_graphics('../results/06_model_cor.png')
+```
+
+***
+### City clustering
+```{r out.width = "80%", fig.align = "center"}
+include_graphics('../results/11_city_clustering.png')
+```
+
+***
+### Case fatility rate
+using nest()
+```{r out.width = "40%", fig.align = "center"}
+include_graphics('../results/12_age_deceased_ratio.png')
+```
+***
+### Transmission
+```{r out.width = "60%", fig.align = "center"}
+include_graphics('../results/16_transmission.png')
+```
+
+***
+### Superspreaders
+```{r out.width = "50%", fig.align = "center"}
+include_graphics('../results/17_subset_transmission.png')
+```
+
+***
+### Search trend 
+```{r out.width = "80%", fig.align = "center"}
+include_graphics('../results/15_searchtrend.png')
+```
+
+
+## Conclusion and discussion 
