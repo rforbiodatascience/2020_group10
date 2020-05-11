@@ -1,111 +1,111 @@
-case_id	confirmed	case_type
-1000001	98	call center
-1000002	20	church
-1000003	40	church
-1000004	14	hospital
-1000005	13	other
-1000006	10	community center
-1000007	7	other
-1000008	7	church
-1000009	200	overseas
-1000010	27	contact with patient
-1000011	27	other
-1100001	39	church
-1100002	12	church
-1100003	5	other
-1100004	6	church
-1100005	4	other
-1100006	1	hospital
-1100007	12	overseas
-1100008	18	contact with patient
-1100009	31	other
-1200001	4508	church
-1200002	185	hospital
-1200003	126	hospital
-1200004	98	hospital
-1200005	35	hospital
-1200006	2	hospital
-1200007	12	overseas
-1200008	919	contact with patient
-1200009	715	other
-1300001	9	church
-1300002	11	overseas
-1300003	1	contact with patient
-1300004	0	other
-1400001	20	call center
-1400002	2	church
-1400003	31	overseas
-1400004	5	contact with patient
-1400005	4	other
-1500001	3	other
-1500002	2	church
-1500003	2	lab
-1500004	9	overseas
-1500005	8	contact with patient
-1500006	9	other
-1600001	16	church
-1600002	9	overseas
-1600003	4	contact with patient
-1600004	7	other
-1700001	30	other
-1700002	8	gym
-1700003	1	church
-1700004	3	overseas
-1700005	3	contact with patient
-1700006	1	other
-2000001	72	church
-2000002	48	call center
-2000003	35	hospital
-2000004	29	church
-2000005	22	hospital
-2000006	10	church
-2000007	125	overseas
-2000008	62	contact with patient
-2000009	44	other
-3000001	17	church
-3000002	6	hospital
-3000003	3	other
-3000004	10	overseas
-3000005	0	contact with patient
-3000006	9	other
-4000001	6	church
-4000002	11	other
-4000003	5	overseas
-4000004	6	contact with patient
-4000005	8	other
-4100001	103	gym
-4100002	9	lab
-4100003	8	overseas
-4100004	1	contact with patient
-4100005	9	other
-5000001	1	church
-5000002	7	overseas
-5000003	5	other
-5100001	1	church
-5100002	7	overseas
-5100003	2	contact with patient
-5100004	1	other
-6000001	566	church
-6000002	120	hospital
-6000003	68	nursing home
-6000004	49	overseas
-6000005	36	other
-6000006	61	nursing home
-6000007	17	other
-6000008	16	community center
-6000009	9	overseas
-6000010	191	contact with patient
-6000011	133	other
-6100001	32	church
-6100002	10	church
-6100003	8	other
-6100004	8	other
-6100005	7	hospital
-6100006	7	other
-6100007	2	church
-6100008	13	overseas
-6100009	6	contact with patient
-6100010	18	other
-7000001	7	overseas
-7000002	0	contact with patient
-7000003	4	other
+confirmed	case_type
+98	call center
+20	church
+40	church
+14	hospital
+13	other
+10	community center
+7	other
+7	church
+200	overseas
+27	contact with patient
+27	other
+39	church
+12	church
+5	other
+6	church
+4	other
+1	hospital
+12	overseas
+18	contact with patient
+31	other
+4508	church
+185	hospital
+126	hospital
+98	hospital
+35	hospital
+2	hospital
+12	overseas
+919	contact with patient
+715	other
+9	church
+11	overseas
+1	contact with patient
+0	other
+20	call center
+2	church
+31	overseas
+5	contact with patient
+4	other
+3	other
+2	church
+2	lab
+9	overseas
+8	contact with patient
+9	other
+16	church
+9	overseas
+4	contact with patient
+7	other
+30	other
+8	gym
+1	church
+3	overseas
+3	contact with patient
+1	other
+72	church
+48	call center
+35	hospital
+29	church
+22	hospital
+10	church
+125	overseas
+62	contact with patient
+44	other
+17	church
+6	hospital
+3	other
+10	overseas
+0	contact with patient
+9	other
+6	church
+11	other
+5	overseas
+6	contact with patient
+8	other
+103	gym
+9	lab
+8	overseas
+1	contact with patient
+9	other
+1	church
+7	overseas
+5	other
+1	church
+7	overseas
+2	contact with patient
+1	other
+566	church
+120	hospital
+68	nursing home
+49	overseas
+36	other
+61	nursing home
+17	other
+16	community center
+9	overseas
+191	contact with patient
+133	other
+32	church
+10	church
+8	other
+8	other
+7	hospital
+7	other
+2	church
+13	overseas
+6	contact with patient
+18	other
+7	overseas
+0	contact with patient
+4	other

@@ -2,8 +2,10 @@
 rm(list = ls())
 
 # Load libraries ----------------------------------------------------------
-library("tidyverse")
-library("ggraph")
+library(tidyverse)
+library(ggraph)
+library(igraph)
+library(tidygraph)
 
 # Load functions ----------------------------------------------------------
 source(file = "R/99_project_functions.R")

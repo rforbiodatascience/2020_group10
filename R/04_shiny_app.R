@@ -7,10 +7,10 @@ library("shiny")
 library("geosphere")
 
 # Define functions ------------------------------------------------------------------------------
-source(file = "../R/99_proj_func.R")
+source(file = "../R/99_project_functions.R")
 
 # Load data ------------------------------------------------------------------------------
-patient_route_df <- read_tsv(file = "../data/patient_route_data_clean.tsv")
+patient_df <- read_tsv(file = "../data/patient_data_augmented.tsv")
 
 # Shiny App ------------------------------------------------------------------------------
 options(shiny.sanitize.errors = TRUE)
@@ -32,7 +32,7 @@ server <- shinyServer(function(input, output, session){
       pluck("longitude")
     
     # Filter by selected date
-    distances <- patient_route_df %>% 
+    distances <- patient_df %>% 
       select(date, latitude, longitude) %>% 
       filter(date == as.Date(input_date)) %>%
       drop_na()

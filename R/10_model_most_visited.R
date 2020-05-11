@@ -11,32 +11,32 @@ source(file = "R/99_project_functions.R")
 patient_df <- read_tsv("data/patient_data_augmented.tsv")
 
 # Filter the data------------------------------------------------------------------------------
-patient_df <- patient_df %>% 
-  group_by(type) %>% 
-  drop_na()
+patient_df <- patient_df %>%
+  group_by(type) %>%
+  drop_na() %>% 
+  summarise(count = n()) %>%
+  arrange(count)
 
 # Visualize the data------------------------------------------------------------------------------
 
-mvp_plot <- ggplot(
-  patient_df,
-  aes (x= type)
+mvp_plot <- patient_df %>%
+  ggplot(aes(x = reorder(type, count), y = count, fill = type)) +
+  geom_bar(stat = "identity") +
+  theme(
+    axis.text.x = element_text(size = 10, angle = 90, hjust=0.95, vjust=0.25),
+    legend.position = "none"
   ) +
-  geom_bar(
-    fill= heat.colors(5)
-    ) +
-  coord_flip() +
   labs(
-    title = "Most visited places", 
-       y = "Number of patients", 
-       x = "Place", 
-       caption ="Data from Korea Centers for Disease Control & Prevention (2020)"
-    ) 
+    title = "Most visited places",
+    y = "Number of patients",
+    x = "Place",
+    caption = "Data from Korea Centers for Disease Control & Prevention (2020)"
+  )
 
 # Save the plot------------------------------------------------------------------------------
 ggsave(
-  filename = "results/10_most_visited_places.png", 
-  width = 8, 
-  height = 8, 
-  mvp_plot)
-
-  
+  filename = "results/10_most_visited_places.png",
+  width = 8,
+  height = 8,
+  mvp_plot
+)

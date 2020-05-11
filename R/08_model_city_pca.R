@@ -15,21 +15,8 @@ patient_df <- read_tsv("data/patient_data_augmented.tsv")
 
 # Wrangle data ------------------------------------------------------------
 
-# Get city confirmed cases using patient dataframe
-confirmed_cases <- patient_df %>%
-  group_by(city_patient_info) %>%
-  distinct(patient_id, .keep_all = TRUE) %>%
-  rename("city" = city_patient_info) %>%
-  summarise(confirmed = length(confirmed_date))
-
-# Join city confirmed cases to city regional data
-city_conf_df <- confirmed_cases %>%
-  full_join(city_df, by = "city") %>%
-  mutate(confirmed = replace_na(confirmed, 0)) %>%
-  drop_na()
-
 # Quantile of confirmed cases
-q_conf <- city_conf_df %>% 
+q_conf <- city_df %>% 
   select(confirmed) %>% 
   map(quantile)
 
@@ -39,7 +26,7 @@ q_conf <- q_conf %>%
   pluck("values")
 
 # Classify confirmed cases into 4 quantile classes
-city_conf_df <- city_conf_df %>%
+city_df <- city_df %>%
   mutate(class = case_when(
     confirmed >= q_conf[1] & confirmed <= q_conf[2] ~ "1. None",
     confirmed >= q_conf[2] & confirmed <= q_conf[3] ~ "2. Low",
@@ -49,13 +36,13 @@ city_conf_df <- city_conf_df %>%
   ))
 
 # Apply PCA
-city_conf_pca <- city_conf_df %>%
+city_conf_pca <- city_df %>%
   select(elementary_school_count:nursing_home_count) %>%
   prcomp(center = TRUE, scale. = TRUE)
 
 # Augment the PCA with columns from before PCA
 city_conf_pca_aug <- city_conf_pca %>%
-  broom::augment(city_conf_df)
+  broom::augment(city_df)
 
 # Get PCA eigenvectors
 pca_vectors <- city_conf_pca %>%

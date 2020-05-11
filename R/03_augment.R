@@ -30,7 +30,7 @@ case_df <- case_df %>%
 
 # Remove unnecessary columns
 case_df <- case_df %>%
-  select(case_id, confirmed, case_type)
+  select(confirmed, case_type)
 
 # Patient augment
 patient_info_df <- read_tsv("data/patient_info_data_clean.tsv")
@@ -69,6 +69,9 @@ patient_df <- patient_df %>%
   mutate(state_date = str_replace_all(state_date, "[_NA]", "")) %>%
   mutate(state_date = ifelse(state_date %in% "", NA, state_date))
 
+patient_df <- patient_df %>%
+  select(-c(global_num, country, symptom_onset_date, age))
+
 # Time augment
 time_df           <- read_tsv("data/time_data_clean.tsv")
 time_age_df       <- read_tsv("data/time_age_data_clean.tsv")
@@ -92,19 +95,42 @@ time_df <- time_df %>%
   ) %>%
   full_join(search_trend_df, by = "date")
 
-# Removing unwanted columns (time*4)
+# Removing unwanted columns
 time_df <- time_df %>%
-  select(-time, -time_time_age, -time_time_gender, -time_time_province)
+  select(-c(
+    time,
+    time_time_age,
+    time_time_gender,
+    time_time_province,
+    released,
+    province,
+    confirmed_time_province,
+    released_time_province,
+    deceased_time_province,
+    cold,
+    flu,
+    pneumonia
+  ))
 
 # Region augment
 city_df <- read_tsv("data/city_data_clean.tsv")
 
-city <- city_df %>% 
-  select(-code, -latitude, -longitude, -province)
+# Removing unwanted columns
+city_df <- city_df %>% 
+  select(-c(code, latitude, longitude, province))
 
-# TODO
-# -	Add joining of patient data and city_df together.
-# -	Update PCA with new city_df
+# Get city confirmed cases using patient dataframe
+confirmed_cases <- patient_df %>%
+  group_by(city_patient_info) %>%
+  distinct(patient_id, .keep_all = TRUE) %>%
+  rename("city" = city_patient_info) %>%
+  summarise(confirmed = length(confirmed_date))
+
+# Join city confirmed cases to city regional data
+city_df <- confirmed_cases %>%
+  full_join(city_df, by = "city") %>%
+  mutate(confirmed = replace_na(confirmed, 0)) %>%
+  drop_na()
 
 # Write data to file --------------------------------------------
 
@@ -119,5 +145,3 @@ write_tsv(time_df, "data/time_data_augmented.tsv")
 
 # Write to disk
 write_tsv(city_df, "data/city_data_augmented.tsv")
-
-

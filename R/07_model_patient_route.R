@@ -104,10 +104,10 @@ interactive_sk_cases <- sk_cases_number %>%
   )
 
 # Save interactive map ------------------------------------------------------------------------------
-#htmlwidgets::saveWidget(
-#  interactive_sk_cases,
-#  "results/interactive_province_patient_route.html"
-#)
+htmlwidgets::saveWidget(
+  interactive_sk_cases,
+  str_c(getwd(), "/results/interactive_province_patient_route.html")
+)
 
 # Save the plots ------------------------------------------------------------------------------
 ggsave(

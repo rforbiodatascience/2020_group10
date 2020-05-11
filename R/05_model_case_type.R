@@ -22,16 +22,12 @@ case_sum <- case_df %>%
 # Visualization ---------------------------------------------------------------
 
 case_plot <- case_sum %>%
-  ggplot(mapping = aes(
-    x = reorder(case_type, sum),
-    y = sum,
-    fill = case_type
-  )) +
+  ggplot(aes(x = reorder(case_type, sum), y = sum, fill = case_type)) +
   geom_bar(stat = "identity") +
   geom_text(aes(label = sum), vjust = -0.5) +
   ylim(0, 5800) +
   theme(
-    axis.text.x = element_text(size = 10, angle = 65, vjust = 0.5),
+    axis.text.x = element_text(size = 10, angle = 90, hjust = 0.95, vjust = 0.2),
     legend.position = "none"
   ) +
   labs(
