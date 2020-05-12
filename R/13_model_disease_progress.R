@@ -54,7 +54,7 @@ model_summary <- time_df_to_model %>%
   group_by(key) %>%
   nest() %>%
   mutate(model = map(data, sigm_model)) %>% 
-  mutate(tidied = map(model, tidy)) %>% 
+  mutate(tidied = map(model, broom::tidy)) %>% 
   unnest(tidied) 
 
 features_to_plot <- model_summary %>% 
@@ -66,7 +66,7 @@ features_to_plot <- model_summary %>%
 fitted_data <- time_df_to_model %>% 
   group_by(key) %>% 
   do(fit = sigm_model(.)) %>%
-  augment(fit)
+  broom::augment(fit)
 
 
 # Data visualization ------------------------------------------------------------------------------
