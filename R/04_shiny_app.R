@@ -119,12 +119,13 @@ ui <- shinyUI(pageWithSidebar(
       dateInput("location_date", h3("Date at location"), value="2020-01-20"),
       
       # Input altitude and longitude parameter
-      numericInput("latitude", h3("Latitude"), value=0),
-      numericInput("longitude", h3("Longitude"), value=0)
+      numericInput("latitude", h3("Latitude"), value=37.31),
+      numericInput("longitude", h3("Longitude"), value=127.1)
     ),
     mainPanel(
       h3(textOutput("distText")),
-      leafletOutput("Map", height = 500)
+      leafletOutput("Map", height = 500),
+      
     )
   )
 )
