@@ -57,10 +57,9 @@ y_test <- nn_dat %>%
 
 # Define model and compile -------------------------------------------------
 
-# 2 hidden layers, with 5 and 4 neurons
-
+# 1 hidden layer; 9 neurons
 model <- keras_model_sequential() %>%
-  layer_dense(units = 5, activation = "relu", input_shape = 7) %>%
+  layer_dense(units = 9, activation = "relu", input_shape = 7) %>%
   layer_dense(units = 4, activation = "softmax")
 
 model %>%

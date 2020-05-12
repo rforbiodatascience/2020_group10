@@ -20,7 +20,7 @@ git clone https://github.com/rforbiodatascience/2020_group10.git
 
 3. Run **R/00_doit.R** to compile the project. A presentation will be available at /doc/final_presentation.rmd
 
-4. Run 04_shiny_app.R to to start the shiny app
+4. Run **04_shiny_app.R** to to start the shiny app
 
 ## Requirements
 
