@@ -1,11 +1,12 @@
 ---
-title: "Revealing the success behind South Korea's approach to COVID-19"
+title: <font size="10"> Revealing the success behind South Korea's approach to COVID-19 </font>
 subtitle: "22100 - R for Bio Data Science"
 author: "Abril Diosdado Hernandez, Amanda Gammelby Qvesel, Erik Nicolas Kiehl, Viktor Törnblom"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
   ioslides_presentation:
     widescreen: true
+    smaller: true
    
 ---
 ```{r setup, include=FALSE}
@@ -15,17 +16,21 @@ knitr::opts_chunk$set(echo = FALSE)
 ## **Introduction**
 
 ### *South Korea during COVID-19*
-South Korea is a one of the world's most densely populated countries with a population of 51.64 million people.
+South Korea is one of the world's most densely populated countries with 51.64 million people.
 
-The first case of COVID-19 in South Korea was confirmed on the 20th of January 2020.
+The first case of COVID-19 in this country was confirmed on the 20th of January 2020. Since then, there has only been 256 deaths caused by COVID-19.
 
-Since then there has only been 256 deaths caused by COVID-19.
-
-(Insert one of our graphs showing no of cases?)
 
 ## Research questions
-* What measures taken by the South Korean government have been effective to contain the outbreak?
-*
+* Have the measures taken by the South Korean government been effective to contain the outbreak?
+
+* Is there any correlation between the place of infection and severity of the disease?
+
+* Does gender or age predispose for getting the disease or for severe outcome?
+
+* Is it possible to predict the outcome of the infection?
+
+* Are there any characteristic features in the high-prevalence disease areas?
 
 
 
@@ -44,31 +49,72 @@ include_graphics('images/workflow.png')
 
 ***
 ### Packages used
+Project core:
+
 - [Tidyverse](https://github.com/tidyverse/tidyverse)
+
+Transmission:
+
 - [igraph](https://github.com/igraph/igraph)
+
+Map: 
+
 - [viridis](https://github.com/sjmgarnier/viridis)    
 - [maptools](https://github.com/RPTools/maptool)
 - [gpclib](https://github.com/rdpeng/gpclib)
 - [rgdal](https://github.com/cran/rgdal/tree/master/inst)
 - [plotly](https://github.com/plotly)  
 
+# Shiny app
+geosphere
+shiny
+
+
+
 ***
 
 ### Data cleaning
 - Get rid of unnecessary data
+- Remove non valid data
+- Converting data into a tidy format
+
+* filter(), mutate ()
 
 
 ***
 ### Data augmenting
+
 - Join tibbles
 - Create new variables
+- Transform
+- Subset the data
 
+* full_join(), mutate(), unite ()
+
+***
 Four main data frames were created regarding:
 
-- patient
+<div class="green">
+- patient (patient_info_df + patient_route_df)
+</div>
+<div class="red">
 - case
+</div>
+<div class="yellow">
 - city
-- time
+</div>
+<div class="blue">
+- time (time_df, time_age_df, time_province_df)
+</div>
+<div class="grey">
+- serchtrend
+</div>
+
+SeoulFloating and Weather were not used
+
+Problem: our data set repeats the same name for come columns.
+
+Solution: added a prefix
 
 
 ## Results
@@ -80,44 +126,80 @@ include_graphics(c('../results/10_most_visited_places.png', '../results/05_model
 
 ***
 ### PCA
-```{r out.width = "50%", fig.align = "center"}
+```{r out.width = "55%", fig.align = "center"}
 include_graphics('../results/08_model_pca.png')
 ```
 
 ***
 ### PCA - variance
-```{r out.width = "50%", fig.align = "center"}
+```{r out.width = "55%", fig.align = "center"}
 include_graphics('../results/08_model_pca_variance.png')
 ```
 
 ***
 ### Correlation matrix
-```{r out.width = "50%", fig.align = "center"}
+```{r out.width = "70%", fig.align = "center"}
 include_graphics('../results/06_model_cor.png')
 ```
 
 ***
 ### City clustering
-```{r out.width = "80%", fig.align = "center"}
+```{r out.width = "85%", fig.align = "center"}
 include_graphics('../results/11_city_clustering.png')
 ```
 
 ***
+### Case number (map) {.smaller}
+```{r out.width = "68%", fig.align = "center"}
+include_graphics('../results/07_cases_number.png')
+```
+
+***
+### Disease progess
+```{r out.width = "65%", fig.align = "center"}
+include_graphics('../results/13_disease_progress.png')
+```
+
+***
+### Disease progess logistic modelling
+```{r out.width = "65%", fig.align = "center"}
+include_graphics('../results/13_logistic_model.png')
+```
+
+***
+### Deceased and confirmed by gender
+```{r out.width = "50%"}
+include_graphics(c('../results/13_confirmed_gender.png', '../results/13_deceased_gender.png'))
+```
+
+***
+### Deceased by age
+```{r out.width = "65%", fig.align = "center"}
+include_graphics('../results/13_disease_age.png')
+```
+
+***
 ### Case fatility rate {.smaller}
-using nest() {.smaller}
+using nest()
 ```{r out.width = "50%", fig.align = "center"}
 include_graphics('../results/12_age_deceased_ratio.png')
 ```
 
 ***
+### Case fatility rate
+```{r out.width = "70%", fig.align = "center"}
+include_graphics('../results/14_contact_exposure.png')
+```
+
+***
 ### Transmission
-```{r out.width = "60%", fig.align = "center"}
+```{r out.width = "70%", fig.align = "center"}
 include_graphics('../results/16_transmission.png')
 ```
 
 ***
 ### Superspreaders
-```{r out.width = "50%", fig.align = "center"}
+```{r out.width = "70%", fig.align = "center"}
 include_graphics('../results/17_subset_transmission.png')
 ```
 
@@ -129,3 +211,12 @@ include_graphics('../results/15_searchtrend.png')
 
 
 ## Conclusion and discussion 
+
+
+## Problems and solutions
+
+Using different packages will mask some functions.
+ 
+ - detach packages after each R cript.
+ 
+
