@@ -7,6 +7,7 @@ A data analasis of the COVID-19 South Korean dataset. The analysis investigates 
 ## Dataset
 
 [Korean COVID-19 dataset](https://www.kaggle.com/kimjihoo/coronavirusdataset)
+Last downloaded 07-04-2020
 
 ## Install and run
 
