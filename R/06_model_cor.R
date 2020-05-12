@@ -68,7 +68,7 @@ correlation_heatmap <- city_cor_df %>%
 
 # Write plots and data to file --------------------------------------------
 ggsave(
-  filename = "results/06_model_cor.png",
+  filename = "results/06_cor_heatmap.png",
   plot = correlation_heatmap,
   width = 10,
   height = 8

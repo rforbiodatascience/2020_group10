@@ -17,7 +17,7 @@ time_df <- time_df %>%
   filter(date > ymd(20200120))
 
 # Overall disease progress
-disease_progress <- time_df %>% 
+confirmed_progress <- time_df %>% 
   select(c(date, sex, test, negative, confirmed, deceased)) %>% 
   pivot_wider(values_fn = list(confirmed = summary_fun),  names_from= sex) %>% 
   pivot_longer(c(test, confirmed, negative, deceased), names_to = "key", values_to = "value")
@@ -36,7 +36,7 @@ deceased_gender <- time_df %>%
   drop_na()
 
 # Stratification by age
-disease_age <- time_df %>%
+confirmed_age <- time_df %>%
   select(c(date, age, confirmed_time_age)) %>%
   group_by(date, confirmed_time_age, age) %>%
   summarise() %>%
@@ -44,7 +44,7 @@ disease_age <- time_df %>%
 
 # Logistic modelling
 # Extract relevant data
-time_df_to_model <- disease_progress %>% 
+time_df_to_model <- confirmed_progress %>% 
   filter(key == "confirmed" | key == "deceased") %>%
   mutate(date = date - as.Date("2020-01-01")) %>%
   mutate(date = as.integer(date)) %>% 
@@ -73,7 +73,7 @@ fitted_data <- time_df_to_model %>%
 # Data visualization ------------------------------------------------------------------------------
 
 # Disease progress
-disease_progress_plot <- disease_progress %>%
+confirmed_progress_plot <- confirmed_progress %>%
   filter(key != "deceased") %>% 
   ggplot(
     aes(x = date, y = value, colour = key)
@@ -139,7 +139,7 @@ deceased_gender_plot <- deceased_gender %>%
 
 
 # Stratified by age
-disease_age_plot <- disease_age %>%
+confirmed_age_plot <- confirmed_age %>%
   ggplot(
     aes(x = date, y = confirmed_time_age, color = age)
   ) +
@@ -181,7 +181,7 @@ logistic_plot <- fitted_data %>%
 # Save the plots ------------------------------------------------------------------------------
 ggsave(
   filename = "results/13_disease_progress.png",
-  plot = disease_progress_plot,
+  plot = confirmed_progress_plot,
   height = 8,
   width = 10
 )
@@ -199,7 +199,7 @@ ggsave(
 )
 ggsave(
   filename = "results/13_disease_age.png",
-  plot = disease_age_plot,
+  plot = confirmed_age_plot,
   height = 8,
   width = 10
 )
@@ -212,7 +212,7 @@ ggsave(
 
 # Save the data frame ------------------------------------------------------------------------------
 write_tsv(
-  x = disease_progress,
+  x = confirmed_progress,
   path = "data/wrangled_disease_progres.tsv"
 )
 write_tsv(
@@ -220,7 +220,7 @@ write_tsv(
   path = "data/disease_gender.tsv"
 )
 write_tsv(
-  x = disease_age,
+  x = confirmed_age,
   path = "data/disease_age_plot.tsv"
 )
 

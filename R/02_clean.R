@@ -95,7 +95,8 @@ city_df <- region_df %>%
 
 # Remove rows with same cities as province, unless the province only exist once
 city_df <- city_df %>%
-  filter(province != city & province != "Korea" | count < 2) %>%
+  filter(province != city | count < 2) %>%
+  filter(province != "Korea") %>% 
   select(-count)
 
 # Add prefix to cities that are named same as province
@@ -119,5 +120,4 @@ write_tsv(patient_info_df, "data/patient_info_data_clean.tsv")
 
 write_tsv(search_trend_df, "data/search_trend_data_clean.tsv")
 
-write_tsv(province_df, "data/province_data_clean.tsv")
 write_tsv(city_df, "data/city_data_clean.tsv")

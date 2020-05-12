@@ -39,7 +39,7 @@ case_plot <- case_sum %>%
 
 # Write plot and data ------------------------------------------------------------------------------
 
-ggsave(filename = "results/05_model_case_type.png", 
+ggsave(filename = "results/05_case_type.png", 
        width = 10,
        height = 5,
        case_plot)

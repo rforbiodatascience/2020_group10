@@ -11,7 +11,6 @@ source(file = "R/99_project_functions.R")
 
 # Load data ---------------------------------------------------------------
 city_df <- read_tsv("data/city_data_augmented.tsv")
-patient_df <- read_tsv("data/patient_data_augmented.tsv")
 
 # Wrangle data ------------------------------------------------------------
 
@@ -49,7 +48,14 @@ pca_vectors <- city_conf_pca %>%
   pluck("rotation") %>%
   data.frame(variables = rownames(.), .)
 
-city_conf_pca <- city_conf_pca %>% broom::tidy("pcs")
+city_conf_pca <- city_conf_pca %>% 
+  broom::tidy("pcs") %>%
+  mutate(percent_round = round(percent*100, 0))
+
+# Create variance explained vector
+var_explained_vector <- city_conf_pca %>%
+  pluck("percent_round") %>% 
+  as.vector()
 
 # Visualise data ----------------------------------------------------------
 
@@ -95,27 +101,28 @@ pca_plot <- city_conf_pca_aug %>%
     title = "PCA of regional city data in South Korea",
     subtitle = "Classified by the quantile of confirmed cases from each city",
     color = "Confirmed cases",
-    x = "PC1",
-    y = "PC2",
+    x = str_c("PC1 (", var_explained_vector[1], "%)"),
+    y = str_c("PC2 (", var_explained_vector[2], "%)"),
     caption = "Data from Korea Centers for Disease Control & Prevention (2020)"
   )
 
 # Write plots and data to file --------------------------------------------
 ggsave(
-  filename = "results/08_model_pca_variance.png",
+  filename = "results/08_city_pca_variance.png",
   plot = pca_var,
   width = 8,
   height = 8,
 )
 
 ggsave(
-  filename = "results/08_model_pca.png",
+  filename = "results/08_city_pca.png",
   plot = pca_plot,
   width = 8,
   height = 8,
 )
 
 write_tsv(city_conf_pca_aug, "data/wrangled_city_pca.tsv")
+write_tsv(city_conf_pca, "data/wrangled_city_pca_explained.tsv")
 write_tsv(pca_vectors, "data/wrangled_pca_vectors.tsv")
 
 # Detach external packages ---------------------------------------------------------------------

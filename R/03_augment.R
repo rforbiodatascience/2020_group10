@@ -3,6 +3,7 @@ rm(list = ls())
 
 # Load libraries --------------------------------------------------------------------------------
 library(tidyverse)
+library(lubridate)
 
 # Define functions ------------------------------------------------------------------------------
 source(file = "R/99_project_functions.R")
@@ -23,6 +24,7 @@ city_df <- read_tsv("data/city_data_clean.tsv")
 
 # Augment case dataframe ------------------------------------------------------------------------
 
+# Classify names on infection case
 case_df <- case_df %>%
   mutate(case_type = case_when(
     str_detect(infection_case, "Hospital") ~ "hospital",
@@ -37,7 +39,7 @@ case_df <- case_df %>%
     str_detect(infection_case, "Community Center") ~ "community center",
     str_detect(infection_case, "other") ~ "other",
     )) %>%
-  mutate(case_type = replace(case_type, is.na(case_type), "other"))
+  mutate(case_type = replace_na(case_type, "other"))
 
 # Remove unnecessary columns
 case_df <- case_df %>%
@@ -45,17 +47,17 @@ case_df <- case_df %>%
 
 # Augment patient dataframes --------------------------------------------------------------------
 
-# Joining the the two patient data frames
-patient_df <- patient_info_df %>%
-  full_join(patient_route_df, by = "patient_id", suffix = c("_patient_info", "_patient_route"))
-
 # Remove unnecessary columns
+patient_df <- patient_info_df %>%
+  select(-c(global_num, country, symptom_onset_date, sex))
+
+# Joining the the two patient data frames
 patient_df <- patient_df %>%
-  select(-sex) %>%
+  full_join(patient_route_df, by = "patient_id", suffix = c("_patient_info", "_patient_route"))
   
 # Add age column and one more column to subset the ages into age_group
 patient_df <- patient_df %>%
-  mutate(age = 2020 - birth_year) %>%
+  mutate(age = year(today()) - birth_year) %>%
   mutate(age_group = case_when(
     age < 10 ~ "0s",
     age < 20 ~ "10s",
@@ -70,16 +72,18 @@ patient_df <- patient_df %>%
     age >= 100 ~ "100s"
   )) %>%
   select(-birth_year)
-  
-# Combine 'released_date' and 'deceased_date' and use state column
-# Unite merges NAs as str and have to be converted back to correct type
-patient_df <- patient_df %>%
-  unite("state_date", released_date : deceased_date, remove = TRUE) %>%
-  mutate(state_date = str_replace_all(state_date, "[_NA]", "")) %>%
-  mutate(state_date = ifelse(state_date %in% "", NA, state_date))
 
+# Combine 'released_date' and 'deceased_date' to state column
 patient_df <- patient_df %>%
-  select(-c(global_num, country, symptom_onset_date, age))
+  unite("state_date", released_date : deceased_date, remove = TRUE)
+
+# Unite concatenates NA and dates. NA are removed and corrected
+patient_df <- patient_df %>%
+  mutate(state_date = str_replace_all(state_date, "[_NA]", "")) %>%
+  mutate(state_date = case_when(
+    state_date == "" ~ as.Date(NA),
+    TRUE ~ as.Date(state_date)
+  ))
 
 # Augment time dataframes -----------------------------------------------------------------------
 
