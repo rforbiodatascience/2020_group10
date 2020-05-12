@@ -13,6 +13,7 @@ source(file = "R/99_project_functions.R")
 
 # Load data ---------------------------------------------------------------
 city_conf_pca_aug <- read_tsv("data/wrangled_city_pca.tsv")
+city_conf_pca_explained <- read_tsv("data/wrangled_city_pca_explained.tsv")
 
 # Wrangle data ------------------------------------------------------------
 set.seed(5)
@@ -37,6 +38,10 @@ city_conf_kmean_pca_aug <- city_conf_kmean_pca %>%
   broom::augment(city_conf_kmean_orig_aug) %>%
   rename(cluster_pca = .cluster)
 
+var_explained_vector <- city_conf_pca_explained %>%
+  pluck("percent_round") %>% 
+  as.vector()
+
 # Visualise data ----------------------------------------------------------
 
 # Plot original PCA
@@ -55,8 +60,8 @@ pl1 <- city_conf_kmean_pca_aug %>%
   ) +
   labs(
     title = "Original PCA",
-    x = "PC1",
-    y = "PC2",
+    x = str_c("PC1 (", var_explained_vector[1], "%)"),
+    y = str_c("PC2 (", var_explained_vector[2], "%)"),
     color = "Confirmed cases"
   )
 
@@ -76,8 +81,8 @@ pl2 <- city_conf_kmean_pca_aug %>%
   ) +
   labs(
     title = "K-means clustering using\noriginal variables (k=4)",
-    x = "PC1",
-    y = "PC2",
+    x = str_c("PC1 (", var_explained_vector[1], "%)"),
+    y = str_c("PC2 (", var_explained_vector[2], "%)"),
     color = "Clusters"
   )
 
@@ -97,8 +102,8 @@ pl3 <- city_conf_kmean_pca_aug %>%
   ) +
   labs(
     title = "K-means clustering using\nPC1 and PC2 (k=4)",
-    x = "PC1",
-    y = "PC2",
+    x = str_c("PC1 (", var_explained_vector[1], "%)"),
+    y = str_c("PC2 (", var_explained_vector[2], "%)"),
     color = "Clusters"
   )
 

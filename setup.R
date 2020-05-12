@@ -6,6 +6,7 @@ install.packages("tidyverse")
 # Shiny app
 install.packages("geosphere")
 install.packages("shiny")
+install.packages("leaflet")
 
 # Plotting maps
 install.packages("gpclib")
