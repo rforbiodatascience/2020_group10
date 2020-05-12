@@ -11,6 +11,7 @@ output:
 ---
 ```{r setup, include=FALSE}
 library(knitr)
+library(tidyverse)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 ## **Introduction**
@@ -26,14 +27,15 @@ The first case of COVID-19 in this country was confirmed on the 20th of January 
 
 * Is there any correlation between the place of infection and severity of the disease?
 
-* Does gender or age predispose for getting the disease or for severe outcome?
+* Does gender or age predispose for getting the disease or for a more severe outcome?
 
 * Is it possible to predict the outcome of the infection?
 
 * Are there any characteristic features in the high-prevalence disease areas?
 
+* Can a prediction of the disease confirmation be made based on city features?
 
-
+* Can the epidemic be traced in the South Korea searchtrends? 
 
 ## Materials and methods
 ```{r out.width = "60%", fig.align='center',fig.cap= "COVID-19 dataset from kaggle" }
@@ -65,9 +67,10 @@ Map:
 - [rgdal](https://github.com/cran/rgdal/tree/master/inst)
 - [plotly](https://github.com/plotly)  
 
-# Shiny app
-geosphere
-shiny
+ Shiny app
+- [geosphere](https://github.com/rspatial/geosphere)
+- [shiny](https://github.com/rstudio/shiny)
+- [leaflet](http://rstudio.github.io/leaflet)
 
 
 
@@ -125,90 +128,78 @@ include_graphics(c('../results/10_most_visited_places.png', '../results/05_model
 ```
 
 ***
-### PCA
 ```{r out.width = "55%", fig.align = "center"}
 include_graphics('../results/08_model_pca.png')
 ```
 
 ***
-### PCA - variance
 ```{r out.width = "55%", fig.align = "center"}
 include_graphics('../results/08_model_pca_variance.png')
 ```
 
-***
-### Correlation matrix
-```{r out.width = "70%", fig.align = "center"}
-include_graphics('../results/06_model_cor.png')
-```
+
 
 ***
-### City clustering
-```{r out.width = "85%", fig.align = "center"}
+```{r out.width = "90%", fig.align = "center", message=FALSE}
 include_graphics('../results/11_city_clustering.png')
+cluster_pred <- read_tsv("../data/wrangled_cluster_pred.tsv") %>% 
+  head()
+knitr::kable(cluster_pred, format="html")
 ```
 
 ***
-### Case number (map) {.smaller}
-```{r out.width = "68%", fig.align = "center"}
+```{r out.width = "75%", fig.align = "center"}
 include_graphics('../results/07_cases_number.png')
 ```
 
 ***
-### Disease progess
 ```{r out.width = "65%", fig.align = "center"}
 include_graphics('../results/13_disease_progress.png')
 ```
 
 ***
-### Disease progess logistic modelling
-```{r out.width = "65%", fig.align = "center"}
+```{r out.width = "75%", fig.align = "center"}
 include_graphics('../results/13_logistic_model.png')
 ```
 
 ***
-### Deceased and confirmed by gender
 ```{r out.width = "50%"}
 include_graphics(c('../results/13_confirmed_gender.png', '../results/13_deceased_gender.png'))
 ```
 
 ***
-### Deceased by age
-```{r out.width = "65%", fig.align = "center"}
+```{r out.width = "70%", fig.align = "center"}
 include_graphics('../results/13_disease_age.png')
 ```
 
 ***
-### Case fatility rate {.smaller}
 using nest()
-```{r out.width = "50%", fig.align = "center"}
+```{r out.width = "55%", fig.align = "center"}
 include_graphics('../results/12_age_deceased_ratio.png')
 ```
 
 ***
-### Case fatility rate
-```{r out.width = "70%", fig.align = "center"}
+```{r out.width = "80%", fig.align = "center"}
 include_graphics('../results/14_contact_exposure.png')
 ```
 
 ***
-### Transmission
-```{r out.width = "70%", fig.align = "center"}
+```{r out.width = "90%", fig.align = "center"}
 include_graphics('../results/16_transmission.png')
 ```
 
-***
-### Superspreaders
-```{r out.width = "70%", fig.align = "center"}
-include_graphics('../results/17_subset_transmission.png')
-```
+
 
 ***
-### Search trend 
-```{r out.width = "80%", fig.align = "center"}
+```{r out.width = "100%", fig.align = "center"}
 include_graphics('../results/15_searchtrend.png')
 ```
 
+## ANN 
+
+## Shiny app
+
+https://erik-kiehl.shinyapps.io/shiny_app/
 
 ## Conclusion and discussion 
 
@@ -220,3 +211,14 @@ Using different packages will mask some functions.
  - detach packages after each R cript.
  
 
+***
+### Superspreaders
+```{r out.width = "70%", fig.align = "center"}
+include_graphics('../results/17_subset_transmission.png')
+```
+
+***
+### Correlation matrix
+```{r out.width = "70%", fig.align = "center"}
+include_graphics('../results/06_model_cor.png')
+```
