@@ -19,7 +19,7 @@ options(shiny.sanitize.errors = TRUE)
 # Server sided code
 server <- shinyServer(function(input, output, session){
   output$Map <- renderLeaflet({
-    # Inputs from sidepanel
+    # Load input from sidepanel
     input_date <- input %>% 
       pluck("location_date")
     
@@ -28,7 +28,8 @@ server <- shinyServer(function(input, output, session){
     
     input_longitude <- input %>% 
       pluck("longitude")  
-   
+    
+    # Wrangle data
     distances <- patient_df %>% 
       select(date, latitude, longitude) %>% 
       filter(date == as.Date(input_date)) %>%
@@ -43,14 +44,15 @@ server <- shinyServer(function(input, output, session){
               col = "blue", 
               name = "you")
     
-    map_sk <- pins_to_map %>%
+    # Visualization
+    pins_to_map %>%
       leaflet()  %>%
       addTiles()  %>%
       addMarkers(popup=pins_to_map$name)  %>%
       addCircleMarkers(color = pins_to_map$col) %>%
       addLegend(labels = c("patient","you"), 
                 colors = c("red", "blue"), title = "Risk overview") 
-    map_sk
+    
   })
   # Distance text
   output$distText <- renderText({
