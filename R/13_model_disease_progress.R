@@ -4,6 +4,7 @@ rm(list = ls())
 # Load libraries ------------------------------------------------------------------------------
 library(tidyverse)
 library(lubridate)
+library(broom)
 
 # Define functions ------------------------------------------------------------------------------
 source(file = "R/99_project_functions.R")

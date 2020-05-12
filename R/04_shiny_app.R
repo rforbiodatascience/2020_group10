@@ -51,9 +51,22 @@ server <- shinyServer(function(input, output, session){
       rowwise() %>%
       select(distance) %>%
       min()
-  
+    
+    # Configure risk estimate
+    if (nearest_distance < 1) {
+      estimate <- "You'd better get tested."
+    }
+    else if (nearest_distance < 2) {
+      estimate <- "You're probably safe."
+    }
+    else {
+      estimate <- "No need to worry."
+    }
+    
     # Display message  
-    paste("You have been", round(nearest_distance, 1), " km from a potential risk of COVID-19 exposure")
+    paste("You have been", round(nearest_distance, 1), 
+          " km from a potential risk of COVID-19 exposure.", estimate)
+    
   })
 })
 
