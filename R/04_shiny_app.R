@@ -5,6 +5,7 @@ rm(list = ls())
 library("tidyverse")
 library("shiny")
 library("geosphere")
+library("leaflet")
 
 # Define functions ------------------------------------------------------------------------------
 source(file = "../R/99_project_functions.R")
@@ -17,7 +18,40 @@ options(shiny.sanitize.errors = TRUE)
 
 # Server sided code
 server <- shinyServer(function(input, output, session){
+  output$Map <- renderLeaflet({
+    # Inputs from sidepanel
+    input_date <- input %>% 
+      pluck("location_date")
+    
+    input_latitude <- input %>% 
+      pluck("latitude")
+    
+    input_longitude <- input %>% 
+      pluck("longitude")  
+   
+    distances <- patient_df %>% 
+      select(date, latitude, longitude) %>% 
+      filter(date == as.Date(input_date)) %>%
+      mutate(name = "Patient", 
+             col = "red") %>% 
+      drop_na()
   
+    pins_to_map <- distances %>% 
+      add_row(date = as.Date(input_date), 
+              latitude = input_latitude, 
+              longitude = input_longitude, 
+              col = "blue", 
+              name = "you")
+    
+    map_sk <- pins_to_map %>%
+      leaflet()  %>%
+      addTiles()  %>%
+      addMarkers(popup=pins_to_map$name)  %>%
+      addCircleMarkers(color = pins_to_map$col) %>%
+      addLegend(labels = c("patient","you"), 
+                colors = c("red", "blue"), title = "Risk overview") 
+    map_sk
+  })
   # Distance text
   output$distText <- renderText({
     
@@ -37,6 +71,7 @@ server <- shinyServer(function(input, output, session){
       filter(date == as.Date(input_date)) %>%
       drop_na()
     
+    
     # Calculate distance and convert meters to km's
     distances <- distances %>%
       rowwise() %>%
@@ -44,6 +79,7 @@ server <- shinyServer(function(input, output, session){
         c(longitude, latitude),
         c(input_longitude, input_latitude)
       )/1000)
+    
     
     # Select the closest distance
     nearest_distance <- distances %>%
@@ -87,7 +123,8 @@ ui <- shinyUI(pageWithSidebar(
       numericInput("longitude", h3("Longitude"), value=0)
     ),
     mainPanel(
-      h3(textOutput("distText"))
+      h3(textOutput("distText")),
+      leafletOutput("Map", height = 500)
     )
   )
 )
