@@ -6,6 +6,7 @@ date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
   ioslides_presentation:
     widescreen: true
+   
 ---
 ```{r setup, include=FALSE}
 library(knitr)
@@ -102,11 +103,12 @@ include_graphics('../results/11_city_clustering.png')
 ```
 
 ***
-### Case fatility rate
-using nest()
-```{r out.width = "40%", fig.align = "center"}
+### Case fatility rate {.smaller}
+using nest() {.smaller}
+```{r out.width = "50%", fig.align = "center"}
 include_graphics('../results/12_age_deceased_ratio.png')
 ```
+
 ***
 ### Transmission
 ```{r out.width = "60%", fig.align = "center"}
