@@ -51,7 +51,7 @@ patient_df <- patient_info_df %>%
 
 # Remove unnecessary columns
 patient_df <- patient_df %>%
-  select(-sex) %>%
+  select(-sex)
   
 # Add age column and one more column to subset the ages into age_group
 patient_df <- patient_df %>%

@@ -23,19 +23,15 @@ The first case of COVID-19 in this country was confirmed on the 20th of January 
 
 
 ## Research questions
-* Have the measures taken by the South Korean government been effective to contain the outbreak?
+* How has the epidemic evolved in South Korea?
 
 * Is there any correlation between the place of infection and severity of the disease?
 
-* Does gender or age predispose for getting the disease or for a more severe outcome?
-
-* Is it possible to predict the outcome of the infection?
+* Does any gender or age predispose for getting the disease or for a more severe outcome?
 
 * Are there any characteristic features in the high-prevalence disease areas?
 
-* Can a prediction of the disease confirmation be made based on city features?
-
-* Can the epidemic be traced in the South Korea searchtrends? 
+* Can a prediction of the disease confirmation be made based on the city?
 
 
 ## Materials and methods
@@ -77,16 +73,12 @@ Map:
 
 ***
 
-### Data cleaning
+### Data cleaning & augmenting
 - Get rid of unnecessary data
 - Remove non valid data
 - Converting data into a tidy format
 
 * filter(), mutate ()
-
-
-***
-### Data augmenting
 
 - Join tibbles
 - Create new variables
@@ -137,20 +129,9 @@ include_graphics('../results/13_disease_progress.png')
 ```{r out.width = "75%", fig.align = "center"}
 include_graphics('../results/13_logistic_model.png')
 ```
-
 ***
-```{r out.width = "50%"}
-include_graphics(c('../results/13_confirmed_gender.png', '../results/13_deceased_gender.png'))
-```
-
-***
-```{r out.width = "70%", fig.align = "center"}
-include_graphics('../results/13_disease_age.png')
-```
-***
-using nest()
-```{r out.width = "55%", fig.align = "center"}
-include_graphics('../results/12_age_deceased_ratio.png')
+```{r out.width = "100%", fig.align = "center"}
+include_graphics('../results/15_searchtrend.png')
 ```
 
 ***
@@ -158,11 +139,28 @@ include_graphics('../results/12_age_deceased_ratio.png')
 include_graphics('../results/07_cases_number.png')
 ```
 
+***
+```{r out.width = "70%", fig.align = "center"}
+include_graphics('../results/13_disease_age.png')
+```
+
+***
+```{r out.width = "50%"}
+include_graphics(c('../results/13_confirmed_gender.png', '../results/13_deceased_gender.png'))
+```
+
+***
+using nest()
+```{r out.width = "55%", fig.align = "center"}
+include_graphics('../results/12_age_deceased_ratio.png')
+```
+
 
 ***
 ```{r out.width = "80%", fig.align = "center"}
 include_graphics('../results/14_contact_exposure.png')
 ```
+
 
 ***
 ```{r out.width = "90%", fig.align = "center"}
@@ -173,7 +171,6 @@ include_graphics('../results/16_transmission.png')
 ```{r out.width = "55%", fig.align = "center"}
 include_graphics('../results/08_model_pca.png')
 ```
-
 
 ***
 ```{r out.width = "55%", fig.align = "center"}
@@ -189,13 +186,15 @@ knitr::kable(cluster_pred, format="html")
 ```
 
 ## ANN 
-
-
-
-***
-```{r out.width = "100%", fig.align = "center"}
-include_graphics('../results/15_searchtrend.png')
+```{r}
+ann_pred <- read_tsv("../data/wrangled_ann_pred") %>% 
+  head()
+knitr::kable(ann_pred, format="html")
 ```
+
+
+
+
 
 
 ## Shiny app
@@ -203,9 +202,28 @@ include_graphics('../results/15_searchtrend.png')
 https://erik-kiehl.shinyapps.io/shiny_app/
 
 ## Conclusion and discussion 
+* Confirmed cases is high compared to deaths. 
 
+* One peak (until beginning of April), follows logistic model
 
-## Problems and solutions
+* There’s no correlation between the place of infection and severity of the disease
+
+* Men die but more women are confirmed to be sick. Young people are driving the spread.
+
+* At least from the retrieved data, there is no strong difference.
+
+* People in their 70s and 80s have a higher fatality rage (as expected).
+
+***
+* There are clusters of superspreaders and certain age range can be observed in each. 
+
+* A higher disease prevalence can be observed in bigger cities and those who have nursing homes, which is very different from what can be seen in the countryside, where elderly population ratio and elderly alone present less cases. 
+
+* Accuracy is just above 50 % - better than random with 4 classes.
+
+* Similar performance as kmeans. 
+
+Problems and solutions
 
 Using different packages will mask some functions.
  
