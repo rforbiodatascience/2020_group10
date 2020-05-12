@@ -37,6 +37,7 @@ The first case of COVID-19 in this country was confirmed on the 20th of January 
 
 * Can the epidemic be traced in the South Korea searchtrends? 
 
+
 ## Materials and methods
 ```{r out.width = "60%", fig.align='center',fig.cap= "COVID-19 dataset from kaggle" }
 include_graphics('dataset.png')
@@ -128,31 +129,6 @@ include_graphics(c('../results/10_most_visited_places.png', '../results/05_model
 ```
 
 ***
-```{r out.width = "55%", fig.align = "center"}
-include_graphics('../results/08_model_pca.png')
-```
-
-***
-```{r out.width = "55%", fig.align = "center"}
-include_graphics('../results/08_model_pca_variance.png')
-```
-
-
-
-***
-```{r out.width = "90%", fig.align = "center", message=FALSE}
-include_graphics('../results/11_city_clustering.png')
-cluster_pred <- read_tsv("../data/wrangled_cluster_pred.tsv") %>% 
-  head()
-knitr::kable(cluster_pred, format="html")
-```
-
-***
-```{r out.width = "75%", fig.align = "center"}
-include_graphics('../results/07_cases_number.png')
-```
-
-***
 ```{r out.width = "65%", fig.align = "center"}
 include_graphics('../results/13_disease_progress.png')
 ```
@@ -171,12 +147,17 @@ include_graphics(c('../results/13_confirmed_gender.png', '../results/13_deceased
 ```{r out.width = "70%", fig.align = "center"}
 include_graphics('../results/13_disease_age.png')
 ```
-
 ***
 using nest()
 ```{r out.width = "55%", fig.align = "center"}
 include_graphics('../results/12_age_deceased_ratio.png')
 ```
+
+***
+```{r out.width = "75%", fig.align = "center"}
+include_graphics('../results/07_cases_number.png')
+```
+
 
 ***
 ```{r out.width = "80%", fig.align = "center"}
@@ -188,6 +169,27 @@ include_graphics('../results/14_contact_exposure.png')
 include_graphics('../results/16_transmission.png')
 ```
 
+***
+```{r out.width = "55%", fig.align = "center"}
+include_graphics('../results/08_model_pca.png')
+```
+
+
+***
+```{r out.width = "55%", fig.align = "center"}
+include_graphics('../results/08_model_pca_variance.png')
+```
+
+***
+```{r out.width = "90%", fig.align = "center", message=FALSE}
+include_graphics('../results/11_city_clustering.png')
+cluster_pred <- read_tsv("../data/wrangled_cluster_pred.tsv") %>% 
+  head()
+knitr::kable(cluster_pred, format="html")
+```
+
+## ANN 
+
 
 
 ***
@@ -195,7 +197,6 @@ include_graphics('../results/16_transmission.png')
 include_graphics('../results/15_searchtrend.png')
 ```
 
-## ANN 
 
 ## Shiny app
 
