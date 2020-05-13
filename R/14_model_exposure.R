@@ -46,6 +46,13 @@ infection_case_df <- infection_case_df %>%
 
 # Visualise data ----------------------------------------------------------
 
+# Create labels
+label_names <- c(
+  "isolated" = "Days in isolation since confimation for isolatated patients",
+  "released" = "Days in isolation for released patients"
+)
+
+
 # Plot the data
 exposure_plot <- infection_case_df %>% 
   ggplot(aes(x = infection_case, y = average_duration, fill = age_group)) +
@@ -54,11 +61,12 @@ exposure_plot <- infection_case_df %>%
     width = .9, size = 0.4,
     position = position_dodge2(width = 0.9, preserve = "single")
   ) +
-  facet_wrap(~state, nrow = 2) +
+  facet_wrap(~state, nrow = 2, labeller = as_labeller(label_names)) +
   theme_group10 +
+  theme(strip.text.x = element_text(size = 8),
+        plot.title = element_text(size = 23)) +
   labs(
     title = "Duration of disease for COVID-19 patients",
-    subtitle = "Days in from isolation since confimation for isolatated patients (panel 1) and time from confirmed to released (panel 2). \nStratified on age group and infection case.",
     color = "Age group",
     caption = "Data from Korea Centers for Disease Control & Prevention (2020)"
   ) +
@@ -70,8 +78,8 @@ exposure_plot <- infection_case_df %>%
 ggsave(
   filename = "results/14_contact_exposure.png",
   plot = exposure_plot,
-  height = 8,
-  width = 10
+  height = 6,
+  width = 8
 )
 
 write_tsv(x = infection_case_df, path = "data/wrangled_exposure.tsv")
