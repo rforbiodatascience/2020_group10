@@ -36,7 +36,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 * Does any gender or age predispose for getting the disease or for a more severe outcome?
 
-* Can characteristics city features be used to predict the burden of disease?
+* Can characteristic city features be used to predict the burden of disease?
 
 
 ## Materials and methods
@@ -216,10 +216,10 @@ include_graphics('../results/16_transmission.png')
 ***
 
 <h3 style="margin-top: -50px">
-Can characteristics city features be used to predict the burden of disease?
+Can characteristic city features be used to predict the burden of disease?
 </h3>
-```{r out.width = "90%", fig.align = "center", message=FALSE}
-include_graphics('../results/11_city_clustering.png')
+```{r out.width = c("50%","50%"), fig.hold = "hold", message=FALSE}
+include_graphics(c('../results/08_city_pca.png', '../results/11_city_clustering.png'))
 
 cluster_pred <- read_tsv("../data/wrangled_cluster_pred.tsv") %>% 
   mutate(score_org = str_c(round(score_org*100, 1), "%"),
@@ -231,7 +231,7 @@ knitr::kable(cluster_pred, format="html")
 ***
 
 <h3 style="margin-top: -50px">
-Can characteristics city features be used to predict the burden of disease?
+Can characteristic city features be used to predict the burden of disease?
 </h3>
 
 **ANN Network**

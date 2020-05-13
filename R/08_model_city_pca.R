@@ -68,7 +68,7 @@ pca_var <- city_conf_pca %>%
   scale_x_continuous("PC", breaks = 1:10) +
   theme_minimal() +
   labs(
-    title = "Explained variance of PCA\nfrom regional city data in South Korea",
+    title = "Explained variance of PCA\nfrom regional city data",
     x = "PC",
     y = "Variance explained (%)"
   ) +
@@ -94,12 +94,12 @@ pca_plot <- city_conf_pca_aug %>%
   geom_label_repel(
     data = pca_vectors,
     aes(x = PC1 * 5, y = PC2 * 5, label = rowname),
-    size = 2,
+    size = 5,
     inherit.aes = FALSE
   ) +
   theme_group10 +
   labs(
-    title = "PCA of regional city data in South Korea",
+    title = "PCA of regional city data",
     subtitle = "Classified by the quantile of confirmed cases from each city",
     color = "Confirmed cases",
     x = str_c("PC1 (", var_explained_vector[1], "%)"),
@@ -118,8 +118,8 @@ ggsave(
 ggsave(
   filename = "results/08_city_pca.png",
   plot = pca_plot,
-  width = 8,
-  height = 8,
+  width = 10,
+  height = 10,
 )
 
 write_tsv(city_conf_pca_aug, "data/wrangled_city_pca.tsv")

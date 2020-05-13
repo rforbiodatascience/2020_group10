@@ -41,30 +41,8 @@ var_explained_vector <- city_conf_pca_explained %>%
 
 # Visualise data ----------------------------------------------------------
 
-# Plot original PCA
-pl1 <- city_conf_kmean_pca_aug %>%
-  ggplot(aes(x = .fittedPC1, y = .fittedPC2, colour = class_label)) +
-  geom_point() +
-  theme_group10 +
-  theme(
-    legend.position = c(.95, .25),
-    legend.justification = c("right", "top"),
-    legend.box.just = "right",
-    legend.margin = margin(2, 2, 2, 2),
-    legend.box.background = element_rect(colour = "black")
-  ) +
-  scale_color_manual(
-    values = c("lightgreen", "yellow", "red", "darkred")
-  ) +
-  labs(
-    title = "Original PCA",
-    x = str_c("PC1 (", var_explained_vector[1], "%)"),
-    y = str_c("PC2 (", var_explained_vector[2], "%)"),
-    color = "Confirmed cases"
-  )
-
 # Plot K-mean clustering on original data
-pl2 <- city_conf_kmean_pca_aug %>%
+pl1 <- city_conf_kmean_pca_aug %>%
   ggplot(aes(x = .fittedPC1, y = .fittedPC2, colour = cluster_org)) +
   geom_point() +
   theme_group10 +
@@ -73,20 +51,21 @@ pl2 <- city_conf_kmean_pca_aug %>%
     legend.justification = c("right", "top"),
     legend.box.just = "right",
     legend.margin = margin(2, 2, 2, 2),
-    legend.box.background = element_rect(colour = "black")
+    legend.box.background = element_rect(colour = "black"),
+    plot.title = element_text(size = 18)
   ) +
   scale_color_manual(
     values = c("lightgreen", "yellow", "red", "darkred")
   ) +
   labs(
-    title = "K-means clustering using\noriginal variables (k=4)",
+    title = "K-means clustering (k=4) \noriginal variables",
     x = str_c("PC1 (", var_explained_vector[1], "%)"),
     y = str_c("PC2 (", var_explained_vector[2], "%)"),
     color = "Clusters"
   )
 
 # Plot K-mean clustering on PC1 and PC2
-pl3 <- city_conf_kmean_pca_aug %>%
+pl2 <- city_conf_kmean_pca_aug %>%
   ggplot(aes(x = .fittedPC1, y = .fittedPC2, colour = cluster_pca)) +
   geom_point() +
   theme_group10 +
@@ -95,23 +74,24 @@ pl3 <- city_conf_kmean_pca_aug %>%
     legend.justification = c("right", "top"),
     legend.box.just = "right",
     legend.margin = margin(2, 2, 2, 2),
-    legend.box.background = element_rect(colour = "black")
+    legend.box.background = element_rect(colour = "black"),
+    plot.title = element_text(size = 18)
   ) +
   scale_color_manual(
     values = c("lightgreen", "yellow", "red", "darkred")
   ) +
   labs(
-    title = "K-means clustering using\nPC1 and PC2 (k=4)",
+    title = "K-means clustering (k=4) \nPC1 and PC2 ",
     x = str_c("PC1 (", var_explained_vector[1], "%)"),
     y = str_c("PC2 (", var_explained_vector[2], "%)"),
     color = "Clusters"
   )
 
 # Combine all plots using patchwork
-combined_plots <- (pl1 + pl2 + pl3) +
+combined_plots <- (pl1 + pl2) +
   plot_annotation(
-    title = "Clustering comparison of regional city data from South Korea",
-    subtitle = "Unsupervised prediction of confirmed cases by applying k-means clustering ",
+    title = "Clustering comparison of regional city data",
+    subtitle = "Unsupervised prediction of confirmed cases by k-means clustering",
     caption = "Data from Korea Centers for Disease Control & Prevention (2020)"
   ) +
   plot_annotation(
@@ -156,8 +136,8 @@ clustering_pred <- city_conf_kmean_pca_aug %>%
 ggsave(
   filename = "results/11_city_clustering.png",
   plot = combined_plots,
-  width = 16,
-  height = 8,
+  width = 10,
+  height = 10,
 )
 
 write_tsv(clustering_pred, "data/wrangled_cluster_pred.tsv")
