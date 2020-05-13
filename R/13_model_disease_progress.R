@@ -93,6 +93,9 @@ confirmed_progress_plot <- confirmed_progress %>%
     date_breaks = "week"
   ) +
   theme_group10 +
+  theme(
+    axis.text.x = element_text(angle = 90, hjust = 0.95, vjust = 0.2),
+  ) +
   scale_color_discrete(
     name = "",
     labels = c("confirmed", "negative", "total tested")
@@ -152,7 +155,7 @@ confirmed_age_plot <- confirmed_age %>%
   labs(
     x = "Time",
     y = "Tests",
-    title = "Confirmed tests of COVID-19 in 2020 - by age",
+    title = "Confirmed tests of COVID-19 in 2020 by age",
     caption = "Data from Korea Centers for Disease Control & Prevention (2020)",
     color = "Age Group"
   ) +
@@ -237,5 +240,5 @@ model_summary <- model_summary %>%
 
 write_tsv(
   x = model_summary,
-  path = "results/logistic_model.tsv"
+  path = "results/wrangled_logistic_model.tsv"
 )

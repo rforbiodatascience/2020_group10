@@ -10,11 +10,8 @@ install.packages("leaflet")
 
 # Plotting maps
 install.packages("gpclib")
-install.packages("htmlwidgets")
 install.packages("maptools")
-install.packages("plotly")
 install.packages("rgdal")
-install.packages("viridis")
 
 # Visualizing networks
 install.packages("ggraph")
