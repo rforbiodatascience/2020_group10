@@ -26,11 +26,15 @@ knitr::opts_chunk$set(echo = FALSE)
 * 259 deaths caused by COVID-19
 
 
+```{r out.width = "20%", fig.align='center',fig.cap= "(South Korean Map, United States. Department Of State)" }
+include_graphics('south_korea_map.jpg')
+```
+
 ## Research questions
 
-* How is human behaviour driving the spread of the disease?
-
 * How has the epidemic evolved in South Korea?
+
+* How is human behaviour driving the spread of the disease?
 
 * Is there any correlation between the place of infection and severity of the disease?
 
@@ -141,15 +145,6 @@ include_graphics('city_df.png')
 ```
 
 ## Results
-<h3 style="margin-top: -50px">
-How is human behaviour driving the spread of the disease?
-</h3>
-
-```{r out.width=c('50%', '50%'), fig.show='hold'}
-include_graphics(c('../results/10_most_visited_places.png', '../results/05_case_type.png'))
-```
-
-***
 
 <h3 style="margin-top: -50px">
 How has the epidemic evolved in South Korea?
@@ -180,6 +175,33 @@ include_graphics('../results/15_searchtrend.png')
 ***
 
 <h3 style="margin-top: -50px">
+How is human behaviour driving the spread of the disease?
+</h3>
+
+```{r out.width=c('50%', '50%'), fig.show='hold'}
+include_graphics(c('../results/10_most_visited_places.png', '../results/05_case_type.png'))
+```
+
+***
+
+<h3 style="margin-top: -50px">
+How is human behaviour driving the spread of the disease?
+</h3>
+```{r out.width = "90%", fig.align = "center"}
+include_graphics('../results/16_transmission.png')
+```
+***
+
+<h3 style="margin-top: -50px">
+Is there any correlation between the place of infection and severity of the disease?
+</h3>
+```{r out.width = "70%", fig.align = "center"}
+include_graphics('../results/14_contact_exposure.png')
+```
+
+***
+
+<h3 style="margin-top: -50px">
 Does any gender or age predispose for getting the disease or for a more severe outcome?
 </h3>
 ```{r out.width=c('50%', '50%'), fig.show='hold'}
@@ -193,24 +215,6 @@ Does any gender or age predispose for getting the disease or for a more severe o
 </h3>
 ```{r out.width=c('50%', '50%'), fig.show='hold'}
 include_graphics(c('../results/13_confirmed_gender.png', '../results/13_deceased_gender.png'))
-```
-
-***
-
-<h3 style="margin-top: -50px">
-Is there any correlation between the place of infection and severity of the disease?
-</h3>
-```{r out.width = "80%", fig.align = "center"}
-include_graphics('../results/14_contact_exposure.png')
-```
-
-***
-
-<h3 style="margin-top: -50px">
-How is human behaviour driving the spread of the disease?
-</h3>
-```{r out.width = "90%", fig.align = "center"}
-include_graphics('../results/16_transmission.png')
 ```
 
 ***
@@ -251,18 +255,17 @@ https://erik-kiehl.shinyapps.io/shiny_app/
 
 ## Conclusion and discussion 
 
-* Confirmed cases are higher than deaths. 
-
 * There’s no correlation between the place of infection and severity of the disease.
 
-* Men die but more women are confirmed to be sick. 
+* More females are diagnosed with COVID-19, but more males die from the disease.
 
 * Young people are driving the spread.
 
 * People in their 70s and 80s have a higher fatality rage.
-There are clusters of superspreaders of certain age range. 
 
-* Accuracy is just above 50 % - better than random with 4 classes (similar performance as kmeans).
+* There are clusters of superspreaders of certain age range. 
+
+* ANN and k-means accuracy is between 40-50 % - better than random with 4 classes.
 
 ***
 ### Superspreaders
