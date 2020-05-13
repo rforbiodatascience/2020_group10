@@ -57,7 +57,7 @@ exposure_plot <- infection_case_df %>%
   facet_wrap(~state, nrow = 2) +
   theme_group10 +
   labs(
-    title = "Duration of disease for COVID-19 patients in South Korea",
+    title = "Duration of disease for COVID-19 patients",
     subtitle = "Days in from isolation since confimation for isolatated patients (panel 1) and time from confirmed to released (panel 2). \nStratified on age group and infection case.",
     color = "Age group",
     caption = "Data from Korea Centers for Disease Control & Prevention (2020)"
