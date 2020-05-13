@@ -1,5 +1,5 @@
 ---
-title: <font size="10"> Revealing the success behind South Korea's approach to COVID-19 </font>
+title: <font size="10"> Exploring the spread of COVID-19 in South Korea </font>
 subtitle: "22100 - R for Bio Data Science"
 author: "Abril Diosdado Hernandez, Amanda Gammelby Qvesel, Erik Nicolas Kiehl, Viktor Törnblom"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
@@ -17,14 +17,18 @@ knitr::opts_chunk$set(echo = FALSE)
 ## **Introduction**
 
 ### *South Korea during COVID-19*
-South Korea is one of the world's most densely populated countries with 51.64 million people.
+* One of the world's most densely populated countries 
 
-The first case of COVID-19 in this country was confirmed on the 20th of January 2020. Since then, there has only been 256 deaths caused by COVID-19.
+* 51.64 million inhabitants
+
+* First case of COVID-19 confirmed on the 20th of January 2020
+
+* 259 deaths caused by COVID-19
 
 
 ## Research questions
 
-* How is human behaviour driving the disease?
+* How is human behaviour driving the spread of the disease?
 
 * How has the epidemic evolved in South Korea?
 
@@ -95,7 +99,7 @@ include_graphics('project_structure.png')
     
 -   Remove non necessary columns.
     
--   Converting data into a tidy format following the <u>tidy rules</u>
+-   Converting data into the tidy format:
     
     -   Each variable has a column
         
@@ -140,7 +144,7 @@ include_graphics('city_df.png')
 
 ## Results
 <h3 style="margin-top: -50px">
-How is human behaviour driving the disease
+How is human behaviour driving the spread of the disease?
 </h3>
 
 ```{r out.width=c('50%', '50%'), fig.show='hold'}
@@ -169,7 +173,7 @@ include_graphics('../results/13_logistic_model.png')
 ***
 
 <h3 style="margin-top: -50px">
-Research question
+How has the epidemic evolved in South Korea?
 </h3>
 ```{r out.width = "100%", fig.align = "center"}
 include_graphics('../results/15_searchtrend.png')
@@ -178,16 +182,16 @@ include_graphics('../results/15_searchtrend.png')
 ***
 
 <h3 style="margin-top: -50px">
-Research question
+How has the epidemic evolved in South Korea?
 </h3>
-```{r out.width = "70%", fig.align = "center"}
-include_graphics('../results/13_disease_age.png')
+```{r out.width=c('50%', '50%'), fig.show='hold'}
+include_graphics(c('../results/13_disease_age.png', '../results/12_age_deceased_ratio.png'))
 ```
 
 ***
 
 <h3 style="margin-top: -50px">
-Research question
+How has the epidemic evolved in South Korea?
 </h3>
 ```{r out.width=c('50%', '50%'), fig.show='hold'}
 include_graphics(c('../results/13_confirmed_gender.png', '../results/13_deceased_gender.png'))
@@ -196,16 +200,7 @@ include_graphics(c('../results/13_confirmed_gender.png', '../results/13_deceased
 ***
 
 <h3 style="margin-top: -50px">
-Research question
-</h3>
-```{r out.width = "55%", fig.align = "center"}
-include_graphics('../results/12_age_deceased_ratio.png')
-```
-
-***
-
-<h3 style="margin-top: -50px">
-Research question
+Is there any correlation between the place of infection and severity of the disease?
 </h3>
 ```{r out.width = "80%", fig.align = "center"}
 include_graphics('../results/14_contact_exposure.png')
@@ -214,19 +209,10 @@ include_graphics('../results/14_contact_exposure.png')
 ***
 
 <h3 style="margin-top: -50px">
-Research question
+How is human behaviour driving the spread of the disease?
 </h3>
 ```{r out.width = "90%", fig.align = "center"}
 include_graphics('../results/16_transmission.png')
-```
-
-***
-
-<h3 style="margin-top: -50px">
-Research question
-</h3>
-```{r out.width = "55%", fig.align = "center"}
-include_graphics('../results/08_city_pca.png')
 ```
 
 ***
