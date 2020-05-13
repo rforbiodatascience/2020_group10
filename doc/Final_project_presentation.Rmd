@@ -266,33 +266,19 @@ knitr::kable(ann_pred, format="html")
 https://erik-kiehl.shinyapps.io/shiny_app/
 
 ## Conclusion and discussion 
-* Confirmed cases is high compared to deaths. 
 
-* One peak (until beginning of April), follows logistic model
+* Confirmed cases are higher than deaths. 
 
-* There’s no correlation between the place of infection and severity of the disease
+* There’s no correlation between the place of infection and severity of the disease.
 
-* Men die but more women are confirmed to be sick. Young people are driving the spread.
+* Men die but more women are confirmed to be sick. 
 
-* At least from the retrieved data, there is no strong difference.
+* Young people are driving the spread.
 
-* People in their 70s and 80s have a higher fatality rage (as expected).
+* People in their 70s and 80s have a higher fatality rage.
+There are clusters of superspreaders of certain age range. 
 
-***
-* There are clusters of superspreaders and certain age range can be observed in each. 
-
-* A higher disease prevalence can be observed in bigger cities and those who have nursing homes, which is very different from what can be seen in the countryside, where elderly population ratio and elderly alone present less cases. 
-
-* Accuracy is just above 50 % - better than random with 4 classes.
-
-* Similar performance as kmeans. 
-
-Problems and solutions
-
-Using different packages will mask some functions.
- 
- - detach packages after each R cript.
- 
+* Accuracy is just above 50 % - better than random with 4 classes (similar performance as kmeans).
 
 ***
 ### Superspreaders
