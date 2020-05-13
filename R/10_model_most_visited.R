@@ -30,7 +30,7 @@ mvp_plot <- patient_df %>%
   labs(
     title = "Most visited places",
     y = "Number of patients",
-    x = "Place",
+    x = "",
     caption = "Data from Korea Centers for Disease Control & Prevention (2020)"
   )
 

@@ -77,8 +77,6 @@ trend_plot <- new_cases_coronavirus %>%
   facet_wrap(~parameter, scales = "free_y", nrow = 2, labeller = plot_labels) +
   labs(
     title = "COVID-19 cases and coronavirus search trend",
-    subtitle = str_c("New COVID-19 cases per day and selected events (upper panel) and",
-               "'coronavirus' search activity in the portal NAVER relative to maximum (lower panel)."),
     caption = "Data from Korea Centers for Disease Control & Prevention (2020)"
   ) +
   xlab("Time (2020)") +

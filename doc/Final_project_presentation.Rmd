@@ -150,7 +150,7 @@ include_graphics('city_df.png')
 How has the epidemic evolved in South Korea?
 </h3>
 ```{r out.width = "65%", fig.align = "center"}
-include_graphics('../results/13_disease_progress.png')
+include_graphics('../results/13_confirmed_progress.png')
 ```
 
 ***
@@ -161,15 +161,6 @@ How has the epidemic evolved in South Korea?
 
 ```{r out.width = "75%", fig.align = "center"}
 include_graphics('../results/13_logistic_model.png')
-```
-
-***
-
-<h3 style="margin-top: -50px">
-How has the epidemic evolved in South Korea?
-</h3>
-```{r out.width = "100%", fig.align = "center"}
-include_graphics('../results/15_searchtrend.png')
 ```
 
 ***
@@ -187,9 +178,10 @@ include_graphics(c('../results/10_most_visited_places.png', '../results/05_case_
 <h3 style="margin-top: -50px">
 How is human behaviour driving the spread of the disease?
 </h3>
-```{r out.width = "90%", fig.align = "center"}
+```{r out.width = "80%", fig.align = "center"}
 include_graphics('../results/16_transmission.png')
 ```
+
 ***
 
 <h3 style="margin-top: -50px">
@@ -205,7 +197,7 @@ include_graphics('../results/14_contact_exposure.png')
 Does any gender or age predispose for getting the disease or for a more severe outcome?
 </h3>
 ```{r out.width=c('50%', '50%'), fig.show='hold'}
-include_graphics(c('../results/13_disease_age.png', '../results/12_age_deceased_ratio.png'))
+include_graphics(c('../results/13_confirmed_age.png', '../results/12_age_deceased_ratio.png'))
 ```
 
 ***
@@ -267,26 +259,37 @@ https://erik-kiehl.shinyapps.io/shiny_app/
 
 * ANN and k-means accuracy is between 40-50 % - better than random with 4 classes.
 
+
+## Questions?
+
 ***
+
 ### Superspreaders
 ```{r out.width = "70%", fig.align = "center"}
 include_graphics('../results/17_subset_transmission.png')
 ```
 
 ***
+
 ### Correlation matrix
 ```{r out.width = "70%", fig.align = "center"}
 include_graphics('../results/06_cor_heatmap.png')
 ```
+
 ***
 ### PCA Variance explained
 ```{r out.width = "55%", fig.align = "center"}
 include_graphics('../results/08_city_pca_variance.png')
 ```
 
-### Regional cases plot
 ***
-```{r out.width = "75%", fig.align = "center"}
+### Regional cases plot
+```{r out.width = "65%", fig.align = "center"}
 include_graphics('../results/07_cases_number.png')
 ```
 
+***
+### Search trends and confirmed cases
+```{r out.width = "100%", fig.align = "center"}
+include_graphics('../results/15_searchtrend.png')
+```

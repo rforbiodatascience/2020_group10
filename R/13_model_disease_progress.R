@@ -14,7 +14,7 @@ time_df <- read_tsv("data/time_data_augmented.tsv")
 
 # Wrangle the data ------------------------------------------------------------------------------
 time_df <- time_df %>%
-  filter(date > ymd(20200120))
+  filter(date > as.Date("2020-01-20"))
 
 # Overall disease progress
 confirmed_progress <- time_df %>%
@@ -182,7 +182,7 @@ logistic_plot <- fitted_data %>%
   labs(
     x = "Days after January 1st, 2020",
     y = "Number of people",
-    title = "Logistic modelling of the courseof the epidemic",
+    title = "Logistic modelling of the course of the epidemic",
     subtitle = "Number of confirmed and deceased people over time fitted to a\nlogistic model",
     caption = "Data from Korea Centers for Disease Control & Prevention (2020)"
   ) +
@@ -190,7 +190,7 @@ logistic_plot <- fitted_data %>%
 
 # Save the plots ------------------------------------------------------------------------------
 ggsave(
-  filename = "results/13_disease_progress.png",
+  filename = "results/13_confirmed_progress.png",
   plot = confirmed_progress_plot,
   height = 8,
   width = 10
@@ -208,7 +208,7 @@ ggsave(
   width = 10
 )
 ggsave(
-  filename = "results/13_disease_age.png",
+  filename = "results/13_confirmed_age.png",
   plot = confirmed_age_plot,
   height = 8,
   width = 10
@@ -223,15 +223,15 @@ ggsave(
 # Save the data frame ------------------------------------------------------------------------------
 write_tsv(
   x = confirmed_progress,
-  path = "data/wrangled_disease_progres.tsv"
+  path = "data/wrangled_confirmed_progress.tsv"
 )
 write_tsv(
   x = deceased_gender,
-  path = "data/disease_gender.tsv"
+  path = "data/wrangled_confirmed_gender.tsv"
 )
 write_tsv(
   x = confirmed_age,
-  path = "data/disease_age_plot.tsv"
+  path = "data/wrangled_confirmed_age.tsv"
 )
 
 # remove features that cannot be written in a tidy way
