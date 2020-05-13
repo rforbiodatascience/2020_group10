@@ -86,7 +86,7 @@ perf <- model %>%
 
 # Save model performance  ---------------------------------------------------------------
 
-write_tsv(perf, "data/wrangled_ann_pred")
+write_tsv(perf, "results/wrangled_ann_pred")
 
 # Detach external packages ---------------------------------------------------------------------
 detach("package:keras", unload=TRUE)

@@ -217,7 +217,7 @@ Can characteristic city features be used to predict the burden of disease?
 ```{r out.width = c("50%","50%"), fig.hold = "hold", message=FALSE}
 include_graphics(c('../results/08_city_pca.png', '../results/11_city_clustering.png'))
 
-cluster_pred <- read_tsv("../data/wrangled_cluster_pred.tsv") %>% 
+cluster_pred <- read_tsv("../results/wrangled_cluster_pred.tsv") %>% 
   mutate(score_org = str_c(round(score_org*100, 1), "%"),
          score_pca = str_c(round(score_pca*100, 1), "%"))
 
@@ -234,8 +234,8 @@ Can characteristic city features be used to predict the burden of disease?
 ```{r message=FALSE}
 include_graphics('neural_network_viz.png')
 
-ann_pred <- read_tsv("../data/wrangled_ann_pred") %>%
-  mutate(accuracy = str_c(round(accuracy*100, 1), "%")) %>%
+ann_pred <- read_tsv("../results/wrangled_ann_pred") %>%
+  mutate(accuracy = str_c(round(acc*100, 1), "%")) %>%
   select(accuracy)
 
 knitr::kable(ann_pred, format="html")
