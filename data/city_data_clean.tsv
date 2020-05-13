@@ -73,7 +73,7 @@ code	province	city	latitude	longitude	elementary_school_count	kindergarten_count
 16030	Ulsan	Buk-gu	35.582685	129.36124	22	45	0	1.73	7.69	3.4	211
 16040	Ulsan	Ulju-gun	35.522126	129.242507	30	49	2	1.74	13.94	6.7	260
 16050	Ulsan	Jung-gu	35.569468	129.332773	21	37	0	2.03	14.15	6.5	323
-17000	Sejong	unknown_Sejong	36.480132	127.289021	48	60	3	1.78	9.48	3.8	491
+17000	Sejong	Sejong_city	36.480132	127.289021	48	60	3	1.78	9.48	3.8	491
 20010	Gyeonggi-do	Gapyeong-gun	37.831297	127.509555	13	14	0	0.88	25.09	12	114
 20020	Gyeonggi-do	Goyang-si	37.658363	126.831961	84	171	2	1.88	12.82	5.2	1608
 20030	Gyeonggi-do	Gwacheon-si	37.42915	126.987616	4	7	0	1.36	13.98	5.7	92
@@ -226,4 +226,4 @@ code	province	city	latitude	longitude	elementary_school_count	kindergarten_count
 61160	Gyeongsangnam-do	Haman-gun	35.272481	128.40654	16	20	0	1.19	23.74	14.7	94
 61170	Gyeongsangnam-do	Hamyang-gun	35.520541	127.725177	13	12	0	1.01	32.65	20.9	83
 61180	Gyeongsangnam-do	Hapcheon-gun	35.566702	128.16587	17	15	0	0.71	38.44	24.7	96
-70000	Jeju-do	unknown_Jeju-do	33.488936	126.500423	113	123	4	1.53	15.1	6.4	1245
+70000	Jeju-do	Jeju-do_city	33.488936	126.500423	113	123	4	1.53	15.1	6.4	1245
