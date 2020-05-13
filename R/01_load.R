@@ -10,7 +10,7 @@ source(file = "R/99_project_functions.R")
 # Load all dataset files of the Korean COVID19 Dataset ------------------------
 
 # Get file paths for database table files
-dataset_files <- list.files(path = "_raw/*.csv", full.names = TRUE)
+dataset_files <- list.files(path = "_raw/", pattern = "*.csv", full.names = TRUE)
 
 # Load table files and set filename to snake case format
 dataset_tables <- dataset_files %>%
