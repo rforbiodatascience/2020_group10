@@ -68,6 +68,7 @@ transmission_plot <- transmission_plot +
     color = "Age group",
     caption = "Data from Korea Centers for Disease Control & Prevention (2020)"
   ) +
+  theme_group10 +
   theme_graph()
 
 # Write plots and data to file --------------------------------------------

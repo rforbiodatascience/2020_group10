@@ -17,9 +17,9 @@ time_df <- time_df %>%
   filter(date > ymd(20200120))
 
 # Overall disease progress
-confirmed_progress <- time_df %>% 
-  select(c(date, sex, test, negative, confirmed, deceased)) %>% 
-  pivot_wider(values_fn = list(confirmed = summary_fun),  names_from= sex) %>% 
+confirmed_progress <- time_df %>%
+  select(c(date, sex, test, negative, confirmed, deceased)) %>%
+  pivot_wider(values_fn = list(confirmed = summary_fun), names_from = sex) %>%
   pivot_longer(c(test, confirmed, negative, deceased), names_to = "key", values_to = "value")
 
 # Stratification by sex
@@ -44,28 +44,28 @@ confirmed_age <- time_df %>%
 
 # Logistic modelling
 # Extract relevant data
-time_df_to_model <- confirmed_progress %>% 
+time_df_to_model <- confirmed_progress %>%
   filter(key == "confirmed" | key == "deceased") %>%
   mutate(date = date - as.Date("2020-01-01")) %>%
-  mutate(date = as.integer(date)) %>% 
-  distinct() 
+  mutate(date = as.integer(date)) %>%
+  distinct()
 
 # Do regression to find asymptote and peak day
 model_summary <- time_df_to_model %>%
   group_by(key) %>%
   nest() %>%
-  mutate(model = map(data, sigm_model)) %>% 
-  mutate(tidied = map(model, broom::tidy)) %>% 
-  unnest(tidied) 
+  mutate(model = map(data, sigm_model)) %>%
+  mutate(tidied = map(model, broom::tidy)) %>%
+  unnest(tidied)
 
-features_to_plot <- model_summary %>% 
-  filter(term == "Asym" | term == "xmid") %>% 
-  select(-c(statistic, model, p.value, std.error)) %>% 
+features_to_plot <- model_summary %>%
+  filter(term == "Asym" | term == "xmid") %>%
+  select(-c(statistic, model, p.value, std.error)) %>%
   pivot_wider(., names_from = term, values_from = estimate)
 
 # Calculate deceased and confirmed as estimated by model
-fitted_data <- time_df_to_model %>% 
-  group_by(key) %>% 
+fitted_data <- time_df_to_model %>%
+  group_by(key) %>%
   do(fit = sigm_model(.)) %>%
   broom::augment(fit)
 
@@ -74,7 +74,7 @@ fitted_data <- time_df_to_model %>%
 
 # Disease progress
 confirmed_progress_plot <- confirmed_progress %>%
-  filter(key != "deceased") %>% 
+  filter(key != "deceased") %>%
   ggplot(
     aes(x = date, y = value, colour = key)
   ) +
@@ -92,6 +92,7 @@ confirmed_progress_plot <- confirmed_progress %>%
     date_labels = "%b %d",
     date_breaks = "week"
   ) +
+  theme_group10 +
   scale_color_discrete(
     name = "",
     labels = c("confirmed", "negative", "total tested")
@@ -110,9 +111,10 @@ confirmed_gender_plot <- confirmed_gender %>%
   labs(
     x = "Time",
     y = "Tests",
-    title = "Confirmed tests of COVID-19 in 2020 - by gender",
+    title = "Confirmed tests of COVID-19 in 2020\nby gender",
     caption = "Data from Korea Centers for Disease Control & Prevention (2020)"
   ) +
+  theme_group10 +
   scale_x_date(
     date_labels = "%b %d",
     date_breaks = "week"
@@ -129,9 +131,10 @@ deceased_gender_plot <- deceased_gender %>%
   labs(
     x = "Time",
     y = "Deceased",
-    title = "COVID-19 deaths in 2020 - by gender",
+    title = "COVID-19 deaths in 2020\nby gender",
     caption = "Data from Korea Centers for Disease Control & Prevention (2020)"
   ) +
+  theme_group10 +
   scale_x_date(
     date_labels = "%b %d",
     date_breaks = "week"
@@ -157,22 +160,26 @@ confirmed_age_plot <- confirmed_age %>%
     date_labels = "%b %d",
     date_breaks = "week"
   ) +
+  theme_group10 +
   theme(legend.position = "bottom")
 
 # Logistic modelling
-logistic_plot <- fitted_data %>% 
+logistic_plot <- fitted_data %>%
   ggplot() +
-  geom_point(aes(x= date, y= value, colour=key)
+  geom_point(aes(x = date, y = value, colour = key)) +
+  geom_line(aes(x = date, y = .fitted), colour = "black", alpha = 0.5) +
+  facet_wrap(~key, nrow = 4, scales = "free_y") +
+  geom_point(data = features_to_plot, colour = "black", aes(x = xmid, y = Asym / 2), shape = 19) +
+  geom_hline(
+    data = features_to_plot,
+    aes(yintercept = Asym),
+    colour = "black", alpha = 0.5, linetype = "dashed", size = 0.8
   ) +
-  geom_line(aes(x= date, y= .fitted), colour = "black", alpha = 0.5
-  ) +
-  facet_wrap(~key, nrow=4, scales = "free_y") +
-  geom_point(data = features_to_plot, colour = "black", aes(x = xmid, y = Asym/2), shape = 19) + 
-  geom_hline(data = features_to_plot, aes(yintercept=Asym), colour = "black", alpha = 0.5, linetype = "dashed", size = 0.8) +
+  theme_group10 +
   labs(
-    x = "Days after January 1st, 2020", 
-    y = "Number of people", 
-    title = "Logistic modelling of the course of the epidemic",
+    x = "Days after January 1st, 2020",
+    y = "Number of people",
+    title = "Logistic modelling of the course\nof the epidemic",
     subtitle = "Number of confirmed and deceased people over time fitted to a logistic model",
     caption = "Data from Korea Centers for Disease Control & Prevention (2020)"
   ) +

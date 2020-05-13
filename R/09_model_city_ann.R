@@ -15,10 +15,9 @@ city_conf_pca_aug <- read_tsv("data/wrangled_city_pca.tsv")
 
 # Convert classes to numeric
 nn_dat <- city_conf_pca_aug %>%
-  mutate(class_label = as.factor(class)) %>%
   mutate(
-    class_num = as.numeric(as.factor(class)) - 1,
-    class_label = class
+    class_label = as.factor(class_label),
+    class_num = as.numeric(class_label) - 1,
   )
 
 # Define test size

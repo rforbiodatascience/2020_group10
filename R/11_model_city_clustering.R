@@ -5,9 +5,6 @@ rm(list = ls())
 library(tidyverse)
 library(patchwork)
 
-# library(devtools)
-# install_github("thomasp85/patchwork")
-
 # Define functions ---------------------------------------------------------------
 source(file = "R/99_project_functions.R")
 
@@ -46,8 +43,9 @@ var_explained_vector <- city_conf_pca_explained %>%
 
 # Plot original PCA
 pl1 <- city_conf_kmean_pca_aug %>%
-  ggplot(aes(x = .fittedPC1, y = .fittedPC2, colour = class)) +
+  ggplot(aes(x = .fittedPC1, y = .fittedPC2, colour = class_label)) +
   geom_point() +
+  theme_group10 +
   theme(
     legend.position = c(.95, .25),
     legend.justification = c("right", "top"),
@@ -69,6 +67,7 @@ pl1 <- city_conf_kmean_pca_aug %>%
 pl2 <- city_conf_kmean_pca_aug %>%
   ggplot(aes(x = .fittedPC1, y = .fittedPC2, colour = cluster_org)) +
   geom_point() +
+  theme_group10 +
   theme(
     legend.position = c(.95, .25),
     legend.justification = c("right", "top"),
@@ -90,6 +89,7 @@ pl2 <- city_conf_kmean_pca_aug %>%
 pl3 <- city_conf_kmean_pca_aug %>%
   ggplot(aes(x = .fittedPC1, y = .fittedPC2, colour = cluster_pca)) +
   geom_point() +
+  theme_group10 +
   theme(
     legend.position = c(.95, .25),
     legend.justification = c("right", "top"),
@@ -113,11 +113,18 @@ combined_plots <- (pl1 + pl2 + pl3) +
     title = "Clustering comparison of regional city data from South Korea",
     subtitle = "Unsupervised prediction of confirmed cases by applying k-means clustering ",
     caption = "Data from Korea Centers for Disease Control & Prevention (2020)"
+  ) +
+  plot_annotation(
+    theme = theme(
+      plot.title = element_text(size = 29),
+      plot.caption = element_text(size = 11),
+      plot.subtitle = element_text(size = 22)
+    )
   )
 
 # Predict clustering accuracy
 clustering_pred <- city_conf_kmean_pca_aug %>%
-  select(class, cluster_org, cluster_pca) %>%
+  select(class_label, cluster_org, cluster_pca) %>%
   mutate(
     cluster_org = case_when(
       cluster_org == 1 ~ "3. Moderate",
@@ -132,12 +139,12 @@ clustering_pred <- city_conf_kmean_pca_aug %>%
       cluster_pca == 4 ~ "1. None"
     ),
     cluster_org_correct = case_when(
-      class == cluster_org ~ 1,
-      class != cluster_org ~ 0
+      class_label == cluster_org ~ 1,
+      class_label != cluster_org ~ 0
     ),
     cluster_pca_correct = case_when(
-      class == cluster_pca ~ 1,
-      class != cluster_pca ~ 0
+      class_label == cluster_pca ~ 1,
+      class_label != cluster_pca ~ 0
     )
   ) %>%
   summarise(

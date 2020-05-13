@@ -1,4 +1,4 @@
-.rownames	city	confirmed	elementary_school_count	kindergarten_count	university_count	academy_ratio	elderly_population_ratio	elderly_alone_ratio	nursing_home_count	class	.fittedPC1	.fittedPC2	.fittedPC3	.fittedPC4	.fittedPC5	.fittedPC6	.fittedPC7
+.rownames	city	confirmed	elementary_school_count	kindergarten_count	university_count	academy_ratio	elderly_population_ratio	elderly_alone_ratio	nursing_home_count	class_label	.fittedPC1	.fittedPC2	.fittedPC3	.fittedPC4	.fittedPC5	.fittedPC6	.fittedPC7
 1	Andong-si	50	30	42	3	1.57	23.95	12.4	290	4. High	-0.1929953976405629	-0.4893208582874243	0.17086017067455236	-0.9396510998520173	0.2258949270059109	-0.020040294846096256	0.08756835500388542
 2	Ansan-si	16	54	94	4	1.49	10.35	4.6	1024	3. Moderate	-3.2877434066517557	-0.5860428973102505	0.4348501788847863	0.3590770719576637	-0.24186314578273693	0.13509856210242027	-0.15600414716035488
 3	Anseong-si	2	35	51	3	1.27	16.95	7.2	271	2. Low	-0.9057519016657055	-0.057283365076607154	0.8989552155227276	-0.11115892169065605	0.3640236103486403	-0.09151854176348662	0.08353368485183355

@@ -22,8 +22,9 @@ patient_df <- patient_df %>%
 mvp_plot <- patient_df %>%
   ggplot(aes(x = reorder(type, count), y = count, fill = type)) +
   geom_bar(stat = "identity") +
+  theme_group10 +
   theme(
-    axis.text.x = element_text(size = 10, angle = 90, hjust=0.95, vjust=0.25),
+    axis.text.x = element_text(size = 14, angle = 90, hjust=0.95, vjust=0.25),
     legend.position = "none"
   ) +
   labs(

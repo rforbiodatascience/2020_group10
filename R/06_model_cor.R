@@ -49,6 +49,7 @@ correlation_heatmap <- city_cor_df %>%
     name = "Pearson Correlation"
   ) +
   theme_minimal() +
+  theme_group10 +
   geom_text(
     aes(var1, var2, label = value),
     color = "white",

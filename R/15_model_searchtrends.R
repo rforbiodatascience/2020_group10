@@ -83,6 +83,7 @@ trend_plot <- new_cases_coronavirus %>%
   ) +
   xlab("Time (2020)") +
   ylab("") +
+  theme_group10 +
   theme(
     legend.position = "none",
     plot.subtitle = element_text(size = 9)

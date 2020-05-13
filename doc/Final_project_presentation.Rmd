@@ -3,7 +3,7 @@ title: <font size="10"> Revealing the success behind South Korea's approach to C
 subtitle: "22100 - R for Bio Data Science"
 author: "Abril Diosdado Hernandez, Amanda Gammelby Qvesel, Erik Nicolas Kiehl, Viktor Törnblom"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
-output: 
+output:
   ioslides_presentation:
     widescreen: true
     smaller: true
@@ -33,169 +33,227 @@ The first case of COVID-19 in this country was confirmed on the 20th of January 
 
 * Can a prediction of the disease confirmation be made based on the city?
 
-
 ## Materials and methods
+
+### The dataset
+
+[Korean COVID-19 dataset](https://www.kaggle.com/kimjihoo/coronavirusdataset)
+Last downloaded 07-04-2020
+
 ```{r out.width = "60%", fig.align='center',fig.cap= "COVID-19 dataset from kaggle" }
 include_graphics('dataset.png')
 ```
 
-## Workflow and Structure of the project
-```{r, fig.width = 1}
+***
+
+### Workflow and Structure of the project
+#### Reproducibility
+- The project includes all steps in the data analysis
+- To achieve consistent computational results
+
+```{r, fig.width = 1, fig.align='center'}
 include_graphics('project_structure.png')
-include_graphics('images/workflow.png')
+#include_graphics('images/workflow.png')
 ```
 
+***
+### Packages for the project
+
+**Project core**:
+
+-   [tidyverse](https://github.com/tidyverse/tidyverse)
+
+**Extension of ggplot**:
+
+-   [ggrepel](https://github.com/slowkow/ggrepel), [patchwork](https://github.com/thomasp85/patchwork)
+
+**Rendering transmission networks**:
+
+-   [igraph](https://github.com/igraph/igraph)
+
+**Rendering maps**:
+
+-   [maptools](https://github.com/RPTools/maptool), 
+    [gpclib](https://github.com/rdpeng/gpclib), [rgdal](https://github.com/cran/rgdal/tree/master/inst)
+
+**Shiny app (+ maps and geo-location packages)**
+
+-   [geosphere](https://github.com/rspatial/geosphere), [shiny](https://github.com/rstudio/shiny),
+    [leaflet](http://rstudio.github.io/leaflet)
 
 ***
-### Packages used
-Project core:
 
-- [Tidyverse](https://github.com/tidyverse/tidyverse)
+### Data cleaning
 
-Transmission:
+-   Remove non valid data (NA's)
+    
+-   Remove non necessary columns.
+    
+-   Converting data into a tidy format following the <u>tidy rules</u>
+    
+    -   Each variable has a column
+        
+    -   Each observation has its own row
+        
+    -   Each value has its own cell
+        
 
-- [igraph](https://github.com/igraph/igraph)
+### Data augmenting
 
-Map: 
-
-- [viridis](https://github.com/sjmgarnier/viridis)    
-- [maptools](https://github.com/RPTools/maptool)
-- [gpclib](https://github.com/rdpeng/gpclib)
-- [rgdal](https://github.com/cran/rgdal/tree/master/inst)
-- [plotly](https://github.com/plotly)  
-
- Shiny app
-- [geosphere](https://github.com/rspatial/geosphere)
-- [shiny](https://github.com/rstudio/shiny)
-- [leaflet](http://rstudio.github.io/leaflet)
-
-
-
-***
-
-### Data cleaning & augmenting
-- Get rid of unnecessary data
-- Remove non valid data
-- Converting data into a tidy format
-
-* filter(), mutate ()
-
-- Join tibbles
-- Create new variables
-- Transform
-- Subset the data
-
-* full_join(), mutate(), unite ()
+-   Joining dataset tables using full_join
+    
+-   Subsetting data *?
+    
+-   Combining columns using unite
+    
+-   Creating new variables for the analysis
 
 ***
-Four main data frames were created regarding:
 
-<div class="green">
-- patient (patient_info_df + patient_route_df)
-</div>
-<div class="red">
-- case
-</div>
-<div class="yellow">
-- city
-</div>
-<div class="blue">
-- time (time_df, time_age_df, time_province_df)
-</div>
-<div class="grey">
-- serchtrend
-</div>
+#### Final datasets
 
-SeoulFloating and Weather were not used
+- Case data ( Case )
+```{r, fig.width = 1, fig.align='center'}
+include_graphics('case_df.png')
+```
 
-Problem: our data set repeats the same name for come columns.
+- Patient data (Patient info + Patient route)
+```{r, fig.width = 1, fig.align='center'}
+include_graphics('patient_df.png')
+```
 
-Solution: added a prefix
+- Time data (Time + Time age + Time gender + Time province + SearchTrend)
+```{r, fig.width = 1, fig.align='center'}
+include_graphics('time_df.png')
+```
 
+- City data (region + Patient info)
+```{r, fig.width = 1, fig.align='center'}
+include_graphics('city_df.png')
+```
 
 ## Results
+<h3 style="margin-top: -50px">
+Research question
+</h3>
 
-```{r out.width = "50%", fig.show = "hold"}
-include_graphics(c('../results/10_most_visited_places.png', '../results/05_model_case_type.png'))
-
+```{r out.width=c('50%', '50%'), fig.show='hold'}
+include_graphics(c('../results/10_most_visited_places.png', '../results/05_case_type.png'))
 ```
 
 ***
+
+<h3 style="margin-top: -50px">
+Research question
+</h3>
 ```{r out.width = "65%", fig.align = "center"}
 include_graphics('../results/13_disease_progress.png')
 ```
 
 ***
+
+<h3 style="margin-top: -50px">
+Research question
+</h3>
+
 ```{r out.width = "75%", fig.align = "center"}
 include_graphics('../results/13_logistic_model.png')
 ```
+
 ***
+
+<h3 style="margin-top: -50px">
+Research question
+</h3>
 ```{r out.width = "100%", fig.align = "center"}
 include_graphics('../results/15_searchtrend.png')
 ```
 
 ***
-```{r out.width = "75%", fig.align = "center"}
-include_graphics('../results/07_cases_number.png')
-```
 
-***
+<h3 style="margin-top: -50px">
+Research question
+</h3>
 ```{r out.width = "70%", fig.align = "center"}
 include_graphics('../results/13_disease_age.png')
 ```
 
 ***
-```{r out.width = "50%"}
+
+<h3 style="margin-top: -50px">
+Research question
+</h3>
+```{r out.width=c('50%', '50%'), fig.show='hold'}
 include_graphics(c('../results/13_confirmed_gender.png', '../results/13_deceased_gender.png'))
 ```
 
 ***
-using nest()
+
+<h3 style="margin-top: -50px">
+Research question
+</h3>
 ```{r out.width = "55%", fig.align = "center"}
 include_graphics('../results/12_age_deceased_ratio.png')
 ```
 
-
 ***
+
+<h3 style="margin-top: -50px">
+Research question
+</h3>
 ```{r out.width = "80%", fig.align = "center"}
 include_graphics('../results/14_contact_exposure.png')
 ```
 
-
 ***
+
+<h3 style="margin-top: -50px">
+Research question
+</h3>
 ```{r out.width = "90%", fig.align = "center"}
 include_graphics('../results/16_transmission.png')
 ```
 
 ***
+
+<h3 style="margin-top: -50px">
+Research question
+</h3>
 ```{r out.width = "55%", fig.align = "center"}
-include_graphics('../results/08_model_pca.png')
+include_graphics('../results/08_city_pca.png')
 ```
 
 ***
-```{r out.width = "55%", fig.align = "center"}
-include_graphics('../results/08_model_pca_variance.png')
-```
 
-***
+<h3 style="margin-top: -50px">
+Research question
+</h3>
 ```{r out.width = "90%", fig.align = "center", message=FALSE}
 include_graphics('../results/11_city_clustering.png')
+
 cluster_pred <- read_tsv("../data/wrangled_cluster_pred.tsv") %>% 
-  head()
+  mutate(score_org = str_c(round(score_org*100, 1), "%"),
+         score_pca = str_c(round(score_pca*100, 1), "%"))
+
 knitr::kable(cluster_pred, format="html")
 ```
 
-## ANN 
-```{r}
-ann_pred <- read_tsv("../data/wrangled_ann_pred") %>% 
-  head()
+***
+
+<h3 style="margin-top: -50px">
+Research question
+</h3>
+
+**ANN Network**
+```{r message=FALSE}
+include_graphics('neural_network_viz.png')
+
+ann_pred <- read_tsv("../data/wrangled_ann_pred") %>%
+  mutate(accuracy = str_c(round(accuracy*100, 1), "%")) %>%
+  select(accuracy)
+
 knitr::kable(ann_pred, format="html")
 ```
-
-
-
-
-
 
 ## Shiny app
 
@@ -239,5 +297,17 @@ include_graphics('../results/17_subset_transmission.png')
 ***
 ### Correlation matrix
 ```{r out.width = "70%", fig.align = "center"}
-include_graphics('../results/06_model_cor.png')
+include_graphics('../results/06_cor_heatmap.png')
 ```
+***
+### PCA Variance explained
+```{r out.width = "55%", fig.align = "center"}
+include_graphics('../results/08_city_pca_variance.png')
+```
+
+### Regional cases plot
+***
+```{r out.width = "75%", fig.align = "center"}
+include_graphics('../results/07_cases_number.png')
+```
+

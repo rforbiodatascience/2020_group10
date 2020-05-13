@@ -3,9 +3,7 @@ rm(list = ls())
 
 # Load libraries ------------------------------------------------------------------------------
 library(tidyverse)
-library(viridis)
 library(rgdal)
-library(plotly)
 library(maptools)
 library(gpclib)
 if (!require(gpclib)) install.packages("gpclib", type="source")
@@ -40,14 +38,6 @@ cases_number <- range_coordinates %>%
             by = c("state", "province_patient_route")
   )
 
-# Tooltip column for plotly
-cases_number_ploty <- cases_number %>%
-  mutate(mytext = str_c("Province: ", province_patient_route, "\n",
-                        "State: ", state, "\n",
-                        "n: ", n,
-                        sep = ""
-  ))
-
 # Set map location and parameters  ------------------------------------------------------------------------------
 
 # Data for South Korea map
@@ -58,7 +48,7 @@ south_korea <- readOGR(
 )
 
 # Tidy map data
-spdf_fortified <- broom::tidy(
+spatial_df <- broom::tidy(
   south_korea,
   region = "name"
 )
@@ -67,22 +57,18 @@ spdf_fortified <- broom::tidy(
 
 sk_cases_number <- ggplot() +
   geom_polygon(
-    data = spdf_fortified,
+    data = spatial_df,
     aes(x = long, y = lat, group = group),
     fill = "grey",
     alpha = 0.4,
     color = "white"
   ) +
   theme_void() +
+  theme_group10 +
   coord_map() +
   geom_point(
-    data = cases_number_ploty,
-    aes(y = min_latt, x = max_lonn, color = state, size = n, text = mytext)
-  ) +
-  scale_color_viridis(
-    option = "inferno",
-    discrete = TRUE,
-    alpha = 0.7
+    data = cases_number,
+    aes(y = min_latt, x = max_lonn, color = state, size = n)
   ) +
   scale_alpha_continuous() +
   scale_size_continuous(
@@ -95,19 +81,6 @@ sk_cases_number <- ggplot() +
     y = "",
     caption = "Data from Korea Centers for Disease Control & Prevention (2020)"
   )
-
-
-# Interactive map
-interactive_sk_cases <- sk_cases_number %>%
-  ggplotly(
-    tooltip = "text"
-  )
-
-# Save interactive map ------------------------------------------------------------------------------
-htmlwidgets::saveWidget(
-  interactive_sk_cases,
-  str_c(getwd(), "/results/interactive_province_patient_route.html")
-)
 
 # Save the plots ------------------------------------------------------------------------------
 ggsave(
@@ -126,5 +99,4 @@ write_tsv(
 # Detach external packages ---------------------------------------------------------------------
 detach("package:maptools", unload=TRUE)
 detach("package:rgdal", unload=TRUE)
-detach("package:plotly", unload=TRUE)
 detach("package:gpclib", unload=TRUE)

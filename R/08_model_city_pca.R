@@ -26,7 +26,7 @@ q_conf <- q_conf %>%
 
 # Classify confirmed cases into 4 quantile classes
 city_df <- city_df %>%
-  mutate(class = case_when(
+  mutate(class_label = case_when(
     confirmed >= q_conf[1] & confirmed <= q_conf[2] ~ "1. None",
     confirmed >= q_conf[2] & confirmed <= q_conf[3] ~ "2. Low",
     confirmed >= q_conf[3] & confirmed <= q_conf[4] ~ "3. Moderate",
@@ -72,15 +72,15 @@ pca_var <- city_conf_pca %>%
     x = "PC",
     y = "Variance explained (%)"
   ) +
+  theme_group10 +
   theme(
-    plot.title = element_text(size = 18),
     axis.ticks.y = element_blank(),
     axis.text.y = element_blank()
   )
 
 # Plot PC1 and PC2 and their corresponding eigenvectors
 pca_plot <- city_conf_pca_aug %>%
-  ggplot(aes(x = .fittedPC1, y = .fittedPC2, color = class)) +
+  ggplot(aes(x = .fittedPC1, y = .fittedPC2, color = class_label)) +
   geom_point() +
   scale_color_manual(
     values = c("lightgreen", "yellow", "red", "darkred")
@@ -97,7 +97,7 @@ pca_plot <- city_conf_pca_aug %>%
     size = 2,
     inherit.aes = FALSE
   ) +
-  theme(plot.title = element_text(size = 18)) +
+  theme_group10 +
   labs(
     title = "PCA of regional city data in South Korea",
     subtitle = "Classified by the quantile of confirmed cases from each city",

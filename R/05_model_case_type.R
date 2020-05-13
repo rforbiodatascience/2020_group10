@@ -14,7 +14,6 @@ case_df <- read_tsv("data/case_data_augmented.tsv")
 
 # Get sum of confirmed by case_type
 case_sum <- case_df %>%
-  distinct() %>% 
   group_by(case_type) %>%
   summarise(sum = sum(confirmed)) %>%
   arrange(sum)
@@ -26,8 +25,9 @@ case_plot <- case_sum %>%
   geom_bar(stat = "identity") +
   geom_text(aes(label = sum), vjust = -0.5) +
   ylim(0, 5800) +
+  theme_group10 +
   theme(
-    axis.text.x = element_text(size = 10, angle = 90, hjust = 0.95, vjust = 0.2),
+    axis.text.x = element_text(angle = 90, hjust = 0.95, vjust = 0.2),
     legend.position = "none"
   ) +
   labs(
@@ -40,8 +40,8 @@ case_plot <- case_sum %>%
 # Write plot and data ------------------------------------------------------------------------------
 
 ggsave(filename = "results/05_case_type.png", 
-       width = 10,
-       height = 5,
+       width = 8,
+       height = 8,
        case_plot)
 
 write_tsv(case_sum, "data/wrangled_case_type_sum.tsv")

@@ -56,7 +56,8 @@ zoom_transmission_plot <- ggraph(graph_obj, layout = "fr") +
     color = "Age group",
     caption = "Data from Korea Centers for Disease Control & Prevention (2020)"
   ) +
-  theme_graph(title_size = 16)
+  theme_group10 +
+  theme_graph()
 
 # Write plots and data to file --------------------------------------------
 ggsave(

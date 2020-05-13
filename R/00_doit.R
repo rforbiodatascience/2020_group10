@@ -2,6 +2,9 @@
 # ------------------------------------------------------------------------------
 rm(list = ls())
 
+# Load libraries -------------------------------------------------------------------------------
+library(knitr)
+
 # Run scripts
 # ------------------------------------------------------------------------------
 options(scipen = 999)
@@ -22,3 +25,5 @@ source(file = "R/14_model_exposure.R")
 source(file = "R/15_model_searchtrends.R")
 source(file = "R/16_model_transmission.R")
 source(file = "R/17_model_subset_transmission.R")
+
+source(purl("doc/final_project_presentation.Rmd"))
