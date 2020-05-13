@@ -76,9 +76,9 @@ trend_plot <- new_cases_coronavirus %>%
   geom_line(aes(y = value, colour = parameter)) +
   facet_wrap(~parameter, scales = "free_y", nrow = 2, labeller = plot_labels) +
   labs(
-    title = "COVID-19 cases and coronavirus search trend in South Korea",
-    subtitle = str_c("Number of new COVID-19 cases per day and selected events (upper panel) and",
-               "\nsearch activity for 'coronavirus' in the portal NAVER relative to maximum (lower panel)."),
+    title = "COVID-19 cases and coronavirus search trend",
+    subtitle = str_c("New COVID-19 cases per day and selected events (upper panel) and",
+               "'coronavirus' search activity in the portal NAVER relative to maximum (lower panel)."),
     caption = "Data from Korea Centers for Disease Control & Prevention (2020)"
   ) +
   xlab("Time (2020)") +
