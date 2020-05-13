@@ -23,6 +23,9 @@ The first case of COVID-19 in this country was confirmed on the 20th of January 
 
 
 ## Research questions
+
+* How is human behaviour driving the disease?
+
 * How has the epidemic evolved in South Korea?
 
 * Is there any correlation between the place of infection and severity of the disease?
@@ -31,16 +34,19 @@ The first case of COVID-19 in this country was confirmed on the 20th of January 
 
 * Are there any characteristic features in the high-prevalence disease areas?
 
-* Can a prediction of the disease confirmation be made based on the city?
+* Can a prediction of the disease confirmation be made based on city features?
+
 
 ## Materials and methods
 
-### The dataset
+<h3 style="margin-top: -50px">
+The dataset
+</h3>
 
 [Korean COVID-19 dataset](https://www.kaggle.com/kimjihoo/coronavirusdataset)
 Last downloaded 07-04-2020
 
-```{r out.width = "60%", fig.align='center',fig.cap= "COVID-19 dataset from kaggle" }
+```{r out.width = "60%", fig.align='center',fig.cap= "COVID-19 dataset from Kaggle" }
 include_graphics('dataset.png')
 ```
 
@@ -69,7 +75,7 @@ include_graphics('project_structure.png')
 
 **Rendering transmission networks**:
 
--   [igraph](https://github.com/igraph/igraph)
+-   [ggraph](https://github.com/thomasp85/ggraph)
 
 **Rendering maps**:
 
@@ -102,7 +108,7 @@ include_graphics('project_structure.png')
 
 -   Joining dataset tables using full_join
     
--   Subsetting data *?
+-   Subsetting data
     
 -   Combining columns using unite
     
@@ -134,7 +140,7 @@ include_graphics('city_df.png')
 
 ## Results
 <h3 style="margin-top: -50px">
-Research question
+How is human behaviour driving the disease
 </h3>
 
 ```{r out.width=c('50%', '50%'), fig.show='hold'}
@@ -144,7 +150,7 @@ include_graphics(c('../results/10_most_visited_places.png', '../results/05_case_
 ***
 
 <h3 style="margin-top: -50px">
-Research question
+How has the epidemic evolved in South Korea?
 </h3>
 ```{r out.width = "65%", fig.align = "center"}
 include_graphics('../results/13_disease_progress.png')
@@ -153,7 +159,7 @@ include_graphics('../results/13_disease_progress.png')
 ***
 
 <h3 style="margin-top: -50px">
-Research question
+How has the epidemic evolved in South Korea?
 </h3>
 
 ```{r out.width = "75%", fig.align = "center"}

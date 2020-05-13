@@ -179,8 +179,8 @@ logistic_plot <- fitted_data %>%
   labs(
     x = "Days after January 1st, 2020",
     y = "Number of people",
-    title = "Logistic modelling of the course\nof the epidemic",
-    subtitle = "Number of confirmed and deceased people over time fitted to a logistic model",
+    title = "Logistic modelling of the courseof the epidemic",
+    subtitle = "Number of confirmed and deceased people over time fitted to a\nlogistic model",
     caption = "Data from Korea Centers for Disease Control & Prevention (2020)"
   ) +
   theme(legend.position = "none")
