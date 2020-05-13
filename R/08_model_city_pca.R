@@ -39,14 +39,15 @@ city_conf_pca <- city_df %>%
   select(elementary_school_count:nursing_home_count) %>%
   prcomp(center = TRUE, scale. = TRUE)
 
-# Augment the PCA with columns from before PCA
+# Augment the PCA with columns from the city dataframe
 city_conf_pca_aug <- city_conf_pca %>%
   broom::augment(city_df)
 
 # Get PCA eigenvectors
 pca_vectors <- city_conf_pca %>%
   pluck("rotation") %>%
-  data.frame(variables = rownames(.), .)
+  as_tibble(rownames = NA) %>% 
+  rownames_to_column()
 
 city_conf_pca <- city_conf_pca %>% 
   broom::tidy("pcs") %>%
@@ -87,12 +88,12 @@ pca_plot <- city_conf_pca_aug %>%
   geom_segment(
     data = pca_vectors,
     aes(x = 0, y = 0, xend = (PC1 * 5), yend = (PC2 * 5)),
-    arrow = arrow(length = unit(1 / 2, "picas")),
+    arrow = arrow(length = unit(0.1, "cm")),
     color = "grey"
   ) +
   geom_label_repel(
     data = pca_vectors,
-    aes(x = PC1 * 5, y = PC2 * 5, label = variables),
+    aes(x = PC1 * 5, y = PC2 * 5, label = rowname),
     size = 2,
     inherit.aes = FALSE
   ) +
