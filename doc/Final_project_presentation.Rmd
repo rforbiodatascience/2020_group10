@@ -38,7 +38,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 * Are there any characteristic features in the high-prevalence disease areas?
 
-* Can a prediction of the disease confirmation be made based on city features?
+* Can a prediction of the disease burden be made based on city features?
 
 
 ## Materials and methods
@@ -182,7 +182,7 @@ include_graphics('../results/15_searchtrend.png')
 ***
 
 <h3 style="margin-top: -50px">
-How has the epidemic evolved in South Korea?
+Does any gender or age predispose for getting the disease or for a more severe outcome?
 </h3>
 ```{r out.width=c('50%', '50%'), fig.show='hold'}
 include_graphics(c('../results/13_disease_age.png', '../results/12_age_deceased_ratio.png'))
@@ -191,7 +191,7 @@ include_graphics(c('../results/13_disease_age.png', '../results/12_age_deceased_
 ***
 
 <h3 style="margin-top: -50px">
-How has the epidemic evolved in South Korea?
+Does any gender or age predispose for getting the disease or for a more severe outcome?
 </h3>
 ```{r out.width=c('50%', '50%'), fig.show='hold'}
 include_graphics(c('../results/13_confirmed_gender.png', '../results/13_deceased_gender.png'))
@@ -218,7 +218,7 @@ include_graphics('../results/16_transmission.png')
 ***
 
 <h3 style="margin-top: -50px">
-Research question
+Are there any characteristic features in the high-prevalence disease areas?
 </h3>
 ```{r out.width = "90%", fig.align = "center", message=FALSE}
 include_graphics('../results/11_city_clustering.png')
@@ -233,7 +233,7 @@ knitr::kable(cluster_pred, format="html")
 ***
 
 <h3 style="margin-top: -50px">
-Research question
+Can a prediction of the disease burden be made based on city features?
 </h3>
 
 **ANN Network**
