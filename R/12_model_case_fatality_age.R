@@ -58,7 +58,7 @@ deceased_by_confirmed_plot <- time_age_disease %>%
 ggsave(
   filename = "results/12_age_deceased_ratio.png",
   plot = deceased_by_confirmed_plot,
-  width = 8,
+  width = 10,
   height = 8,
 )
 

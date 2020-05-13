@@ -1,5 +1,5 @@
 ---
-title: <font size="10"> Exploring the spread of COVID-19 in South Korea </font>
+title: <font size="11">Exploring COVID-19 in South Korea</font>
 subtitle: "22100 - R for Bio Data Science"
 author: "Abril Diosdado Hernandez, Amanda Gammelby Qvesel, Erik Nicolas Kiehl, Viktor Törnblom"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
@@ -36,9 +36,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 * Does any gender or age predispose for getting the disease or for a more severe outcome?
 
-* Are there any characteristic features in the high-prevalence disease areas?
-
-* Can a prediction of the disease burden be made based on city features?
+* Can characteristics city features be used to predict the burden of disease?
 
 
 ## Materials and methods
@@ -218,7 +216,7 @@ include_graphics('../results/16_transmission.png')
 ***
 
 <h3 style="margin-top: -50px">
-Are there any characteristic features in the high-prevalence disease areas?
+Can characteristics city features be used to predict the burden of disease?
 </h3>
 ```{r out.width = "90%", fig.align = "center", message=FALSE}
 include_graphics('../results/11_city_clustering.png')
@@ -233,7 +231,7 @@ knitr::kable(cluster_pred, format="html")
 ***
 
 <h3 style="margin-top: -50px">
-Can a prediction of the disease burden be made based on city features?
+Can characteristics city features be used to predict the burden of disease?
 </h3>
 
 **ANN Network**
